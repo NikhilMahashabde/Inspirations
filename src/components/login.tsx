@@ -54,18 +54,14 @@ function Login({ setIsLoggedIn, setUserName }: LoginProps) {
 
   const loginMutation = useMutation(
     (loginFormData: LoginFormData) =>
-      axios.post<ErrorResponse, LoginResponse>(
-        "http://localhost:8080/login",
-        loginFormData,
-        {
-          withCredentials: true,
-        }
-      ),
+      axios.post<ErrorResponse, LoginResponse>("/login", loginFormData, {
+        withCredentials: true,
+      }),
     {
       onSuccess: (response) => {
         setIsLoggedIn(true);
         setUserName(response.data.name);
-        navigate("/challenges");
+        navigate("/");
       },
       onError: (error: ErrorResponse) => {
         setErrorResponse(error.response.data.message || "");
