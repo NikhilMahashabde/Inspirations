@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Navigationbar from "./components/Navigationbar";
+import WithSubnavigation from "./components/navbarUI";
 
 const getGreeting = async function () {
   const res = await fetch("/api/test");
@@ -17,7 +17,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <>
         <h1>Inspirations</h1>
-        <Navigationbar isLoggedIn={isLoggedIn} userName={userName} />
+        <WithSubnavigation />
+        {/* <Navigationbar isLoggedIn={isLoggedIn} userName={userName} /> */}
       </>
     </QueryClientProvider>
   );
