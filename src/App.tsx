@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Navigationbar from "./components/Navigationbar";
 
 const getGreeting = async function () {
   const res = await fetch("/api/test");
   return await res.json();
 };
 
+const queryClient = new QueryClient();
+
 function App() {
-  const [count, setCount] = useState(0);
-
-  const [greeting, setGreeting] = useState("");
-
-  useEffect(() => {
-    getGreeting().then((res) => setGreeting(res.greeting));
-  }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
 
   return (
-    <>
-      <p>Server response: {greeting}</p>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <>
+        <h1>Inspirations</h1>
+        <Navigationbar isLoggedIn={isLoggedIn} userName={userName} />
+      </>
+    </QueryClientProvider>
   );
 }
 
