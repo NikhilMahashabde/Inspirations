@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import WithSubnavigation from "./components/navbarUI";
-
-const getGreeting = async function () {
-  const res = await fetch("/api/test");
-  return await res.json();
-};
+import { BrowserRouter as Router } from "react-router-dom"; // Import BrowserRouter
+import AppRoutes from "./AppRoutes";
 
 const queryClient = new QueryClient();
 
@@ -15,11 +12,18 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <>
-        <h1>Inspirations</h1>
-        <WithSubnavigation />
-        {/* <Navigationbar isLoggedIn={isLoggedIn} userName={userName} /> */}
-      </>
+      <Router>
+        <>
+          <h5>Inspirations HEDING</h5>
+          <WithSubnavigation />
+
+          <AppRoutes
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            setUserName={setUserName}
+          />
+        </>
+      </Router>
     </QueryClientProvider>
   );
 }
