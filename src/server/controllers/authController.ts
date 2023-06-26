@@ -30,9 +30,9 @@ interface CustomSession extends Session {
 // }
 
 const handleLogin = async (req: Request, res: Response) => {
-  Object.entries(req.body).forEach(([key, value]) => {
-    console.log(key, ":", value);
-  });
+  // Object.entries(req.body).forEach(([key, value]) => {
+  //   console.log(key, ":", value);
+  // });
 
   if (!(req.body.email && req.body.password))
     return res.status(400).json({ message: "invalid email or password input" });

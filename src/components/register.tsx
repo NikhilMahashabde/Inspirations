@@ -1,6 +1,8 @@
 import axios from "axios";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../AuthContext";
 
 interface LoginFormData {
   name: string;
@@ -20,6 +22,8 @@ type ErrorResponse = {
 function Register() {
   const [registerError, setRegisterError] = useState<string>("");
   const [registerSuccess, setRegisterSuccess] = useState<string>("");
+  const navigate = useNavigate();
+  const { setIsLoggedIn, setUserName } = useContext(AuthContext);
 
   const [formData, setFormData] = useState<LoginFormData>({
     name: "",
@@ -37,8 +41,35 @@ function Register() {
     }));
   };
 
-  const registerMutation = useMutation((formData: LoginFormData) =>
-    axios.post("http://localhost:8080/api/users", formData)
+  type RegisterError = {
+    response: {
+      data: {
+        message?: string;
+      };
+    };
+  };
+
+  interface RegisterSuccess {
+    data: {
+      success: boolean;
+      name: string;
+    };
+  }
+
+  const registerMutation = useMutation(
+    (formData: LoginFormData) =>
+      axios.post<RegisterError, RegisterSuccess>("/api/users", formData),
+    {
+      onSuccess: (response) => {
+        setIsLoggedIn(true);
+        setUserName(response.data.name);
+        setRegisterError("");
+        navigate("/");
+      },
+      onError: (error: ErrorResponse) => {
+        setRegisterError(error.response.data.message || "");
+      },
+    }
   );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -48,22 +79,7 @@ function Register() {
     // console.log(key, ":", value)
     // })
 
-    try {
-      await registerMutation.mutateAsync(formData);
-      const response = registerMutation.data;
-      console.log(response?.data.message);
-      setRegisterSuccess(response?.data.message);
-      setRegisterError("");
-    } catch (error) {
-      console.error(
-        registerMutation.data,
-        (registerMutation.error as ErrorResponse)?.response?.data?.message
-      );
-      const errorData =
-        (registerMutation.error as ErrorResponse)?.response?.data?.message ||
-        "";
-      setRegisterError(errorData);
-    }
+    await registerMutation.mutateAsync(formData);
   };
 
   return (
