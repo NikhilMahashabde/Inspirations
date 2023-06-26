@@ -9,12 +9,14 @@ interface RoutesInterface {
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setUserName: React.Dispatch<React.SetStateAction<string>>;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const AppRoutes = ({
   isLoggedIn,
   setIsLoggedIn,
   setUserName,
+  setCount,
 }: RoutesInterface) => {
   return (
     <>
@@ -22,7 +24,11 @@ const AppRoutes = ({
         <Route
           path="/login"
           element={
-            <Login setIsLoggedIn={setIsLoggedIn} setUserName={setUserName} />
+            <Login
+              setIsLoggedIn={setIsLoggedIn}
+              setUserName={setUserName}
+              setCount={setCount}
+            />
           }
         />
         <Route

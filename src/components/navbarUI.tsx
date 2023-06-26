@@ -22,9 +22,19 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
+import { useEffect } from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
 
-export default function WithSubnavigation() {
+interface navUIinterface {
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function WithSubnavigation({ setCount }: navUIinterface) {
   const { isOpen, onToggle } = useDisclosure();
+
+  useEffect(() => {
+    setCount((prevCount) => prevCount + 1);
+  }, [setCount]);
 
   return (
     <Box>
@@ -74,22 +84,23 @@ export default function WithSubnavigation() {
           spacing={6}
         >
           <Button
-            as={"a"}
+            as={ReactRouterLink}
+            to={"/login"}
             fontSize={"sm"}
             fontWeight={400}
             variant={"link"}
-            href={"/login"}
           >
             Sign In
           </Button>
           <Button
-            as={"a"}
+            as={ReactRouterLink}
+            to={"/register"}
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"sm"}
             fontWeight={600}
             color={"white"}
             bg={"pink.400"}
-            href={"/register"}
+            variant={"link"}
             _hover={{
               bg: "pink.300",
             }}
@@ -119,7 +130,8 @@ const DesktopNav = () => {
             <PopoverTrigger>
               <Link
                 p={2}
-                href={navItem.href ?? "#"}
+                as={ReactRouterLink}
+                to={navItem.href ?? "#"}
                 fontSize={"sm"}
                 fontWeight={500}
                 color={linkColor}
@@ -158,7 +170,8 @@ const DesktopNav = () => {
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
     <Link
-      href={href}
+      as={ReactRouterLink}
+      to={href}
       role={"group"}
       display={"block"}
       p={2}
@@ -212,9 +225,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   return (
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
-        py={2}
-        as={Link}
-        href={href ?? "#"}
+        as={ReactRouterLink}
+        to={href ?? "#"}
         justify={"space-between"}
         align={"center"}
         _hover={{

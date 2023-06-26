@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
@@ -24,11 +24,16 @@ interface LoginError {
 interface LoginProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setUserName: React.Dispatch<React.SetStateAction<string>>;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function Login({ setIsLoggedIn, setUserName }: LoginProps) {
+function Login({ setIsLoggedIn, setUserName, setCount }: LoginProps) {
   const [errorResponse, setErrorResponse] = useState<string>("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setCount((prevCount) => prevCount + 1);
+  }, [setCount]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

@@ -9,18 +9,30 @@ const queryClient = new QueryClient();
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCount((count) => count + 1);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
         <>
           <h5>Inspirations HEDING</h5>
-          <WithSubnavigation />
+          <h1>count: {count}</h1>
+          {isLoggedIn && (
+            <h1>
+              welcome {userName} and count {count}{" "}
+            </h1>
+          )}
 
+          <WithSubnavigation setCount={setCount} />
           <AppRoutes
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             setUserName={setUserName}
+            setCount={setCount}
           />
         </>
       </Router>
