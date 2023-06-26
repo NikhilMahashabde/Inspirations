@@ -22,8 +22,9 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
+import AuthDataContext from "../AuthDataContext";
 
 interface navUIinterface {
   setCount: React.Dispatch<React.SetStateAction<number>>;
@@ -31,6 +32,7 @@ interface navUIinterface {
 
 export default function WithSubnavigation({ setCount }: navUIinterface) {
   const { isOpen, onToggle } = useDisclosure();
+  const { isLoggedIn, userName } = useContext(AuthDataContext);
 
   useEffect(() => {
     setCount((prevCount) => prevCount + 1);
@@ -83,30 +85,51 @@ export default function WithSubnavigation({ setCount }: navUIinterface) {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            as={ReactRouterLink}
-            to={"/login"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-          >
-            Sign In
-          </Button>
-          <Button
-            as={ReactRouterLink}
-            to={"/register"}
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
-            variant={"link"}
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
-            Sign Up
-          </Button>
+          {!isLoggedIn && (
+            <>
+              <Button
+                as={ReactRouterLink}
+                to={"/login"}
+                fontSize={"sm"}
+                fontWeight={400}
+                variant={"link"}
+              >
+                Sign In
+              </Button>
+              <Button
+                as={ReactRouterLink}
+                to={"/register"}
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"white"}
+                bg={"pink.400"}
+                variant={"link"}
+                _hover={{
+                  bg: "pink.300",
+                }}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
+          {isLoggedIn && (
+            <Button
+              as={ReactRouterLink}
+              to={"/logout"}
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              color={"white"}
+              bg={"pink.400"}
+              variant={"link"}
+              _hover={{
+                bg: "pink.300",
+              }}
+            >
+              `Logout ({userName})`
+            </Button>
+          )}
         </Stack>
       </Flex>
 

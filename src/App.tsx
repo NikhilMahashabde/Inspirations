@@ -4,6 +4,7 @@ import WithSubnavigation from "./components/navbarUI";
 import { BrowserRouter as Router } from "react-router-dom"; // Import BrowserRouter
 import AppRoutes from "./AppRoutes";
 import AuthContext from "./AuthContext";
+import AuthDataContext from "./AuthDataContext";
 
 const queryClient = new QueryClient();
 
@@ -19,25 +20,27 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={{ setIsLoggedIn, setUserName }}>
-        <Router>
-          <>
-            <h5>Inspirations HEDING</h5>
-            <h1>count: {count}</h1>
-            {isLoggedIn && (
-              <h1>
-                welcome {userName} and count {count}{" "}
-              </h1>
-            )}
+        <AuthDataContext.Provider value={{ isLoggedIn, userName }}>
+          <Router>
+            <>
+              <h5>Inspirations HEDING</h5>
+              <h1>count: {count}</h1>
+              {isLoggedIn && (
+                <h1>
+                  welcome {userName} and count {count}{" "}
+                </h1>
+              )}
 
-            <WithSubnavigation setCount={setCount} />
-            <AppRoutes
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-              setUserName={setUserName}
-              setCount={setCount}
-            />
-          </>
-        </Router>
+              <WithSubnavigation setCount={setCount} />
+              <AppRoutes
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                setUserName={setUserName}
+                setCount={setCount}
+              />
+            </>
+          </Router>
+        </AuthDataContext.Provider>
       </AuthContext.Provider>
     </QueryClientProvider>
   );
