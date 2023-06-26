@@ -11,7 +11,7 @@ if (!SESSION_KEY)
 
 const store = new MongoStore({
   mongoUrl: databaseURI,
-  collectionName: "scavengerhunt",
+  collectionName: "sessions",
 });
 
 const enableSession = expressSession({
