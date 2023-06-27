@@ -3,7 +3,7 @@ import App from "./App.tsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom"; // Import BrowserRouter
 
-import { QueryClient, QueryClientProvider, useMutation } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 

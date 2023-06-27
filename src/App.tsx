@@ -21,7 +21,6 @@ function App() {
     () => axios.get("/api/sessions"),
     {
       onSuccess: (response) => {
-        console.log(response);
         setIsLoggedIn(response.data.isLoggedIn);
         setUserName(response.data.name);
       },

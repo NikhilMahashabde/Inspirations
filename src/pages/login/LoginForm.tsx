@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
@@ -17,15 +17,13 @@ interface LoginResponse {
   };
 }
 
-interface LoginError {
-  message: string;
-  name: string;
-}
-
-interface LoginProps {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-  setUserName: React.Dispatch<React.SetStateAction<string>>;
-}
+type ErrorResponse = {
+  response: {
+    data: {
+      message?: string;
+    };
+  };
+};
 
 function LoginForm() {
   const [errorResponse, setErrorResponse] = useState<string>("");
@@ -46,14 +44,6 @@ function LoginForm() {
     password: "",
   });
 
-  type ErrorResponse = {
-    response: {
-      data: {
-        message?: string;
-      };
-    };
-  };
-
   const loginMutation = useMutation(
     (loginFormData: LoginFormData) =>
       axios.post<ErrorResponse, LoginResponse>("/login", loginFormData, {
@@ -73,11 +63,6 @@ function LoginForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    Object.keys(loginFormData).map((key: string) => {
-      console.log(`${key}: ${loginFormData[key]}`);
-      return null;
-    });
 
     await loginMutation.mutateAsync(loginFormData);
   };

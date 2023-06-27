@@ -5,11 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import AuthContext from "../../context/AuthContext";
 
-interface LogoutProps {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-  setUserName: React.Dispatch<React.SetStateAction<string>>;
-}
-
 type ErrorResponse = {
   response: {
     data: {
@@ -26,9 +21,8 @@ function LogoutForm() {
   const logoutMutation = useMutation(
     () => axios.post("/logout", { withCredentials: true }),
     {
-      onSuccess: (response) => {
+      onSuccess: () => {
         setIsLoggedIn(false);
-        console.log(response);
         setUserName("");
         Cookies.remove("connect.sid", { path: "/", domain: "localhost" });
         navigate("/");
