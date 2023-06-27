@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import loginRouter from "./routes/login.js";
 import logoutRouter from "./routes/logout.js";
 import usersRouter from "./routes/api/users.js";
+import sessionsRouter from "./routes/api/sessions.js";
 const PORT = process.env.PORT || 8080;
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
@@ -23,6 +24,7 @@ app.use(enableSession);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/sessions", sessionsRouter);
 // app.use("/logout", require("./routes/logout"));
 app.get("/api/test", (_, res) => res.json({ greeting: "not hellos" }));
 app.use(express.static(path.join(__dirname, "public")));

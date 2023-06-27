@@ -1,48 +1,45 @@
 import { useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
-import WithSubnavigation from "./components/navbarUI";
-import { BrowserRouter as Router } from "react-router-dom"; // Import BrowserRouter
-import AppRoutes from "./AppRoutes";
-import AuthContext from "./AuthContext";
-import AuthDataContext from "./AuthDataContext";
+// import { BrowserRouter as Router } from "react-router-dom"; // Import BrowserRouter
+import AuthContext from "./context/AuthContext";
+import AuthDataContext from "./context/AuthDataContext";
+import axios from "axios";
+import { useMutation } from "react-query";
+import Router from "./pages/router";
 
-const queryClient = new QueryClient();
+interface LoginStateResponse {
+  data: {
+    isLoggedIn: boolean;
+    name: string;
+  };
+}
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
-  const [count, setCount] = useState(0);
+
+  const loginStateMutation = useMutation<LoginStateResponse>(
+    () => axios.get("/api/sessions"),
+    {
+      onSuccess: (response) => {
+        console.log(response);
+        setIsLoggedIn(response.data.isLoggedIn);
+        setUserName(response.data.name);
+      },
+    }
+  );
 
   useEffect(() => {
-    setCount((count) => count + 1);
+    loginStateMutation.mutateAsync();
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthContext.Provider value={{ setIsLoggedIn, setUserName }}>
-        <AuthDataContext.Provider value={{ isLoggedIn, userName }}>
-          <Router>
-            <>
-              <h5>Inspirations HEDING</h5>
-              <h1>count: {count}</h1>
-              {isLoggedIn && (
-                <h1>
-                  welcome {userName} and count {count}{" "}
-                </h1>
-              )}
-
-              <WithSubnavigation setCount={setCount} />
-              <AppRoutes
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                setUserName={setUserName}
-                setCount={setCount}
-              />
-            </>
-          </Router>
-        </AuthDataContext.Provider>
-      </AuthContext.Provider>
-    </QueryClientProvider>
+    // <QueryClientProvider client={queryClient}>
+    <AuthContext.Provider value={{ setIsLoggedIn, setUserName }}>
+      <AuthDataContext.Provider value={{ isLoggedIn, userName }}>
+        <Router />
+      </AuthDataContext.Provider>
+    </AuthContext.Provider>
+    // </QueryClientProvider>
   );
 }
 

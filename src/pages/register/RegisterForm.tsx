@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../AuthContext";
+import AuthContext from "../../context/AuthContext";
 
 interface LoginFormData {
   name: string;
@@ -19,7 +19,7 @@ type ErrorResponse = {
   };
 };
 
-function Register() {
+function RegisterForm() {
   const [registerError, setRegisterError] = useState<string>("");
   const [registerSuccess, setRegisterSuccess] = useState<string>("");
   const navigate = useNavigate();
@@ -139,4 +139,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterForm;

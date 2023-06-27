@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 
 interface LoginFormData {
   email: string;
@@ -24,16 +25,12 @@ interface LoginError {
 interface LoginProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setUserName: React.Dispatch<React.SetStateAction<string>>;
-  setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function Login({ setIsLoggedIn, setUserName, setCount }: LoginProps) {
+function LoginForm() {
   const [errorResponse, setErrorResponse] = useState<string>("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setCount((prevCount) => prevCount + 1);
-  }, [setCount]);
+  const { setIsLoggedIn, setUserName } = useContext(AuthContext);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -119,4 +116,4 @@ function Login({ setIsLoggedIn, setUserName, setCount }: LoginProps) {
   );
 }
 
-export default Login;
+export default LoginForm;

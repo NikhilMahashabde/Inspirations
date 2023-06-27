@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import AuthContext from "../../context/AuthContext";
 
 interface LogoutProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,9 +18,10 @@ type ErrorResponse = {
   };
 };
 
-function Logout({ setIsLoggedIn, setUserName }: LogoutProps) {
+function LogoutForm() {
   const [logoutError, setLogoutError] = useState<string>("");
   const navigate = useNavigate();
+  const { setIsLoggedIn, setUserName } = useContext(AuthContext);
 
   const logoutMutation = useMutation(
     () => axios.post("/logout", { withCredentials: true }),
@@ -52,4 +54,4 @@ function Logout({ setIsLoggedIn, setUserName }: LogoutProps) {
   );
 }
 
-export default Logout;
+export default LogoutForm;

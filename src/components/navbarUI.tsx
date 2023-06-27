@@ -24,19 +24,11 @@ import {
 } from "@chakra-ui/icons";
 import { useContext, useEffect } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import AuthDataContext from "../AuthDataContext";
+import AuthDataContext from "../context/AuthDataContext";
 
-interface navUIinterface {
-  setCount: React.Dispatch<React.SetStateAction<number>>;
-}
-
-export default function WithSubnavigation({ setCount }: navUIinterface) {
+export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
   const { isLoggedIn, userName } = useContext(AuthDataContext);
-
-  useEffect(() => {
-    setCount((prevCount) => prevCount + 1);
-  }, [setCount]);
 
   return (
     <Box>
