@@ -3,6 +3,7 @@ import CallToActionWithIllustration from "./homepage";
 import AuthDataContext from "../../context/AuthDataContext";
 import WithSubnavigation from "../../components/navbarUI";
 import AuthHomepage from "./AuthHomepage";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   const { isAuthenticated } = useContext(AuthDataContext);
@@ -10,12 +11,24 @@ const Home = () => {
   return (
     <>
       {!isAuthenticated ? (
-        <CallToActionWithIllustration />
+        <>
+          <div className="container">
+            <div className="content">
+              <CallToActionWithIllustration />
+            </div>
+            <Footer />
+          </div>
+        </>
       ) : (
         <>
-          <h1>Home page</h1>
-          <WithSubnavigation />
-          <AuthHomepage />
+          <div className="container">
+            <div className="content">
+              <h1>Home page</h1>
+              <WithSubnavigation />
+              <AuthHomepage />
+            </div>
+            <Footer />
+          </div>
         </>
       )}
     </>

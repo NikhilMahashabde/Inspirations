@@ -5,6 +5,7 @@ import AuthDataContext from "./context/AuthDataContext";
 import axios from "axios";
 import { useMutation } from "react-query";
 import Router from "./pages/Router";
+import "./assets/css/styles.css";
 
 interface LoginStateResponse {
   data: {

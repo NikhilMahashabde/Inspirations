@@ -3,6 +3,7 @@ import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
+import "./css/styles.css";
 
 interface LoginFormData {
   name: string;

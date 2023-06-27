@@ -4,6 +4,7 @@ import Home from "./home";
 import Login from "./login";
 import Logout from "./logout";
 import Register from "./register";
+import Trips from "./trips";
 
 const pagesData: routerType[] = [
   {
@@ -29,6 +30,11 @@ const pagesData: routerType[] = [
   {
     path: "/",
     element: <Home />,
+    title: "Home",
+  },
+  {
+    path: "/trips",
+    element: <Trips />,
     title: "Home",
   },
 ];

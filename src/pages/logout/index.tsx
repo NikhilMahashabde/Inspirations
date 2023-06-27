@@ -1,12 +1,18 @@
+import Footer from "../../components/Footer";
 import WithSubnavigation from "../../components/navbarUI";
 import LogoutForm from "./Logout";
 
 const Login = () => {
   return (
     <>
-      <h1>Inspirations - Login </h1>
-      <WithSubnavigation />
-      <LogoutForm />
+      <div className="container">
+        <div className="content">
+          <h1>Inspirations - Login </h1>
+          <WithSubnavigation />
+          <LogoutForm />
+        </div>
+        <Footer />
+      </div>
     </>
   );
 };

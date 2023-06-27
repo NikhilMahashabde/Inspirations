@@ -3,6 +3,7 @@ import WithSubnavigation from "../../components/navbarUI";
 import AuthDataContext from "../../context/AuthDataContext";
 import LoginForm from "./LoginForm";
 import { useContext, useEffect } from "react";
+import Footer from "../../components/Footer";
 
 const Login = () => {
   const { isAuthenticated } = useContext(AuthDataContext);
@@ -20,9 +21,14 @@ const Login = () => {
 
   return (
     <>
-      <h1>Inspirations - Login </h1>
-      <WithSubnavigation />
-      <LoginForm />
+      <div className="container">
+        <div className="content">
+          <h1>Inspirations - Login </h1>
+          <WithSubnavigation />
+          <LoginForm />
+        </div>
+        <Footer />
+      </div>
     </>
   );
 };
