@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import {
   Flex,
   Container,
@@ -10,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 export default function CallToActionWithIllustration() {
+  const navigate = useNavigate();
   return (
     <Container maxW={"5xl"}>
       <Stack
@@ -40,11 +43,12 @@ export default function CallToActionWithIllustration() {
             colorScheme={"orange"}
             bg={"orange.400"}
             _hover={{ bg: "orange.500" }}
+            onClick={() => navigate("/login")}
           >
-            Get started
+            Login
           </Button>
-          <Button rounded={"full"} px={6}>
-            Learn more
+          <Button rounded={"full"} px={6} onClick={() => navigate("/register")}>
+            Sign up
           </Button>
         </Stack>
         <Flex w={"full"}>

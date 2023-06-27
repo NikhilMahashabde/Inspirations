@@ -23,7 +23,7 @@ function RegisterForm() {
   const [registerError, setRegisterError] = useState<string>("");
   const [registerSuccess, setRegisterSuccess] = useState<string>("");
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUserName } = useContext(AuthContext);
+  const { setIsAuthenticated, setUserName } = useContext(AuthContext);
 
   const [formData, setFormData] = useState<LoginFormData>({
     name: "",
@@ -61,7 +61,7 @@ function RegisterForm() {
       axios.post<RegisterError, RegisterSuccess>("/api/users", formData),
     {
       onSuccess: (response) => {
-        setIsLoggedIn(true);
+        setIsAuthenticated(true);
         setUserName(response.data.name);
         setRegisterError("");
         navigate("/");

@@ -28,7 +28,7 @@ type ErrorResponse = {
 function LoginForm() {
   const [errorResponse, setErrorResponse] = useState<string>("");
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUserName } = useContext(AuthContext);
+  const { setIsAuthenticated, setUserName } = useContext(AuthContext);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -51,7 +51,7 @@ function LoginForm() {
       }),
     {
       onSuccess: (response) => {
-        setIsLoggedIn(true);
+        setIsAuthenticated(true);
         setUserName(response.data.name);
         navigate("/");
       },

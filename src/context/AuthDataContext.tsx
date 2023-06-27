@@ -1,12 +1,12 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 
 interface AuthDataContextProps {
-  isLoggedIn: boolean;
+  isAuthenticated: boolean;
   userName: string;
 }
 
 const AuthDataContext = createContext<AuthDataContextProps>({
-  isLoggedIn: false,
+  isAuthenticated: false,
   userName: "",
 });
 

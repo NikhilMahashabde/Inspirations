@@ -4,7 +4,7 @@ import AuthContext from "./context/AuthContext";
 import AuthDataContext from "./context/AuthDataContext";
 import axios from "axios";
 import { useMutation } from "react-query";
-import Router from "./pages/router";
+import Router from "./pages/Router";
 
 interface LoginStateResponse {
   data: {
@@ -14,14 +14,14 @@ interface LoginStateResponse {
 }
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState("");
 
   const loginStateMutation = useMutation<LoginStateResponse>(
     () => axios.get("/api/sessions"),
     {
       onSuccess: (response) => {
-        setIsLoggedIn(response.data.isLoggedIn);
+        setIsAuthenticated(response.data.isLoggedIn);
         setUserName(response.data.name);
       },
     }
@@ -31,10 +31,14 @@ function App() {
     loginStateMutation.mutateAsync();
   }, []);
 
+  if (loginStateMutation.isLoading) {
+    return <div></div>;
+  }
+
   return (
     // <QueryClientProvider client={queryClient}>
-    <AuthContext.Provider value={{ setIsLoggedIn, setUserName }}>
-      <AuthDataContext.Provider value={{ isLoggedIn, userName }}>
+    <AuthContext.Provider value={{ setIsAuthenticated, setUserName }}>
+      <AuthDataContext.Provider value={{ isAuthenticated, userName }}>
         <Router />
       </AuthDataContext.Provider>
     </AuthContext.Provider>

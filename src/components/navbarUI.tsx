@@ -28,7 +28,7 @@ import AuthDataContext from "../context/AuthDataContext";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
-  const { isLoggedIn, userName } = useContext(AuthDataContext);
+  const { isAuthenticated, userName } = useContext(AuthDataContext);
 
   return (
     <Box>
@@ -77,7 +77,7 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          {!isLoggedIn && (
+          {!isAuthenticated && (
             <>
               <Button
                 as={ReactRouterLink}
@@ -105,7 +105,7 @@ export default function WithSubnavigation() {
               </Button>
             </>
           )}
-          {isLoggedIn && (
+          {isAuthenticated && (
             <Button
               as={ReactRouterLink}
               to={"/logout"}
