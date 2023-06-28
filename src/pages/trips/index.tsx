@@ -11,6 +11,7 @@ const Trips = () => {
         <div className="content">
           <h1>Inspirations - Trips menu </h1>
           <WithSubnavigation />
+          {/* my trips component that shows all trips i have access to.  */}
 
           <h1> create trips </h1>
           <h1> render all trips here curernt ones </h1>
