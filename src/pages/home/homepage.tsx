@@ -26,15 +26,15 @@ export default function CallToActionWithIllustration() {
           fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
           lineHeight={"110%"}
         >
-          Meeting scheduling{" "}
+          Travel Planning{" "}
           <Text as={"span"} color={"orange.400"}>
             made easy
           </Text>
         </Heading>
         <Text color={"gray.500"} maxW={"3xl"}>
-          Never miss a meeting. Never be late for one too. Keep track of your
-          meetings and receive smart reminders in appropriate times. Read your
-          smart “Daily Agenda” every morning.
+          Stressed about planning? Not sure what to do? Fear no more. Design and
+          plan your next adventure day by day, utilise your very own AI travel
+          agent for a guide. Or take inspiration from what others are planning!
         </Text>
         <Stack spacing={6} direction={"row"}>
           <Button

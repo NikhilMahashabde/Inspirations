@@ -7,6 +7,7 @@ import loginRouter from "./routes/login.js";
 import logoutRouter from "./routes/logout.js";
 import usersRouter from "./routes/api/users.js";
 import sessionsRouter from "./routes/api/sessions.js";
+import tripsRouter from "./routes/api/trips.js";
 const PORT = process.env.PORT || 8080;
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
@@ -30,6 +31,7 @@ app.get("/api/test", (_, res) => res.json({ greeting: "not hellos" }));
 app.use(express.static(path.join(__dirname, "public")));
 
 //routes private
+app.use("/api/trips", tripsRouter);
 
 //connect app
 

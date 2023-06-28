@@ -26,3 +26,20 @@ main page without buttons
 request control - why do i need to typecast every time, can i not set or make it infer that this may or may not be inside? guard?
 
 routes and folder structures
+
+---------- Trip component ---------
+
+Cretae a trip -
+
+trip form to craete one
+/edit trip or delete trips
+
+once inside the trip - show header with trip info
+
+<add legs card>
+
+[location]
+[date start]
+[date end]
+[actiities
+[budet]]

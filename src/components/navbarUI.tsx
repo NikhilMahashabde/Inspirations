@@ -295,12 +295,12 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: "Inspirations",
+    label: "My Trips",
     children: [
       {
-        label: "See examples",
-        subLabel: "See examples",
-        href: "/login",
+        label: "Add new trip",
+        subLabel: "Start your exciting new journey today",
+        href: "/trips/create",
       },
       {
         label: "regoister",
@@ -308,6 +308,10 @@ const NAV_ITEMS: Array<NavItem> = [
         href: "/register",
       },
     ],
+  },
+  {
+    label: "Search public trips",
+    href: "/trips/search",
   },
   {
     label: "About the author",
