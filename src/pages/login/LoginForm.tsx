@@ -1,8 +1,7 @@
 import axios from "axios";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../../context/AuthContext";
+import { DataContext } from "../../context/AppContext";
 
 interface LoginFormData {
   email: string;
@@ -26,9 +25,13 @@ type ErrorResponse = {
 };
 
 function LoginForm() {
-  const [errorResponse, setErrorResponse] = useState<string>("");
-  const navigate = useNavigate();
-  const { setIsAuthenticated, setUserName } = useContext(AuthContext);
+  const {
+    setIsAuthenticated,
+    setUserName,
+    navigate,
+    errorResponse,
+    setErrorResponse,
+  } = useContext(DataContext);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

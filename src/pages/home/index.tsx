@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import CallToActionWithIllustration from "./homepage";
-import AuthDataContext from "../../context/AuthDataContext";
 import WithSubnavigation from "../../components/navbarUI";
 import AuthHomepage from "./AuthHomepage";
 import Footer from "../../components/Footer";
+import { DataContext } from "../../context/AppContext";
 
 const Home = () => {
-  const { isAuthenticated } = useContext(AuthDataContext);
+  const { isAuthenticated } = useContext(DataContext);
 
   return (
     <>

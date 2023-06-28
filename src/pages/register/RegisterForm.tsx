@@ -1,9 +1,8 @@
 import axios from "axios";
-import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../../context/AuthContext";
 import "./css/styles.css";
+import { DataContext } from "../../context/AppContext";
 
 interface LoginFormData {
   name: string;
@@ -23,8 +22,7 @@ type ErrorResponse = {
 function RegisterForm() {
   const [registerError, setRegisterError] = useState<string>("");
   const [registerSuccess, setRegisterSuccess] = useState<string>("");
-  const navigate = useNavigate();
-  const { setIsAuthenticated, setUserName } = useContext(AuthContext);
+  const { setIsAuthenticated, setUserName, navigate } = useContext(DataContext);
 
   const [formData, setFormData] = useState<LoginFormData>({
     name: "",
@@ -75,11 +73,6 @@ function RegisterForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    // Object.entries(formData).forEach(([key,value]) => {
-    // console.log(key, ":", value)
-    // })
-
     await registerMutation.mutateAsync(formData);
   };
 

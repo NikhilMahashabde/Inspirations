@@ -1,13 +1,11 @@
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import WithSubnavigation from "../../components/navbarUI";
-import AuthDataContext from "../../context/AuthDataContext";
 import RegisterForm from "./RegisterForm";
 import Footer from "../../components/Footer";
+import { DataContext } from "../../context/AppContext";
 
 const Register = () => {
-  const { isAuthenticated } = useContext(AuthDataContext);
-  const navigate = useNavigate();
+  const { isAuthenticated, navigate } = useContext(DataContext);
 
   useEffect(() => {
     if (isAuthenticated) {

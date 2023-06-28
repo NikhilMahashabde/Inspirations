@@ -2,8 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 
+interface TripData {
+  [key: string]: string;
+}
+
 const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
-  const [tripData, setTripData] = useState();
+  const [tripData, setTripData] = useState<TripData | undefined>();
 
   const tripDataMutation = useMutation(() => axios.get(`/api/trips/${id}`), {
     onSuccess: (res) => {

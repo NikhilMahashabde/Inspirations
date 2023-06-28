@@ -22,13 +22,13 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import AuthDataContext from "../context/AuthDataContext";
+import { DataContext } from "../context/AppContext";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
-  const { isAuthenticated, userName } = useContext(AuthDataContext);
+  const { isAuthenticated, userName } = useContext(DataContext);
 
   return (
     <Box>

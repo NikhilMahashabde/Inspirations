@@ -1,9 +1,8 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import AuthContext from "../../context/AuthContext";
+import { DataContext } from "../../context/AppContext";
 
 type ErrorResponse = {
   response: {
@@ -14,9 +13,13 @@ type ErrorResponse = {
 };
 
 function LogoutForm() {
-  const [logoutError, setLogoutError] = useState<string>("");
-  const navigate = useNavigate();
-  const { setIsAuthenticated, setUserName } = useContext(AuthContext);
+  const {
+    setIsAuthenticated,
+    setUserName,
+    navigate,
+    errorResponse,
+    setErrorResponse,
+  } = useContext(DataContext);
 
   const logoutMutation = useMutation(
     () => axios.post("/logout", { withCredentials: true }),
@@ -25,10 +28,11 @@ function LogoutForm() {
         setIsAuthenticated(false);
         setUserName("");
         Cookies.remove("connect.sid", { path: "/", domain: "localhost" });
+        setErrorResponse("");
         navigate("/");
       },
       onError: (error: ErrorResponse) => {
-        setLogoutError(error.response.data.message || "");
+        setErrorResponse(error.response.data.message || "");
       },
     }
   );
@@ -46,7 +50,7 @@ function LogoutForm() {
   }
   return (
     <>
-      <div>Error: {logoutError} </div>
+      <div>Error: {errorResponse} </div>
     </>
   );
 }

@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 import {
   Flex,
   Container,
@@ -10,9 +8,11 @@ import {
   Icon,
   IconProps,
 } from "@chakra-ui/react";
+import { DataContext } from "../../context/AppContext";
+import { useContext } from "react";
 
 export default function CallToActionWithIllustration() {
-  const navigate = useNavigate();
+  const { navigate } = useContext(DataContext);
   return (
     <Container maxW={"5xl"}>
       <Stack

@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 // import { BrowserRouter as Router } from "react-router-dom"; // Import BrowserRouter
-import AuthContext from "./context/AuthContext";
-import AuthDataContext from "./context/AuthDataContext";
 import axios from "axios";
 import { useMutation } from "react-query";
 import Router from "./pages/Router";
 import "./assets/css/styles.css";
+import { DataContext } from "./context/AppContext";
 
 interface LoginStateResponse {
   data: {
@@ -15,9 +14,7 @@ interface LoginStateResponse {
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userName, setUserName] = useState("");
-
+  const { setIsAuthenticated, setUserName } = useContext(DataContext);
   const loginStateMutation = useMutation<LoginStateResponse>(
     () => axios.get("/api/sessions"),
     {
@@ -36,15 +33,7 @@ function App() {
     return <div></div>;
   }
 
-  return (
-    // <QueryClientProvider client={queryClient}>
-    <AuthContext.Provider value={{ setIsAuthenticated, setUserName }}>
-      <AuthDataContext.Provider value={{ isAuthenticated, userName }}>
-        <Router />
-      </AuthDataContext.Provider>
-    </AuthContext.Provider>
-    // </QueryClientProvider>
-  );
+  return <Router />;
 }
 
 export default App;
