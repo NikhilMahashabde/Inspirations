@@ -298,14 +298,14 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "My Trips",
     children: [
       {
+        label: "My Trips",
+        subLabel: "Show all trips available to me",
+        href: "/trips",
+      },
+      {
         label: "Add new trip",
         subLabel: "Start your exciting new journey today",
         href: "/trips/create",
-      },
-      {
-        label: "regoister",
-        subLabel: "regoister",
-        href: "/register",
       },
     ],
   },

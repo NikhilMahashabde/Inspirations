@@ -437,7 +437,8 @@ export default function CreateTripForm() {
   const newTripMutation = useMutation(
     () => axios.post("/api/trips", tripData),
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
+        console.log(response);
         toast({
           title: "Account created.",
           description: "We've created your account for you.",
@@ -445,7 +446,7 @@ export default function CreateTripForm() {
           duration: 3000,
           isClosable: true,
         });
-        navigate("/trips/965");
+        navigate(`/trips/${response.data._id}`);
       },
       onError: () => {
         toast({
