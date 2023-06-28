@@ -28,16 +28,16 @@ request control - why do i need to typecast every time, can i not set or make it
 routes and folder structures
 
 ---------- Trip component ---------
+Display trips on main page with basic trip info - button to edit or delete trip
 
-Cretae a trip -
-
-trip form to craete one
-/edit trip or delete trips
+Main page - render 3 random trips with all of trip/edit info
 
 once inside the trip - show header with trip info
+add card
+type, + props.
+onChange => update trip props.
 
 <add legs card>
-
 [location]
 [date start]
 [date end]

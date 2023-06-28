@@ -1,5 +1,6 @@
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { MyTripsInterface } from "../types/interfaces.types";
 
 interface AuthContextProps {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
@@ -9,6 +10,8 @@ interface AuthContextProps {
   navigate: NavigateFunction;
   errorResponse: string;
   setErrorResponse: Dispatch<SetStateAction<string>>;
+  myTrips: MyTripsInterface[] | undefined;
+  setMyTrips: Dispatch<SetStateAction<MyTripsInterface[] | undefined>>;
 }
 
 const DataContext = createContext<AuthContextProps>({
@@ -27,6 +30,10 @@ const DataContext = createContext<AuthContextProps>({
   setErrorResponse: () => {
     return;
   },
+  myTrips: undefined,
+  setMyTrips: () => {
+    return;
+  },
 });
 
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
@@ -34,6 +41,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [userName, setUserName] = useState("");
   const navigate = useNavigate();
   const [errorResponse, setErrorResponse] = useState<string>("");
+  const [myTrips, setMyTrips] = useState<MyTripsInterface[] | undefined>();
 
   return (
     <DataContext.Provider
@@ -45,6 +53,8 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
         navigate,
         errorResponse,
         setErrorResponse,
+        myTrips,
+        setMyTrips,
       }}
     >
       {children}
