@@ -22,7 +22,7 @@ function LogoutForm() {
   } = useContext(DataContext);
 
   const logoutMutation = useMutation(
-    () => axios.post("/logout", { withCredentials: true }),
+    () => axios.post("/api/logout", { withCredentials: true }),
     {
       onSuccess: () => {
         setIsAuthenticated(false);

@@ -2,6 +2,7 @@ import { routerType } from "../types/router.types";
 import CouldNotFind from "./404";
 import Home from "./home";
 import Login from "./login";
+import OauthLogin from "./login/OauthLogin";
 import Logout from "./logout";
 import Register from "./register";
 import { Trips, CreateTrips, TripModify } from "./trips";
@@ -45,6 +46,11 @@ const pagesData: routerType[] = [
   {
     path: "/trips/:id",
     element: <TripModify />,
+    title: "Trip config",
+  },
+  {
+    path: "/oauthlogin",
+    element: <OauthLogin />,
     title: "Trip config",
   },
 ];

@@ -2,6 +2,7 @@ import axios from "axios";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
 import { DataContext } from "../../context/AppContext";
+import { LoginButton } from "../../components/buttons/login-button";
 
 interface LoginFormData {
   email: string;
@@ -31,6 +32,7 @@ function LoginForm() {
     navigate,
     errorResponse,
     setErrorResponse,
+    isAuthenticated,
   } = useContext(DataContext);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +51,7 @@ function LoginForm() {
 
   const loginMutation = useMutation(
     (loginFormData: LoginFormData) =>
-      axios.post<ErrorResponse, LoginResponse>("/login", loginFormData, {
+      axios.post<ErrorResponse, LoginResponse>("/api/login", loginFormData, {
         withCredentials: true,
       }),
     {
@@ -100,6 +102,8 @@ function LoginForm() {
         {loginMutation.isLoading && <div>Loading...</div>}
         {loginMutation.isError && <div>Error: {errorResponse}</div>}
       </form>
+      {!isAuthenticated && <LoginButton />}
+      {errorResponse && <div>Error: {errorResponse}</div>}
     </div>
   );
 }

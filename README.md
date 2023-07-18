@@ -1,11 +1,6 @@
 # Inspirations
 
-// if not logged in,
-main page
-with log in and register buttoms
-
-// if logged in redirect to main page
-main page without buttons
+**To do**
 
 - show example jounneys
 - UI to create / start journey
@@ -26,6 +21,9 @@ main page without buttons
 request control - why do i need to typecast every time, can i not set or make it infer that this may or may not be inside? guard?
 
 routes and folder structures
+
+// main page - ouath login
+// new card for login
 
 ---------- Trip component ---------
 Display trips on main page with basic trip info - button to edit or delete trip

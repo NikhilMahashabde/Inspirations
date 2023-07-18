@@ -3,12 +3,14 @@ import path from "path";
 import enableSession from "./middleware/session";
 import connectDB from "./config/dBConn";
 import mongoose from "mongoose";
-import loginRouter from "./routes/login.js";
+import loginRouter from "./routes/api/login.js";
 import logoutRouter from "./routes/logout.js";
 import usersRouter from "./routes/api/users.js";
 import sessionsRouter from "./routes/api/sessions.js";
 import tripsRouter from "./routes/api/trips.js";
-const PORT = process.env.PORT || 8080;
+import authRouter from "./routes/auth.js";
+import cookieParser from "cookie-parser";
+const PORT = 8080;
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 export const app = express();
@@ -20,10 +22,12 @@ app.use(express.urlencoded({ extended: false })); // built in middle ware. encod
 app.use(express.json()); // json parser
 connectDB();
 app.use(enableSession);
+app.use(cookieParser());
 
 //routes public
-app.use("/login", loginRouter);
-app.use("/logout", logoutRouter);
+app.use("/auth", authRouter);
+app.use("/api/login", loginRouter);
+app.use("/api/logout", logoutRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/sessions", sessionsRouter);
 // app.use("/logout", require("./routes/logout"));

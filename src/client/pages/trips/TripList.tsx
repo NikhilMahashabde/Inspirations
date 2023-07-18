@@ -5,7 +5,8 @@ import { useContext, useEffect } from "react";
 import axios from "axios";
 
 export const TripList = () => {
-  const { myTrips, setMyTrips } = useContext(DataContext);
+  const { myTrips, setMyTrips, isAuthenticated, navigate } =
+    useContext(DataContext);
 
   const myTripsMutation = useMutation(
     async () => await axios.get("/api/trips"),
@@ -24,6 +25,8 @@ export const TripList = () => {
     myTripsMutation.mutateAsync();
   }, []);
 
+  // if (!isAuthenticated) navigate("/");
+
   if (myTrips !== undefined)
     return (
       <>
@@ -35,4 +38,6 @@ export const TripList = () => {
 
   if (myTripsMutation.isLoading) return <>Loading trips....please wait</>;
   if (myTripsMutation.isSuccess) return <>Loading trips....Finsihed Loading</>;
+
+  return <>No trips found</>;
 };

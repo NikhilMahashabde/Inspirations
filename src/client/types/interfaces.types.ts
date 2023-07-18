@@ -4,7 +4,7 @@ export interface MyTripsInterface {
   authorisation: string[];
   purpose: string;
   budget: number;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   nodes: [];
 }

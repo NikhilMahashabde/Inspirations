@@ -48,10 +48,10 @@ export default function MyTripCard({ trip }: MyTripCardProps) {
           pt={2}
         >
           <Heading fontSize={"2xl"} fontFamily={"body"}>
-            Lindsey James
+            {trip.name}
           </Heading>
           <Text fontWeight={600} color={"gray.500"} size="sm" mb={4}>
-            @lindsey_jam3s
+            {trip.startDate} - {trip.endDate}
           </Text>
           <Text
             textAlign={"center"}

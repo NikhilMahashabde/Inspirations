@@ -15,6 +15,7 @@ interface LoginStateResponse {
 
 function App() {
   const { setIsAuthenticated, setUserName } = useContext(DataContext);
+
   const loginStateMutation = useMutation<LoginStateResponse>(
     () => axios.get("/api/sessions"),
     {
@@ -30,7 +31,7 @@ function App() {
   }, []);
 
   if (loginStateMutation.isLoading) {
-    return <div></div>;
+    return <div>Loading...</div>;
   }
 
   return <Router />;

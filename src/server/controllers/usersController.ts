@@ -7,6 +7,9 @@ interface CustomSession extends Session {
   email: string;
   name: string;
 }
+
+
+
 const createNewUser = async (req: Request, res: Response) => {
   Object.entries(req.body).forEach(([key, value]) => {
     console.log(key, ":", value);
@@ -40,7 +43,7 @@ const createNewUser = async (req: Request, res: Response) => {
 
   try {
     const success = await Users.create(newUser);
-    console.log(success);
+    // console.log(success);
     res.json({ message: "Success", name: newUser.name });
     (req.session as CustomSession).email = newUser.email;
     (req.session as CustomSession).name = newUser.name;
