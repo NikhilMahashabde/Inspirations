@@ -34,6 +34,7 @@ app.use("/api/sessions", sessionsRouter);
 app.get("/api/test", (_, res) => res.json({ greeting: "not hellos" }));
 app.use(express.static(path.join(__dirname, "public")));
 
+//middle ware for redirect if unathorised)
 //routes private
 app.use("/api/trips", tripsRouter);
 

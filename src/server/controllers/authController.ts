@@ -30,8 +30,10 @@ interface CustomSession extends Session {
 //   //   name?: string;
 //   // }) => LoginResponse;
 // }
+
 const handleJWT = async (req: Request, res: Response) => {
   const authorizationHeader = req.headers.authorization;
+
   if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
     const accessToken = authorizationHeader.split(" ")[1];
     // console.log("accesstoken:", accessToken);
@@ -40,6 +42,7 @@ const handleJWT = async (req: Request, res: Response) => {
       const decodedToken = jwt.decode(accessToken);
       console.log("Decoded Token:", decodedToken);
 
+      //const userInfoVerifyUrl= decodedToken.aud[1]
       const userInfoEndpoint =
         "https://dev-8v4vi8wg2ppia707.us.auth0.com/userinfo"; // Replace with your Auth0 domain's /userinfo endpoint
 
@@ -48,6 +51,8 @@ const handleJWT = async (req: Request, res: Response) => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+
+      //reauth
 
       const email = userResponse.data.email;
 

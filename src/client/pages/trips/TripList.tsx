@@ -5,14 +5,12 @@ import { useContext, useEffect } from "react";
 import axios from "axios";
 
 export const TripList = () => {
-  const { myTrips, setMyTrips, isAuthenticated, navigate } =
-    useContext(DataContext);
+  const { myTrips, setMyTrips } = useContext(DataContext);
 
   const myTripsMutation = useMutation(
     async () => await axios.get("/api/trips"),
     {
       onSuccess: (res) => {
-        console.log(res.data.tripList);
         setMyTrips(res.data.tripList);
       },
       onError: (error) => {
@@ -27,17 +25,22 @@ export const TripList = () => {
 
   // if (!isAuthenticated) navigate("/");
 
-  if (myTrips !== undefined)
-    return (
-      <>
-        {myTrips.map((trip) => (
-          <MyTripCard trip={trip} />
-        ))}
-      </>
-    );
-
-  if (myTripsMutation.isLoading) return <>Loading trips....please wait</>;
-  if (myTripsMutation.isSuccess) return <>Loading trips....Finsihed Loading</>;
-
-  return <>No trips found</>;
+  return (
+    <>
+      {myTripsMutation.isLoading && <>Loading trips....please wait</>}
+      {myTripsMutation.isSuccess &&
+        myTrips !== undefined &&
+        myTrips.length === 0 && <div> No trips found</div>}
+      {myTripsMutation.isSuccess &&
+        myTrips !== undefined &&
+        myTrips.length !== 0 && (
+          <>
+            {" "}
+            {myTrips.map((trip) => (
+              <MyTripCard trip={trip} />
+            ))}
+          </>
+        )}
+    </>
+  );
 };

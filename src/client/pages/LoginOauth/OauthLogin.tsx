@@ -1,9 +1,8 @@
 import axios from "axios";
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { DataContext } from "../../context/AppContext";
-import { LoginButton } from "../../components/buttons/login-button";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useContext, useEffect } from "react";
 
 function OauthLogin() {
   const { getAccessTokenSilently } = useAuth0();
@@ -49,16 +48,19 @@ function OauthLogin() {
     };
 
     fetchData();
-  }, []);
+  }, [getAccessTokenSilently, loginStateMutationJWT]);
 
   return (
     <>
       {loginStateMutationJWT.isLoading && (
-        <div> mutation has started loading</div>
+        <div>
+          {" "}
+          Attempting to login with your Single sign on account.... please wait
+        </div>
       )}
-      {loginStateMutationJWT.isSuccess && <div> mutation has successed</div>}
-      trying to load
-      {userName}
+      {loginStateMutationJWT.isSuccess && (
+        <div> Succes!....Welcome {userName}, Redirecting.....</div>
+      )}
     </>
   );
 }
