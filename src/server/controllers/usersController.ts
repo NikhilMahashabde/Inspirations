@@ -8,8 +8,6 @@ interface CustomSession extends Session {
   name: string;
 }
 
-
-
 const createNewUser = async (req: Request, res: Response) => {
   Object.entries(req.body).forEach(([key, value]) => {
     console.log(key, ":", value);

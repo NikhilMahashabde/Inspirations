@@ -1,14 +1,17 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-interface Node {
+export interface TripNode {
+  _id: string | null | undefined;
   nodeType: string;
   duration: number;
   origin: string;
   destination: string;
   activities: string;
-  startDate: Date;
-  endDate: Date;
+  description: string;
+  startTime: Date;
+  endTime: Date;
   notes: string;
+  budget: number;
 }
 
 export interface TripDocument extends Document {
@@ -18,18 +21,21 @@ export interface TripDocument extends Document {
   budget: number;
   startDate: Date;
   endDate: Date;
-  nodes: Node[];
+  nodes: TripNode[];
+  tags: string[];
 }
 
-const nodeSchema = new Schema<Node>({
+const nodeSchema = new Schema<TripNode>({
   nodeType: { type: String },
   duration: { type: Number },
   origin: { type: String },
   destination: { type: String },
+  description: { type: String },
   activities: { type: String },
-  startDate: { type: Date },
-  endDate: { type: Date },
+  startTime: { type: Date },
+  endTime: { type: Date },
   notes: { type: String },
+  budget: { type: Number },
 });
 
 const tripSchema = new Schema<TripDocument>({

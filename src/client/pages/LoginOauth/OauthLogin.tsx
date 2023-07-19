@@ -48,7 +48,7 @@ function OauthLogin() {
     };
 
     fetchData();
-  }, [getAccessTokenSilently, loginStateMutationJWT]);
+  }, []);
 
   return (
     <>

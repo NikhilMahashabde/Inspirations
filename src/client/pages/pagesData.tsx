@@ -1,4 +1,4 @@
-import { routerType } from "../types/router.types";
+import { routerType } from "../interfaces/router.types";
 import CouldNotFind from "./404";
 import Home from "./home";
 import Login from "./login";
@@ -44,7 +44,7 @@ const pagesData: routerType[] = [
     title: "Home",
   },
   {
-    path: "/trips/:id",
+    path: "/trip/:id",
     element: <TripModify />,
     title: "Trip config",
   },

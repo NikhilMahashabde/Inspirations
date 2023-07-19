@@ -3,13 +3,14 @@ import path from "path";
 import enableSession from "./middleware/session";
 import connectDB from "./config/dBConn";
 import mongoose from "mongoose";
-import loginRouter from "./routes/api/login.js";
-import logoutRouter from "./routes/logout.js";
-import usersRouter from "./routes/api/users.js";
-import sessionsRouter from "./routes/api/sessions.js";
-import tripsRouter from "./routes/api/trips.js";
-import authRouter from "./routes/auth.js";
+import loginRouter from "./routes/api/login.ts";
+import logoutRouter from "./routes/logout.ts";
+import usersRouter from "./routes/api/users.ts";
+import sessionsRouter from "./routes/api/sessions.ts";
+import tripsRouter from "./routes/api/trips.ts";
+import authRouter from "./routes/auth.ts";
 import cookieParser from "cookie-parser";
+import tripRouter from "./routes/api/trip.ts";
 const PORT = 8080;
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //middle ware for redirect if unathorised)
 //routes private
 app.use("/api/trips", tripsRouter);
+app.use("/api/trip", tripRouter);
 
 //connect app
 

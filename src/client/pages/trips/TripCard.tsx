@@ -11,13 +11,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { MyTripsInterface } from "../../types/interfaces.types";
+import { MyTripsInterface } from "../../interfaces/interfaces.types";
+import { Link as ReactRouterLink } from "react-router-dom";
 
-interface MyTripCardProps {
+interface TripCardProps {
   trip: MyTripsInterface;
 }
 
-export default function MyTripCard({ trip }: MyTripCardProps) {
+export default function TripCard({ trip }: TripCardProps) {
   return (
     <Center py={6}>
       <Stack
@@ -100,6 +101,8 @@ export default function MyTripCard({ trip }: MyTripCardProps) {
             alignItems={"center"}
           >
             <Button
+              as={ReactRouterLink}
+              to={`/trip/${trip._id}`}
               flex={1}
               fontSize={"sm"}
               rounded={"full"}
@@ -107,7 +110,7 @@ export default function MyTripCard({ trip }: MyTripCardProps) {
                 bg: "gray.200",
               }}
             >
-              Message
+              Open Trip
             </Button>
             <Button
               flex={1}

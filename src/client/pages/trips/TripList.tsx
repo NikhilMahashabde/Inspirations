@@ -1,8 +1,8 @@
 import { useMutation } from "react-query";
 import { DataContext } from "../../context/AppContext";
-import MyTripCard from "./MyTripCard";
 import { useContext, useEffect } from "react";
 import axios from "axios";
+import TripCard from "./TripCard";
 
 export const TripList = () => {
   const { myTrips, setMyTrips } = useContext(DataContext);
@@ -37,7 +37,7 @@ export const TripList = () => {
           <>
             {" "}
             {myTrips.map((trip) => (
-              <MyTripCard trip={trip} />
+              <TripCard trip={trip} />
             ))}
           </>
         )}

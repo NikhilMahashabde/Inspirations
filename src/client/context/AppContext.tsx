@@ -1,8 +1,8 @@
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { MyTripsInterface } from "../types/interfaces.types";
+import { MyTripsInterface, TripData } from "../interfaces/interfaces.types";
 
-interface AuthContextProps {
+interface DataContextProps {
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
   setUserName: Dispatch<SetStateAction<string>>;
   isAuthenticated: boolean;
@@ -12,9 +12,11 @@ interface AuthContextProps {
   setErrorResponse: Dispatch<SetStateAction<string>>;
   myTrips: MyTripsInterface[] | undefined;
   setMyTrips: Dispatch<SetStateAction<MyTripsInterface[] | undefined>>;
+  tripData: MyTripsInterface | undefined;
+  setTripData: Dispatch<SetStateAction<MyTripsInterface | undefined>>;
 }
 
-const DataContext = createContext<AuthContextProps>({
+const DataContext = createContext<DataContextProps>({
   isAuthenticated: false,
   setIsAuthenticated: () => {
     return;
@@ -34,6 +36,10 @@ const DataContext = createContext<AuthContextProps>({
   setMyTrips: () => {
     return;
   },
+  tripData: undefined,
+  setTripData: () => {
+    return;
+  },
 });
 
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
@@ -42,6 +48,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
   const [errorResponse, setErrorResponse] = useState<string>("");
   const [myTrips, setMyTrips] = useState<MyTripsInterface[] | undefined>();
+  const [tripData, setTripData] = useState<TripData | undefined>();
 
   return (
     <DataContext.Provider
@@ -55,6 +62,8 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
         setErrorResponse,
         myTrips,
         setMyTrips,
+        tripData,
+        setTripData,
       }}
     >
       {children}
