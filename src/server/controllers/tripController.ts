@@ -37,7 +37,7 @@ const handleAddTripNode = async (req: Request, res: Response) => {
 
     await foundTrip.save();
 
-    return res.json({ message: "all good" });
+    return res.json({ trip: foundTrip });
 
     // return succesfull trip. update main trip component.
   } catch (error) {
@@ -45,4 +45,39 @@ const handleAddTripNode = async (req: Request, res: Response) => {
   }
 };
 
-export { handleAddTripNode };
+const handleDeleteTripNode = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const nodeIndex = req.body.index;
+
+  if (!(id && String(nodeIndex))) {
+    return res.status(400).json({
+      message: "did not submit ID or correct node index, node not deleted",
+    });
+  }
+
+  try {
+    const Trip = await Trips.findOne({ _id: id });
+
+    if (!Trip)
+      return res
+        .status(500)
+        .json({ message: "Cannot find trip, did not delete", trip: Trip });
+
+    if (nodeIndex < 0 || nodeIndex >= Trip.nodes.length)
+      return res
+        .status(400)
+        .json({ message: "Invalid node index. Node not deleted." });
+
+    Trip.nodes.splice(nodeIndex, 1);
+
+    await Trip.save();
+
+    return res
+      .status(200)
+      .json({ message: "Node deleted successfully.", updatedTrip: Trip });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { handleAddTripNode, handleDeleteTripNode };

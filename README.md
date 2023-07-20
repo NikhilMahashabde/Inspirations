@@ -3,11 +3,9 @@
 **To do**
 
 - show example jounneys
-- UI to create / start journey
 
 // start journey page
 
-- list of all journeys - create new journey - name , desc, etc
 - optimise journey]
 
 // enter journey
@@ -17,12 +15,6 @@
 - location
 - [optional buttons -
 
---- questions
-request control - why do i need to typecast every time, can i not set or make it infer that this may or may not be inside? guard?
-
-routes and folder structures
-
-// main page - ouath login
 // new card for login
 
 ---------- Trip component ---------

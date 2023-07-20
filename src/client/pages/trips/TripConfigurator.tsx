@@ -108,12 +108,7 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
                 >
                   {tripData.purpose}
                 </Text>
-                <Text fontSize={"lg"}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
-                  aliquid amet at delectus doloribus dolorum expedita hic, ipsum
-                  maxime modi nam officiis porro, quae, quisquam quos
-                  reprehenderit velit? Natus, totam.
-                </Text>
+                <Text fontSize={"lg"}></Text>
               </VStack>
               <Box>
                 <Text
@@ -128,19 +123,6 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
 
                 <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                   {tripData.budget}
-                  {/* 
-
-
-                  <List spacing={2}>
-                    <ListItem>Chronograph</ListItem>
-                    <ListItem>Master Chronometer Certified</ListItem>{" "}
-                    <ListItem>Tachymeter</ListItem>
-                  </List>
-                  <List spacing={2}>
-                    <ListItem>Anti‑magnetic</ListItem>
-                    <ListItem>Chronometer</ListItem>
-                    <ListItem>Small seconds</ListItem>
-                  </List> */}
                 </SimpleGrid>
               </Box>
 
@@ -167,19 +149,30 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
             </Stack>
           </Stack>
         </SimpleGrid>
+
         <SimpleGrid
           columns={{ base: 1, lg: 3 }}
           spacing={{ base: 8, md: 10 }}
-          py={{ base: 18, md: 24 }}
+          py={{ base: 2, md: 2 }}
         >
+          <Heading
+            lineHeight={1.1}
+            fontWeight={600}
+            fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+          >
+            My Itinerary
+          </Heading>
+        </SimpleGrid>
+        <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 8, md: 10 }}>
           <AddAccomodationButton id={tripData?._id} />
           <AddAccomodationButton id={tripData?._id} />
           <AddAccomodationButton id={tripData?._id} />
         </SimpleGrid>
+
         <SimpleGrid
           columns={{ base: 1, lg: 1 }}
           spacing={{ base: 8, md: 10 }}
-          py={{ base: 18, md: 24 }}
+          py={{ base: 2, md: 2 }}
         >
           <ItineraryWrapper />
         </SimpleGrid>

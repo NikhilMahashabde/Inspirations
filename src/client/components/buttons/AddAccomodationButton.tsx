@@ -2,8 +2,11 @@ import { IconButton } from "@chakra-ui/react";
 import axios from "axios";
 import { BsHouseAddFill } from "react-icons/bs";
 import { useMutation } from "react-query";
+import { DataContext } from "../../context/AppContext";
+import { useContext } from "react";
 
 const AddAccomodationButton = ({ id }: { id: string | undefined }) => {
+  const { setTripData } = useContext(DataContext);
   const data = {
     _id: id,
     addNodeType: "accomodation",
@@ -13,8 +16,11 @@ const AddAccomodationButton = ({ id }: { id: string | undefined }) => {
     () => axios.post(`/api/trip/${id}`, data),
 
     {
-      onSuccess: (response) =>
-        console.log("added a acc leg", response.data.message),
+      onSuccess: (response) => {
+        console.log(response.data);
+        setTripData(response.data.trip);
+      },
+
       onError: () => console.log("failed to add leg"),
     }
   );

@@ -8,6 +8,11 @@ import Itinerary, {
 import { useContext } from "react";
 import { DataContext } from "../../context/AppContext";
 import { TripNode } from "../../../server/model/trips";
+import { Box, Grid, GridItem, SimpleGrid, Stack } from "@chakra-ui/react";
+import AccomadationRow from "./AccomadationRow";
+import LegRow from "./LegRow";
+import { Badge, Icons } from "@kiwicom/orbit-components";
+import React from "react";
 
 const ItineraryWrapper = () => {
   const { tripData } = useContext(DataContext);
@@ -15,14 +20,18 @@ const ItineraryWrapper = () => {
   return (
     tripData && (
       <Itinerary>
-        {tripData.nodes.map((node: TripNode) => (
-          <ItinerarySegmentStop
-            city={tripData.nodes.length}
-            station="Sheremetyevo International Airport (SVO)"
-            date="Fri, 19.10"
-            time="14:05"
-          />
-        ))}
+        <ItinerarySegment spaceAfter="medium">
+          {tripData.nodes.map((node: TripNode, index) => (
+            <React.Fragment key={index}>
+              {node.nodeType === "accomodation" && (
+                <AccomadationRow node={node} index={index} />
+              )}
+              {node.nodeType === "accomodation" && (
+                <LegRow node={node} index={index} />
+              )}
+            </React.Fragment>
+          ))}
+        </ItinerarySegment>
       </Itinerary>
     )
   );
