@@ -23,12 +23,11 @@ const ItineraryWrapper = () => {
         <ItinerarySegment spaceAfter="medium">
           {tripData.nodes.map((node: TripNode, index) => (
             <React.Fragment key={index}>
-              {node.nodeType === "accomodation" && (
+              {(node.nodeType === "accomodation" ||
+                node.nodeType === "activity") && (
                 <AccomadationRow node={node} index={index} />
               )}
-              {node.nodeType === "accomodation" && (
-                <LegRow node={node} index={index} />
-              )}
+              {node.nodeType === "leg" && <LegRow node={node} index={index} />}
             </React.Fragment>
           ))}
         </ItinerarySegment>

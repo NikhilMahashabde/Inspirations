@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Trips, { TripNode } from "../model/trips";
+import { MyTripsInterface } from "../../client/interfaces/interfaces.types";
 
 const handleAddTripNode = async (req: Request, res: Response) => {
   const id = req.params.id;
@@ -80,4 +81,20 @@ const handleDeleteTripNode = async (req: Request, res: Response) => {
   }
 };
 
-export { handleAddTripNode, handleDeleteTripNode };
+const handleUpdateTripNode = async (req: Request, res: Response) => {
+  const tripData: MyTripsInterface = req.body.data;
+
+  if (!req.body.data)
+    return res.status(400).json({
+      message: "did not submit Trip ",
+    });
+
+  try {
+    await Trips.replaceOne({ _id: tripData._id }, tripData);
+    return res.json({ updatedTrip: req.body.data });
+  } catch (error) {
+    return console.error(error);
+  }
+};
+
+export { handleAddTripNode, handleDeleteTripNode, handleUpdateTripNode };

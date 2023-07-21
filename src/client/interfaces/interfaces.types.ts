@@ -14,3 +14,11 @@ export interface MyTripsInterface {
 export interface TripData extends MyTripsInterface {
   _id: string;
 }
+
+export interface DeleteResponse {
+  updatedTrip: TripData;
+}
+
+export interface UpdateTripResponse {
+  updatedTrip: TripData;
+}

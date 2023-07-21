@@ -1,18 +1,19 @@
 import { Button, IconButton } from "@chakra-ui/react";
 import axios from "axios";
-import { BsHouseAddFill } from "react-icons/bs";
+
+import { GiCommercialAirplane } from "react-icons/gi";
 import { useMutation } from "react-query";
 import { DataContext } from "../../context/AppContext";
 import { useContext } from "react";
 
-const AddAccomodationButton = ({ id }: { id: string | undefined }) => {
+const AddLegButton = ({ id }: { id: string | undefined }) => {
   const { setTripData } = useContext(DataContext);
   const data = {
     _id: id,
-    addNodeType: "accomodation",
+    addNodeType: "leg",
   };
 
-  const AddAccomodationMutation = useMutation(
+  const AddTravelMutation = useMutation(
     () => axios.post(`/api/trip/${id}`, data),
 
     {
@@ -25,28 +26,28 @@ const AddAccomodationButton = ({ id }: { id: string | undefined }) => {
     }
   );
 
-  const AddAccomodationToTrip = async () => {
-    if (id) AddAccomodationMutation.mutateAsync();
+  const AddTravelToTrip = async () => {
+    if (id) AddTravelMutation.mutateAsync();
   };
 
   return (
     <Button
       variant="outline"
       colorScheme="teal"
-      leftIcon={<BsHouseAddFill />}
-      onClick={AddAccomodationToTrip}
+      leftIcon={<GiCommercialAirplane />}
+      onClick={AddTravelToTrip}
     >
-      Add Accomadation
+      Add Travel
     </Button>
     // <IconButton
     //   variant="outline"
     //   colorScheme="teal"
     //   aria-label="Call Sage"
     //   fontSize="20px"
-    //   icon={<BsHouseAddFill />}
+    //   icon={<GiCommercialAirplane />}
     //   onClick={AddAccomodationToTrip}
     // />
   );
 };
 
-export default AddAccomodationButton;
+export default AddLegButton;

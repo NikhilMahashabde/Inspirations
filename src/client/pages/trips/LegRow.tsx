@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Button, Grid, GridItem } from "@chakra-ui/react";
 import {
   ItinerarySegmentBanner,
   ItinerarySegmentDetail,
@@ -6,15 +6,46 @@ import {
 } from "@kiwicom/orbit-components/lib/Itinerary";
 import { TripNode } from "../../../server/model/trips";
 import { Badge } from "@kiwicom/orbit-components/lib";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import { Icons } from "@kiwicom/orbit-components";
+import { AiFillDelete } from "react-icons/ai";
+import { DataContext } from "../../context/AppContext";
+import { useMutation } from "react-query";
+import axios from "axios";
+import { DeleteResponse } from "../../interfaces/interfaces.types";
 
 const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleToggle = () => {
     setIsExpanded((prevState) => !prevState);
+  };
+
+  const { setTripData, tripData } = useContext(DataContext);
+
+  const data = {
+    id: tripData?._id || "",
+    index: index,
+  };
+
+  const deleteRowMutation = useMutation(
+    (data: { id: string | null; index: number }) =>
+      axios.delete<DeleteResponse>(`/api/trip/${data.id}`, {
+        data,
+      }),
+    {
+      onSuccess: (res) => {
+        setTripData(res.data.updatedTrip);
+      },
+      onError: (res: { error: string }) => {
+        console.log(res);
+      },
+    }
+  );
+
+  const deleteRow = async () => {
+    deleteRowMutation.mutateAsync(data);
   };
   return (
     <div style={{ width: "100%" }}>
@@ -59,15 +90,22 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
                     }
                   />
                 </GridItem>
-                {isExpanded && <MdExpandLess />}
-                {!isExpanded && <MdExpandMore />}
+                <GridItem>
+                  {isExpanded && <MdExpandLess />}
+                  {!isExpanded && <MdExpandMore />}
+                </GridItem>
               </Grid>
             </div>
           </>
         </GridItem>
 
         <GridItem>
-          <button>hello</button>
+          <Button
+            variant="outline"
+            colorScheme="red"
+            leftIcon={<AiFillDelete />}
+            onClick={deleteRow}
+          ></Button>
         </GridItem>
         <GridItem>
           <button>hello</button>

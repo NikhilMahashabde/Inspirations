@@ -4,8 +4,16 @@ import { useContext } from "react";
 import { TripNode } from "../../../server/model/trips";
 import { useMutation } from "react-query";
 import axios from "axios";
-import { TripData } from "../../interfaces/interfaces.types";
+import {
+  MyTripsInterface,
+  TripData,
+  UpdateTripResponse,
+} from "../../interfaces/interfaces.types";
 import { DataContext } from "../../context/AppContext";
+import { Button } from "@chakra-ui/react";
+import { AiFillDelete } from "react-icons/ai";
+import { BsFileArrowDown, BsFileArrowUp } from "react-icons/bs";
+import _ from "lodash"; // Import Lodash
 
 interface DeleteResponse {
   updatedTrip: TripData;
@@ -39,8 +47,44 @@ const AccomadationRow = ({
     }
   );
 
+  const UpdateTripMutation = useMutation(
+    (data: MyTripsInterface) =>
+      axios.put<UpdateTripResponse>(`/api/trip/${data._id}`, {
+        data,
+      }),
+    {
+      onSuccess: (res) => {
+        setTripData(res.data.updatedTrip);
+      },
+      onError: (res: { error: string }) => {
+        console.log(res);
+      },
+    }
+  );
+
   const deleteRow = async () => {
     deleteRowMutation.mutateAsync(data);
+  };
+
+  const MoveRowUp = async () => {
+    if (index == 0 || !tripData) return null;
+    const updateTripData = _.cloneDeep(tripData);
+    [updateTripData.nodes[index - 1], updateTripData.nodes[index]] = [
+      updateTripData.nodes[index],
+      updateTripData.nodes[index - 1],
+    ];
+
+    UpdateTripMutation.mutateAsync(updateTripData);
+  };
+
+  const MoveRowDown = async () => {
+    if (!tripData || index == tripData.nodes.length - 1) return null;
+    const updateTripData = _.cloneDeep(tripData);
+    [updateTripData.nodes[index + 1], updateTripData.nodes[index]] = [
+      updateTripData.nodes[index],
+      updateTripData.nodes[index + 1],
+    ];
+    UpdateTripMutation.mutateAsync(updateTripData);
   };
 
   return (
@@ -48,7 +92,6 @@ const AccomadationRow = ({
       <Grid
         templateColumns={{
           base: "repeat(100, 1fr)",
-          lg: "repeat(100, 1fr)",
         }}
       >
         <GridItem colSpan={80} style={{ gridColumn: "span 90" }}>
@@ -61,13 +104,29 @@ const AccomadationRow = ({
         </GridItem>
 
         <GridItem>
-          <button onClick={deleteRow}>Del Row</button>
+          <Button
+            variant="outline"
+            colorScheme="red"
+            leftIcon={<AiFillDelete />}
+            onClick={deleteRow}
+          ></Button>
+          {/* <button onClick={deleteRow}>Del Row</button> */}
         </GridItem>
         <GridItem>
-          <button>hello</button>
+          <Button
+            variant="outline"
+            colorScheme="red"
+            leftIcon={<BsFileArrowUp />}
+            onClick={MoveRowUp}
+          ></Button>
         </GridItem>
         <GridItem>
-          <button>hello</button>
+          <Button
+            variant="outline"
+            colorScheme="red"
+            leftIcon={<BsFileArrowDown />}
+            onClick={MoveRowDown}
+          ></Button>
         </GridItem>
       </Grid>
     </div>

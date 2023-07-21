@@ -1,18 +1,18 @@
-import { Button, IconButton } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import axios from "axios";
-import { BsHouseAddFill } from "react-icons/bs";
+import { MdOutlineSportsTennis } from "react-icons/md";
 import { useMutation } from "react-query";
 import { DataContext } from "../../context/AppContext";
 import { useContext } from "react";
 
-const AddAccomodationButton = ({ id }: { id: string | undefined }) => {
+const AddActivityButton = ({ id }: { id: string | undefined }) => {
   const { setTripData } = useContext(DataContext);
   const data = {
     _id: id,
-    addNodeType: "accomodation",
+    addNodeType: "activity",
   };
 
-  const AddAccomodationMutation = useMutation(
+  const AddActivityMutation = useMutation(
     () => axios.post(`/api/trip/${id}`, data),
 
     {
@@ -21,32 +21,34 @@ const AddAccomodationButton = ({ id }: { id: string | undefined }) => {
         setTripData(response.data.trip);
       },
 
-      onError: () => console.log("failed to add leg"),
+      onError: () => console.log("failed to add activity"),
     }
   );
 
-  const AddAccomodationToTrip = async () => {
-    if (id) AddAccomodationMutation.mutateAsync();
+  const AddActivityToTrip = async () => {
+    if (id) AddActivityMutation.mutateAsync();
   };
 
   return (
     <Button
       variant="outline"
       colorScheme="teal"
-      leftIcon={<BsHouseAddFill />}
-      onClick={AddAccomodationToTrip}
+      leftIcon={<MdOutlineSportsTennis />}
+      onClick={AddActivityToTrip}
     >
-      Add Accomadation
+      Add Activity
     </Button>
     // <IconButton
     //   variant="outline"
     //   colorScheme="teal"
     //   aria-label="Call Sage"
     //   fontSize="20px"
-    //   icon={<BsHouseAddFill />}
-    //   onClick={AddAccomodationToTrip}
-    // />
+    //   icon={<MdOutlineSportsTennis />}
+    //   onClick={AddActivityToTrip}
+    // >
+    //   Add Activity
+    // </IconButton>
   );
 };
 
-export default AddAccomodationButton;
+export default AddActivityButton;
