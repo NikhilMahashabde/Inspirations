@@ -1,22 +1,31 @@
-import { Grid, GridItem } from "@chakra-ui/react";
-import { ItinerarySegmentStop } from "@kiwicom/orbit-components/lib/Itinerary";
-import { useContext } from "react";
+import {
+  Grid,
+  GridItem,
+  IconButton,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import {
+  ItinerarySegmentDetail,
+  ItinerarySegmentStop,
+} from "@kiwicom/orbit-components/lib/Itinerary";
+import { useContext, useState } from "react";
 import { TripNode } from "../../../server/model/trips";
 import { useMutation } from "react-query";
 import axios from "axios";
 import {
   MyTripsInterface,
-  TripData,
   UpdateTripResponse,
 } from "../../interfaces/interfaces.types";
 import { DataContext } from "../../context/AppContext";
 import { Button } from "@chakra-ui/react";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { BsFileArrowDown, BsFileArrowUp } from "react-icons/bs";
 import _ from "lodash"; // Import Lodash
+import { TripEditModal } from "./TripEditModal/TripEditModal";
+import { Icons } from "@kiwicom/orbit-components";
 
 interface DeleteResponse {
-  updatedTrip: TripData;
+  updatedTrip: MyTripsInterface;
 }
 const AccomadationRow = ({
   node,
@@ -26,6 +35,7 @@ const AccomadationRow = ({
   index: number;
 }) => {
   const { setTripData, tripData } = useContext(DataContext);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const data = {
     id: tripData?._id || "",
@@ -87,6 +97,23 @@ const AccomadationRow = ({
     UpdateTripMutation.mutateAsync(updateTripData);
   };
 
+  //date and time formatting for output
+  const startTimeDate = new Date(node.startTime);
+
+  const timeString = startTimeDate.toLocaleTimeString(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
+  const dateString = startTimeDate.toLocaleDateString(undefined, {
+    year: "2-digit",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
+  // time durration formatting.
+
   return (
     <div style={{ width: "100%" }}>
       <Grid
@@ -94,39 +121,69 @@ const AccomadationRow = ({
           base: "repeat(100, 1fr)",
         }}
       >
-        <GridItem colSpan={80} style={{ gridColumn: "span 90" }}>
-          <ItinerarySegmentStop
-            city={node.origin || "N/A"}
-            station="Sheremetyevo International Airport (SVO)sdaaddddssssssssssssssssssssssdddss"
-            date="Fri, 19.10"
-            time="14:05"
-          />
+        <GridItem
+          colSpan={80}
+          style={{ gridColumn: "span 90" }}
+          onClick={() => setIsExpanded((prev) => !prev)}
+        >
+          {!isExpanded && (
+            <ItinerarySegmentStop
+              city={node.destination || "No Destination Entered"}
+              station={node.description || "No Description Entered"}
+              date={dateString}
+              time={timeString}
+            />
+          )}
+          {isExpanded && (
+            <ItinerarySegmentDetail
+              icon={<Icons.Accommodation size="small" />}
+              duration="2h 30m"
+              summary={<h1>gasdgasgasg</h1>}
+            />
+          )}
         </GridItem>
 
+        {/* Pop up box for edditing the data etc.  */}
         <GridItem>
-          <Button
-            variant="outline"
-            colorScheme="red"
-            leftIcon={<AiFillDelete />}
-            onClick={deleteRow}
-          ></Button>
-          {/* <button onClick={deleteRow}>Del Row</button> */}
+          <TripEditModal index={index} />
         </GridItem>
+
+        {/* Edit move and delte buttons   */}
         <GridItem>
-          <Button
-            variant="outline"
-            colorScheme="red"
-            leftIcon={<BsFileArrowUp />}
+          <IconButton
+            bg={useColorModeValue("gray.400", "gray.800")}
+            color={useColorModeValue("white", "gray.800")}
+            _hover={{
+              bg: "blue.600",
+            }}
+            aria-label="Move Row Down"
+            icon={<BsFileArrowUp />}
             onClick={MoveRowUp}
-          ></Button>
+          />
         </GridItem>
         <GridItem>
-          <Button
-            variant="outline"
-            colorScheme="red"
-            leftIcon={<BsFileArrowDown />}
+          <IconButton
+            bg={useColorModeValue("gray.400", "gray.800")}
+            color={useColorModeValue("white", "gray.800")}
+            _hover={{
+              bg: "blue.600",
+            }}
+            aria-label="Move Row Down"
+            icon={<BsFileArrowDown />}
             onClick={MoveRowDown}
-          ></Button>
+          />
+        </GridItem>
+        <GridItem>
+          <IconButton
+            bg={useColorModeValue("red.400", "red.800")}
+            color={useColorModeValue("white", "gray.800")}
+            _hover={{
+              bg: "red.600",
+            }}
+            aria-label="Subscribe"
+            icon={<AiFillDelete />}
+            onClick={deleteRow}
+          />
         </GridItem>
       </Grid>
     </div>

@@ -8,17 +8,17 @@ export interface MyTripsInterface {
   budget: number;
   startDate: string;
   endDate: string;
-  nodes: TripNode[];
-}
-
-export interface TripData extends MyTripsInterface {
-  _id: string;
+  nodes: TripNode[] | [];
 }
 
 export interface DeleteResponse {
-  updatedTrip: TripData;
+  updatedTrip: MyTripsInterface;
 }
 
 export interface UpdateTripResponse {
-  updatedTrip: TripData;
+  updatedTrip: MyTripsInterface;
+}
+
+export interface NodeFormValues {
+  destination: string;
 }

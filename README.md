@@ -35,6 +35,9 @@ onChange => update trip props.
 [budet]]
 
 **Plan of action**
-1 - add up and down arrow buttons
-onclick, check index number limits,
-if ok spread array to n-2... then put in n into n-1. and then add current N into N location.. spread from n to length.
+
+edit button - bring pop up for edit window.
+
+- update show editable items
+
+onClick on destination - open up more info.
