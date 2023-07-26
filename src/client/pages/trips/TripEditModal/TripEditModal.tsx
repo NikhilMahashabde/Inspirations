@@ -31,7 +31,10 @@ export function TripEditModal({ index }: { index: number }) {
         }}
         aria-label="Subscribe"
         icon={<AiFillEdit />}
-        onClick={onOpen}
+        onClick={(e) => {
+          e.stopPropagation();
+          onOpen();
+        }}
       />
 
       <Modal isOpen={isOpen} onClose={onClose}>

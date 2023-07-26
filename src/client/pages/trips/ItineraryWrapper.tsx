@@ -26,83 +26,43 @@ import { AiFillEdit } from "react-icons/ai";
 const ItineraryWrapper = () => {
   const { tripData } = useContext(DataContext);
 
+  const getTimeString = (timeObj: Date) =>
+    timeObj.toLocaleTimeString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+  const getDateString = (timeObj: Date) =>
+    timeObj.toLocaleDateString(undefined, {
+      year: "2-digit",
+      month: "2-digit",
+      day: "2-digit",
+    });
+
   return (
     tripData && (
       <Itinerary>
         <ItinerarySegment spaceAfter="medium">
+          <ItinerarySegmentStop
+            city={tripData.startLocation}
+            station={""}
+            date={getTimeString(new Date(tripData.startDate))}
+            time={getDateString(new Date(tripData.startDate))}
+          />
+
           {tripData.nodes.map((node: TripNode, index) => (
-            <React.Fragment key={index}>
-              {/* {(node.nodeType === "accomodation" ||
-                    node.nodeType === "activity") && (
-                    <AccomadationRow node={node} index={index} />
-                  )} */}
-
-              {node.nodeType === "leg" && (
-                <>
-                  <LegRow node={node} index={index} />
-                </>
-              )}
-            </React.Fragment>
+            <LegRow node={node} index={index} />
           ))}
+
+          <ItinerarySegmentStop
+            city={tripData.endLocation}
+            station={""}
+            date={getTimeString(new Date(tripData.endDate))}
+            time={getDateString(new Date(tripData.endDate))}
+          />
         </ItinerarySegment>
-
-        {/* <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(9, 1fr)",
-              }}
-            > */}
-        {/* <ItinerarySegmentDetail
-                icon={<Icons.Airplane size="small" />}
-                duration="2h 30m"
-                summary={
-                  <div>
-                    test summaryddddddddummaryddddummarydffffffffffffffffffffddd
-                  </div>
-                } */}
-        {/* /> */}
-        {/* </div> */}
       </Itinerary>
-
-      // <Itinerary>
-      //   {tripData.nodes.map((node: TripNode, index) => (
-      //     <React.Fragment key={index}>
-      //       {node.nodeType === "leg" && (
-      //         <>
-      //           <IconButton
-      //             bg={useColorModeValue("yellow.400", "yellow.800")}
-      //             color={useColorModeValue("white", "gray.800")}
-      //             _hover={{
-      //               bg: "red.600",
-      //             }}
-      //             aria-label="Subscribe"
-      //             icon={<AiFillEdit />}
-      //             onClick={() => console.log("hi;")}
-      //           />
-      //         </>
-      //       )}
-      //     </React.Fragment>
-      //   ))}
-      // </Itinerary>
-
-      /* 
-        <GridItem colSpan={1}>
-          <ItinerarySegment spaceAfter="medium">
-            {tripData.nodes.map((node: TripNode, index) => (
-              <React.Fragment key={index}>
-                {(node.nodeType === "accomodation" ||
-                  node.nodeType === "activity") && (
-                  <AccomadationRow node={node} index={index} />
-                )}
-                {node.nodeType === "leg" && (
-                  <>
-                    <LegRow node={node} index={index} />
-                  </>
-                )}
-              </React.Fragment>
-            ))}
-          </ItinerarySegment>
-        </GridItem> */
     )
   );
 };

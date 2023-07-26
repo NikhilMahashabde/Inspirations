@@ -4,6 +4,8 @@ export interface MyTripsInterface {
   _id: string;
   name: string;
   authorisation: string[];
+  startLocation: string;
+  endLocation: string;
   purpose: string;
   budget: number;
   startDate: string;

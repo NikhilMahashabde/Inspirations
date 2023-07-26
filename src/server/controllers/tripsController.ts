@@ -16,6 +16,8 @@ const createNewTrip = async (req: Request, res: Response) => {
     endDate: req.body.endDate,
     participants: req.body.participants,
     authorisation: [(req.session as CustomSession)?.email],
+    endLocation: req.body.endLocation,
+    startLocation: req.body.startLocation,
   });
 
   try {

@@ -3,6 +3,21 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
 import { DataContext } from "../../context/AppContext";
 import { LoginButton } from "../../components/buttons/login-button";
+import { FcGoogle } from "react-icons/fc";
+
+import {
+  Center,
+  Button,
+  Checkbox,
+  Flex,
+  Text,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  Image,
+} from "@chakra-ui/react";
 
 interface LoginFormData {
   email: string;
@@ -74,36 +89,63 @@ function LoginForm() {
 
   return (
     <div>
-      <h2>Login form</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={loginFormData.email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={loginFormData.password}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
+          <Flex p={8} flex={1} align={"center"} justify={"center"}>
+            <Stack spacing={4} w={"full"} maxW={"md"}>
+              <Heading fontSize={"2xl"}>Sign in to your account</Heading>
+              <FormControl id="email">
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  type="text"
+                  id="email"
+                  name="email"
+                  value={loginFormData.email}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel>Password</FormLabel>
+                <Input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={loginFormData.password}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+              <Stack spacing={6}>
+                <Stack
+                  direction={{ base: "column", sm: "row" }}
+                  align={"start"}
+                  justify={"space-between"}
+                >
+                  <Checkbox>Remember me</Checkbox>
+                  <Text color={"blue.500"}>Forgot password?</Text>
+                </Stack>
+                <Button colorScheme={"blue"} variant={"solid"} type="submit">
+                  Sign in
+                </Button>
+                {!isAuthenticated && <LoginButton />}
 
-        <button type="submit">Login</button>
+                {loginMutation.isLoading && <div>Loading...</div>}
+                {loginMutation.isError && <div>Error: {errorResponse}</div>}
 
-        {loginMutation.isLoading && <div>Loading...</div>}
-        {loginMutation.isError && <div>Error: {errorResponse}</div>}
+                {errorResponse && <div>Error: {errorResponse}</div>}
+              </Stack>
+            </Stack>
+          </Flex>
+          <Flex flex={1}>
+            <Image
+              alt={"Login Image"}
+              objectFit={"cover"}
+              src={
+                "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80"
+              }
+            />
+          </Flex>
+        </Stack>
       </form>
-      {!isAuthenticated && <LoginButton />}
-      {errorResponse && <div>Error: {errorResponse}</div>}
     </div>
   );
 }

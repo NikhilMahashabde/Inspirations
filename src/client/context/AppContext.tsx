@@ -25,6 +25,8 @@ const defaultTripData: MyTripsInterface = {
   startDate: "",
   endDate: "",
   nodes: [],
+  startLocation: "",
+  endLocation: "",
 };
 
 const DataContext = createContext<DataContextProps>({
@@ -56,6 +58,8 @@ const DataContext = createContext<DataContextProps>({
     startDate: "",
     endDate: "",
     nodes: [],
+    startLocation: "",
+    endLocation: "",
   },
   setTripData: () => {
     return;

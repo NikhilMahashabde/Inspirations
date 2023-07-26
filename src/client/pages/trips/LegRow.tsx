@@ -1,36 +1,20 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
-  Button,
-  Grid,
-  GridItem,
   IconButton,
   useColorModeValue,
   Collapse,
   Box,
-  Stack,
   HStack,
+  VStack,
 } from "@chakra-ui/react";
-import {
-  ItinerarySegmentBanner,
-  ItinerarySegmentDetail,
-} from "@kiwicom/orbit-components/lib/Itinerary";
+import { ItinerarySegmentDetail } from "@kiwicom/orbit-components/lib/Itinerary";
 import { TripNode } from "../../../server/model/trips";
-import {
-  Badge,
-  Text as MyText,
-  Slider,
-  TextLink,
-} from "@kiwicom/orbit-components/lib";
-import { useContext, useEffect, useState } from "react";
 
-import Itinerary, {
-  ItinerarySegment,
-  ItineraryStatus,
-  ItineraryBadgeList,
-  ItinerarySegmentStop,
-} from "@kiwicom/orbit-components/lib/Itinerary";
+import { useContext, useEffect, useState } from "react";
 
 import { Icons } from "@kiwicom/orbit-components";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { BsFileArrowDown, BsFileArrowUp } from "react-icons/bs";
 import { DataContext } from "../../context/AppContext";
 import { useMutation } from "react-query";
 import axios from "axios";
@@ -39,16 +23,13 @@ import {
   MyTripsInterface,
   UpdateTripResponse,
 } from "../../interfaces/interfaces.types";
-import { BsFileArrowDown, BsFileArrowUp } from "react-icons/bs";
+
 import _ from "lodash";
+import { TripEditModal } from "./TripEditModal/TripEditModal";
 
 const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [maxWidth, setMaxWidth] = useState("60vw");
-
-  const [gridTemplateColumns, setGridTemplateColumns] = useState(
-    `repeat(10, ${Number(maxWidth.replace("px", "50")) / 9}px)`
-  );
 
   const UpdateTripMutation = useMutation(
     (data: MyTripsInterface) =>
@@ -114,16 +95,6 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
     };
   }, []);
 
-  useEffect(() => {
-    const columnWidth = Math.min(
-      Number((window.innerWidth - 20) / 9),
-      110
-    ).toFixed(0);
-
-    const gridTemplateColumns = `repeat(10, ${columnWidth}px)`;
-    setGridTemplateColumns(gridTemplateColumns);
-  }, [maxWidth]);
-
   ////////// view window logic
 
   const deleteRowMutation = useMutation(
@@ -152,166 +123,70 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
         duration="2h 30m"
         summary={
           <HStack flex={1}>
-            <Box
-              flex={1}
-              onClick={() => setIsExpanded((prev) => !prev)}
-              maxW={maxWidth}
-            >
+            <Box flex={1} onClick={handleToggle} maxW={maxWidth}>
               <Collapse startingHeight={20} in={isExpanded}>
-                Anim pariatur 1cliche reprehenderit, enim eiusmod high 2life
-                accusamus terry r3ichardson ad squid. Nihil anim keffiyeh
-                helvetica, craft beer labore wes anderson cred nesciunt
-                sapie4nte ea proident.6
+                <div>{tripData.nodes[index].destination}</div>
+                <div>{tripData.nodes[index].description}</div>
+                <div>test</div>
+                <div>test</div>
+                <div>test</div>
+                <div>test</div>
+                <div>test</div>
+                <div>test</div>
+                <div>test</div>
+                <div>test</div>
               </Collapse>
             </Box>
-            <IconButton
-              bg={useColorModeValue("yellow.400", "yellow.800")}
-              color={useColorModeValue("white", "gray.800")}
-              _hover={{
-                bg: "red.600",
-              }}
-              aria-label="Subscribe"
-              icon={<AiFillEdit />}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            />
+            <VStack spacing={2} align="stretch">
+              <>
+                {/* //edit button */}
+                <TripEditModal index={index} />
+
+                {/* conditionnaly rendered delete add move buttons */}
+                {isExpanded && (
+                  <IconButton
+                    bg={useColorModeValue("blue.400", "blue.800")}
+                    color={useColorModeValue("white", "gray.800")}
+                    _hover={{
+                      bg: "blue.600",
+                    }}
+                    aria-label="Move Row Down"
+                    icon={<BsFileArrowDown />}
+                    onClick={MoveRowDown}
+                  />
+                )}
+
+                {isExpanded && (
+                  <IconButton
+                    bg={useColorModeValue("blue.400", "blue.800")}
+                    color={useColorModeValue("white", "gray.800")}
+                    _hover={{
+                      bg: "blue.600",
+                    }}
+                    aria-label="Move Row Down"
+                    icon={<BsFileArrowUp />}
+                    onClick={MoveRowUp}
+                  />
+                )}
+
+                {isExpanded && (
+                  <IconButton
+                    bg={useColorModeValue("red.400", "red.800")}
+                    color={useColorModeValue("white", "gray.800")}
+                    _hover={{
+                      bg: "red.600",
+                    }}
+                    aria-label="Subscribe"
+                    icon={<AiFillDelete />}
+                    onClick={deleteRow}
+                  />
+                )}
+              </>
+            </VStack>
           </HStack>
-
-          // <Grid templateColumns={{ base: gridTemplateColumns }}>
-          //   <GridItem colSpan={9}>
-
-          // </GridItem>
-          // <GridItem colSpan={1}>
-
-          //   </GridItem>
-          // </Grid>
         }
       />
-
-      {/* <ItinerarySegmentDetail
-        icon={<Icons.Airplane size="small" />}
-        duration="2h 30m"
-        {...({ opened: true } as Props)}
-        summary={
-          <div>testing summary</div>
-          // <Badge
-          //   carriers={[
-          //     {
-          //       code: "FR",
-          //       name: "Ryanair",
-          //     },
-          //   ]}
-          // >
-          //   Ryanair
-          // </Badge>
-        }
-        content={[
-          {
-            title: <div>hellonothell</div>,
-            items: [
-              // {
-              //   icon: <Icons.Airplane size="small" />,
-              //   name: "Carrier",
-              //   value: "Ryanair",
-              // },
-              // {
-              //   icon: <Icons.InformationCircle size="small" />,
-              //   name: "Connection number",
-              //   value: "RA 8345",
-              // },
-            ],
-          },
-        ]}
-      />
-    </> 
-
-    // <GridItem colSpan={9}>
-    //   <div
-    //     style={{
-    //       display: "grid",
-    //       gridTemplateColumns: "repeat(9, 1fr)",
-    //     }}
-    //   >
-    // <ItinerarySegmentDetail
-    //   icon={<Icons.Airplane size="small" />}
-    //   duration="2h 30m"
-    //   summary={
-    //     <div style={{ whiteSpace: "normal", overflowX: "hidden" }}>
-    //       test
-    //       summaryddddddddummaryddddummarydffffffffffffffffffffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-    //     </div>
-    //   }
-    // />
-
-    // <GridItem colSpan={1}>
-    //   <>
-    //     <IconButton
-    //       bg={useColorModeValue("yellow.400", "yellow.800")}
-    //       color={useColorModeValue("white", "gray.800")}
-    //       _hover={{
-    //         bg: "red.600",
-    //       }}
-    //       aria-label="Subscribe"
-    //       icon={<AiFillEdit />}
-    //       onClick={() => console.log("hi;")}
-    //     />
-    //     {/*
-    //     <IconButton
-    //       bg={useColorModeValue("blue.400", "blue.800")}
-    //       color={useColorModeValue("white", "gray.800")}
-    //       _hover={{
-    //         bg: "blue.600",
-    //       }}
-    //       aria-label="Move Row Down"
-    //       icon={<BsFileArrowDown />}
-    //       onClick={MoveRowDown}
-    //     />
-    //     <IconButton
-    //       bg={useColorModeValue("red.400", "red.800")}
-    //       color={useColorModeValue("white", "gray.800")}
-    //       _hover={{
-    //         bg: "red.600",
-    //       }}
-    //       aria-label="Subscribe"
-    //       icon={<AiFillDelete />}
-    //       onClick={deleteRow}
-    //     /> */}
     </>
-    // </GridItem>
-
-    // // {/* <IconButton
-    // //     bg={useColorModeValue("blue.400", "blue.800")}
-    //     color={useColorModeValue("white", "gray.800")}
-    //     _hover={{
-    //       bg: "blue.600",
-    //     }}
-    //     aria-label="Move Row Down"
-    //     icon={<BsFileArrowUp />}
-    //     onClick={MoveRowUp}
-    //   />
-
-    //   <IconButton
-    //     bg={useColorModeValue("blue.400", "blue.800")}
-    //     color={useColorModeValue("white", "gray.800")}
-    //     _hover={{
-    //       bg: "blue.600",
-    //     }}
-    //     aria-label="Move Row Down"
-    //     icon={<BsFileArrowDown />}
-    //     onClick={MoveRowDown}
-    //   />
-
-    //   <IconButton
-    //     bg={useColorModeValue("red.400", "red.800")}
-    //     color={useColorModeValue("white", "gray.800")}
-    //     _hover={{
-    //       bg: "red.600",
-    //     }}
-    //     aria-label="Subscribe"
-    //     icon={<AiFillDelete />}
-    //     onClick={deleteRow}
-    //   /> */}
   );
 };
 

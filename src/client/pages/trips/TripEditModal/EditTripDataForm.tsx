@@ -4,6 +4,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import { Field, Form, Formik, FormikProps } from "formik";
 import { useContext } from "react";
@@ -19,6 +20,7 @@ import _ from "lodash";
 
 export function EditTripDataForm({ index }: { index: number }) {
   const { tripData, setTripData } = useContext(DataContext);
+  const toast = useToast();
 
   function validateDestination(value: string) {
     let error;
@@ -36,6 +38,14 @@ export function EditTripDataForm({ index }: { index: number }) {
     {
       onSuccess: (res) => {
         setTripData(res.data.updatedTrip);
+        console.log("success");
+        toast({
+          title: "Trip Updated.",
+          description: "You can close the menu or continue updating",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
       },
       onError: (res: { error: string }) => {
         console.log(res);
@@ -46,7 +56,7 @@ export function EditTripDataForm({ index }: { index: number }) {
   return (
     <Formik
       initialValues={{ destination: tripData.nodes[index].destination }}
-      onSubmit={(values, actions) => {
+      onSubmit={async (values, actions) => {
         const updateTripData = _.cloneDeep(tripData);
 
         updateTripData.nodes[index] = {
@@ -54,12 +64,9 @@ export function EditTripDataForm({ index }: { index: number }) {
           ...values,
         };
 
-        UpdateTripMutation.mutateAsync(updateTripData);
+        await UpdateTripMutation.mutateAsync(updateTripData);
 
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
+        // set cheer here
       }}
     >
       {(props: FormikProps<NodeFormValues>) => (

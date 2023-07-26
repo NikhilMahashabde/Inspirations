@@ -1,6 +1,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 
+import { FcGoogle } from "react-icons/fc";
+import { Box, Button, Center, Stack, Text } from "@chakra-ui/react";
+import { AiFillGithub } from "react-icons/ai";
+
 export const LoginButton: React.FC = () => {
   const { loginWithRedirect } = useAuth0();
 
@@ -16,8 +20,27 @@ export const LoginButton: React.FC = () => {
   };
 
   return (
-    <button className="button__login" onClick={handleLogin}>
-      Log In
-    </button>
+    <>
+      <Button
+        w={"full"}
+        variant={"outline"}
+        leftIcon={<FcGoogle />}
+        onClick={handleLogin}
+      >
+        <Center>
+          <Text>Sign in with Google</Text>
+        </Center>
+      </Button>
+      <Button
+        w={"full"}
+        variant={"outline"}
+        leftIcon={<AiFillGithub />}
+        onClick={handleLogin}
+      >
+        <Center>
+          <Text>Sign in with Github</Text>
+        </Center>
+      </Button>
+    </>
   );
 };

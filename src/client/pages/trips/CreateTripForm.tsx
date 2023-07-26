@@ -15,13 +15,9 @@ import {
   GridItem,
   FormLabel,
   Input,
-  Select,
   SimpleGrid,
-  InputLeftAddon,
-  InputGroup,
   Textarea,
   FormHelperText,
-  InputRightElement,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +30,8 @@ interface TripFormInterface {
   startDate: Date | null;
   endDate: Date | null;
   participants: number;
+  startLocation: string;
+  endLocation: string;
 }
 
 const Form1 = ({
@@ -403,6 +401,35 @@ const Form3 = ({
             className="react-datepicker-wrapper"
           />
 
+          {/* Trip statrt end params
+           */}
+          <FormControl>
+            <FormLabel htmlFor="startLocation" fontWeight={"normal"}>
+              Trip Start Location
+            </FormLabel>
+            <Input
+              id="trip-startLocation"
+              placeholder="e.g. Melbourne Southern Cross"
+              value={tripData.startLocation}
+              onChange={(e) =>
+                setTripData({ ...tripData, startLocation: e.target.value })
+              }
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel htmlFor="endLocation" fontWeight={"normal"}>
+              Trip Start Location
+            </FormLabel>
+            <Input
+              id="trip-endLocation"
+              placeholder="e.g. Sydney Central Station"
+              value={tripData.endLocation}
+              onChange={(e) =>
+                setTripData({ ...tripData, endLocation: e.target.value })
+              }
+            />
+          </FormControl>
+
           <Textarea
             placeholder="you@example.com"
             rows={3}
@@ -431,6 +458,8 @@ export default function CreateTripForm() {
     startDate: new Date(),
     endDate: new Date(),
     participants: 0,
+    startLocation: "",
+    endLocation: "",
   });
   const navigate = useNavigate();
 
@@ -440,18 +469,18 @@ export default function CreateTripForm() {
       onSuccess: (response) => {
         console.log(response);
         toast({
-          title: "Account created.",
-          description: "We've created your account for you.",
+          title: "Trip created.",
+          description: "We've created the trip for you",
           status: "success",
           duration: 3000,
           isClosable: true,
         });
-        navigate(`/trips/${response.data._id}`);
+        navigate(`/trip/${response.data._id}`);
       },
       onError: () => {
         toast({
-          title: "new Trip creation failed",
-          description: "not sure what happened try again",
+          title: "Trip creation failed",
+          description: "An error occured, try again",
           status: "error",
           duration: 3000,
           isClosable: true,

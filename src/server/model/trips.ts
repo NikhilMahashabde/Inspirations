@@ -23,6 +23,8 @@ export interface TripDocument extends Document {
   endDate: Date;
   nodes: TripNode[];
   tags: string[];
+  startLocation: string;
+  endLocation: string;
 }
 
 const nodeSchema = new Schema<TripNode>({
@@ -46,6 +48,8 @@ const tripSchema = new Schema<TripDocument>({
   startDate: { type: Date },
   endDate: { type: Date },
   nodes: { type: [nodeSchema] },
+  startLocation: { type: String },
+  endLocation: { type: String },
 });
 
 const TripModel = mongoose.model<TripDocument>("Trips", tripSchema);
