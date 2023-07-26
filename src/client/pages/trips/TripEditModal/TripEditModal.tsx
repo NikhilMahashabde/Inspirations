@@ -47,9 +47,9 @@ export function TripEditModal({ index }: { index: number }) {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            {/* <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
-            </Button>
+            </Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>

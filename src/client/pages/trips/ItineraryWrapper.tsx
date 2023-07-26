@@ -5,7 +5,7 @@ import Itinerary, {
   ItinerarySegmentStop,
   ItinerarySegmentDetail,
 } from "@kiwicom/orbit-components/lib/Itinerary";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "../../context/AppContext";
 import { TripNode } from "../../../server/model/trips";
 import {
@@ -24,7 +24,7 @@ import React from "react";
 import { AiFillEdit } from "react-icons/ai";
 
 const ItineraryWrapper = () => {
-  const { tripData } = useContext(DataContext);
+  const { tripData, isRowExpanded, setIsRowExpanded } = useContext(DataContext);
 
   const getTimeString = (timeObj: Date) =>
     timeObj.toLocaleTimeString(undefined, {
@@ -39,6 +39,16 @@ const ItineraryWrapper = () => {
       month: "2-digit",
       day: "2-digit",
     });
+
+  useEffect(() => {
+    tripData.nodes.map((node, index) =>
+      setIsRowExpanded((prev) => {
+        const newArr = [...prev];
+        newArr[index] = false;
+        return newArr;
+      })
+    );
+  }, []);
 
   return (
     tripData && (

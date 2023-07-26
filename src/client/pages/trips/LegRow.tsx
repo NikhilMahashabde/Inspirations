@@ -14,6 +14,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { Icons } from "@kiwicom/orbit-components";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+
 import { BsFileArrowDown, BsFileArrowUp } from "react-icons/bs";
 import { DataContext } from "../../context/AppContext";
 import { useMutation } from "react-query";
@@ -28,8 +29,9 @@ import _ from "lodash";
 import { TripEditModal } from "./TripEditModal/TripEditModal";
 
 const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const [maxWidth, setMaxWidth] = useState("60vw");
+  const { setTripData, tripData, isRowExpanded, setIsRowExpanded } =
+    useContext(DataContext);
 
   const UpdateTripMutation = useMutation(
     (data: MyTripsInterface) =>
@@ -53,6 +55,13 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
       updateTripData.nodes[index],
       updateTripData.nodes[index - 1],
     ];
+    setIsRowExpanded((prev) => {
+      const newArr = [...prev];
+      const tmp = newArr[index - 1];
+      newArr[index - 1] = true;
+      newArr[index] = tmp;
+      return newArr;
+    });
 
     UpdateTripMutation.mutateAsync(updateTripData);
   };
@@ -64,14 +73,23 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
       updateTripData.nodes[index],
       updateTripData.nodes[index + 1],
     ];
+    setIsRowExpanded((prev) => {
+      const newArr = [...prev];
+      const tmp = newArr[index + 1];
+      newArr[index + 1] = true;
+      newArr[index] = tmp;
+      return newArr;
+    });
     UpdateTripMutation.mutateAsync(updateTripData);
   };
 
   const handleToggle = () => {
-    setIsExpanded((prevState) => !prevState);
+    setIsRowExpanded((prev) => {
+      const newArr = [...prev];
+      newArr[index] = !newArr[index];
+      return newArr;
+    });
   };
-
-  const { setTripData, tripData } = useContext(DataContext);
 
   const data = {
     id: tripData?._id || "",
@@ -124,7 +142,7 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
         summary={
           <HStack flex={1}>
             <Box flex={1} onClick={handleToggle} maxW={maxWidth}>
-              <Collapse startingHeight={20} in={isExpanded}>
+              <Collapse startingHeight={20} in={isRowExpanded[index]}>
                 <div>{tripData.nodes[index].destination}</div>
                 <div>{tripData.nodes[index].description}</div>
                 <div>test</div>
@@ -143,7 +161,7 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
                 <TripEditModal index={index} />
 
                 {/* conditionnaly rendered delete add move buttons */}
-                {isExpanded && (
+                {isRowExpanded[index] && (
                   <IconButton
                     bg={useColorModeValue("blue.400", "blue.800")}
                     color={useColorModeValue("white", "gray.800")}
@@ -156,7 +174,7 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
                   />
                 )}
 
-                {isExpanded && (
+                {isRowExpanded[index] && (
                   <IconButton
                     bg={useColorModeValue("blue.400", "blue.800")}
                     color={useColorModeValue("white", "gray.800")}
@@ -169,7 +187,7 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
                   />
                 )}
 
-                {isExpanded && (
+                {isRowExpanded[index] && (
                   <IconButton
                     bg={useColorModeValue("red.400", "red.800")}
                     color={useColorModeValue("white", "gray.800")}

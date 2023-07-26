@@ -93,7 +93,7 @@ export function EditTripDataForm({ index }: { index: number }) {
             isLoading={props.isSubmitting}
             type="submit"
           >
-            Submit
+            Update
           </Button>
         </Form>
       )}

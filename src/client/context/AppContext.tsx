@@ -14,6 +14,8 @@ interface DataContextProps {
   setMyTrips: Dispatch<SetStateAction<MyTripsInterface[] | undefined>>;
   tripData: MyTripsInterface;
   setTripData: Dispatch<SetStateAction<MyTripsInterface>>;
+  isRowExpanded: boolean[] | [];
+  setIsRowExpanded: Dispatch<SetStateAction<boolean[] | []>>;
 }
 
 const defaultTripData: MyTripsInterface = {
@@ -31,6 +33,10 @@ const defaultTripData: MyTripsInterface = {
 
 const DataContext = createContext<DataContextProps>({
   isAuthenticated: false,
+  isRowExpanded: [],
+  setIsRowExpanded: () => {
+    return;
+  },
   setIsAuthenticated: () => {
     return;
   },
@@ -73,6 +79,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [errorResponse, setErrorResponse] = useState<string>("");
   const [myTrips, setMyTrips] = useState<MyTripsInterface[] | undefined>();
   const [tripData, setTripData] = useState<MyTripsInterface>(defaultTripData);
+  const [isRowExpanded, setIsRowExpanded] = useState<boolean[] | []>([]);
 
   return (
     <DataContext.Provider
@@ -88,6 +95,8 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
         setMyTrips,
         tripData,
         setTripData,
+        isRowExpanded,
+        setIsRowExpanded,
       }}
     >
       {children}
