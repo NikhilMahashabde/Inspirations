@@ -21,10 +21,12 @@ export interface TripDocument extends Document {
   budget: number;
   startDate: Date;
   endDate: Date;
+  images: string[];
   nodes: TripNode[];
   tags: string[];
   startLocation: string;
   endLocation: string;
+  destinations: string[];
 }
 
 const nodeSchema = new Schema<TripNode>({
@@ -43,6 +45,7 @@ const nodeSchema = new Schema<TripNode>({
 const tripSchema = new Schema<TripDocument>({
   name: { type: String },
   authorisation: { type: [String] },
+
   purpose: { type: String },
   budget: { type: Number },
   startDate: { type: Date },
@@ -50,6 +53,8 @@ const tripSchema = new Schema<TripDocument>({
   nodes: { type: [nodeSchema] },
   startLocation: { type: String },
   endLocation: { type: String },
+  images: { type: [String] },
+  destinations: { type: [String] },
 });
 
 const TripModel = mongoose.model<TripDocument>("Trips", tripSchema);

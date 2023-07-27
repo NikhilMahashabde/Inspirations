@@ -6,14 +6,20 @@ import {
   Box,
   HStack,
   VStack,
+  border,
 } from "@chakra-ui/react";
 import { ItinerarySegmentDetail } from "@kiwicom/orbit-components/lib/Itinerary";
+import { Accommodation } from "@kiwicom/orbit-components/icons";
+
 import { TripNode } from "../../../server/model/trips";
 
 import { useContext, useEffect, useState } from "react";
 
 import { Icons } from "@kiwicom/orbit-components";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { Camera } from "@kiwicom/orbit-components/icons";
+
+import { Sightseeing } from "@kiwicom/orbit-components/icons";
 
 import { BsFileArrowDown, BsFileArrowUp } from "react-icons/bs";
 import { DataContext } from "../../context/AppContext";
@@ -27,8 +33,10 @@ import {
 
 import _ from "lodash";
 import { TripEditModal } from "./TripEditModal/TripEditModal";
+import { MdOutlineSportsTennis } from "react-icons/md";
 
 const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const [maxWidth, setMaxWidth] = useState("60vw");
   const { setTripData, tripData, isRowExpanded, setIsRowExpanded } =
     useContext(DataContext);
@@ -51,10 +59,7 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
   const MoveRowUp = async () => {
     if (index == 0 || !tripData) return null;
     const updateTripData = _.cloneDeep(tripData);
-    [updateTripData.nodes[index - 1], updateTripData.nodes[index]] = [
-      updateTripData.nodes[index],
-      updateTripData.nodes[index - 1],
-    ];
+
     setIsRowExpanded((prev) => {
       const newArr = [...prev];
       const tmp = newArr[index - 1];
@@ -62,6 +67,11 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
       newArr[index] = tmp;
       return newArr;
     });
+
+    [updateTripData.nodes[index - 1], updateTripData.nodes[index]] = [
+      updateTripData.nodes[index],
+      updateTripData.nodes[index - 1],
+    ];
 
     UpdateTripMutation.mutateAsync(updateTripData);
   };
@@ -83,7 +93,8 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
     UpdateTripMutation.mutateAsync(updateTripData);
   };
 
-  const handleToggle = () => {
+  const handleToggle = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
     setIsRowExpanded((prev) => {
       const newArr = [...prev];
       newArr[index] = !newArr[index];
@@ -134,25 +145,58 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
     deleteRowMutation.mutateAsync(data);
   };
 
+  const baseIcon = () => {
+    console.log(node.nodeType);
+    switch (node.nodeType) {
+      case "accomodation":
+        return <Accommodation size="small" />;
+      case "leg":
+        return <Icons.Airplane size="small" />;
+      case "activity":
+        return <Sightseeing size="small" />;
+      // Add more cases for other node types and their corresponding icons
+      default:
+        return <Icons.Airplane size="small" />;
+    }
+  };
+
+  //hover effect for the row
+  const handleHover = () => {
+    setIsHovered(true);
+  };
+
+  const handleHoverLeave = () => {
+    setIsHovered(false);
+  };
+
+  const BoxStyle = {
+    border: isHovered
+      ? "1px solid rgba(211, 211, 211, .9)"
+      : "1px solid rgba(211, 211, 211, .5)",
+
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    transition: "opacity 0.3s ease",
+    borderRadius: "12px",
+  };
+
   return (
     <>
       <ItinerarySegmentDetail
-        icon={<Icons.Airplane size="small" />}
+        icon={baseIcon()}
         duration="2h 30m"
         summary={
-          <HStack flex={1}>
-            <Box flex={1} onClick={handleToggle} maxW={maxWidth}>
+          <HStack
+            flex={1}
+            style={BoxStyle}
+            onMouseEnter={handleHover}
+            onMouseLeave={handleHoverLeave}
+            onClick={handleToggle}
+          >
+            <Box flex={1} maxW={maxWidth}>
               <Collapse startingHeight={20} in={isRowExpanded[index]}>
-                <div>{tripData.nodes[index].destination}</div>
-                <div>{tripData.nodes[index].description}</div>
-                <div>test</div>
-                <div>test</div>
-                <div>test</div>
-                <div>test</div>
-                <div>test</div>
-                <div>test</div>
-                <div>test</div>
-                <div>test</div>
+                <div>Destination: {tripData.nodes[index].destination}</div>
+                <div>Description: {tripData.nodes[index].description}</div>
               </Collapse>
             </Box>
             <VStack spacing={2} align="stretch">
@@ -169,8 +213,8 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
                       bg: "blue.600",
                     }}
                     aria-label="Move Row Down"
-                    icon={<BsFileArrowDown />}
-                    onClick={MoveRowDown}
+                    icon={<BsFileArrowUp />}
+                    onClick={MoveRowUp}
                   />
                 )}
 
@@ -182,8 +226,8 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
                       bg: "blue.600",
                     }}
                     aria-label="Move Row Down"
-                    icon={<BsFileArrowUp />}
-                    onClick={MoveRowUp}
+                    icon={<BsFileArrowDown />}
+                    onClick={MoveRowDown}
                   />
                 )}
 

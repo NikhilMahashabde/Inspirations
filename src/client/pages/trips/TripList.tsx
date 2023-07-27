@@ -3,6 +3,7 @@ import { DataContext } from "../../context/AppContext";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import TripCard from "./TripCard";
+import { HStack, Wrap } from "@chakra-ui/react";
 
 export const TripList = () => {
   const { myTrips, setMyTrips } = useContext(DataContext);
@@ -23,8 +24,6 @@ export const TripList = () => {
     myTripsMutation.mutateAsync();
   }, []);
 
-  // if (!isAuthenticated) navigate("/");
-
   return (
     <>
       {myTripsMutation.isLoading && <>Loading trips....please wait</>}
@@ -34,12 +33,11 @@ export const TripList = () => {
       {myTripsMutation.isSuccess &&
         myTrips !== undefined &&
         myTrips.length !== 0 && (
-          <>
-            {" "}
+          <Wrap spacing="4" justify="center">
             {myTrips.map((trip) => (
               <TripCard trip={trip} />
             ))}
-          </>
+          </Wrap>
         )}
     </>
   );

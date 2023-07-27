@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useToast } from "@chakra-ui/react";
+import { Badge, useToast } from "@chakra-ui/react";
 import { useMutation } from "react-query";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Progress,
   Box,
@@ -18,6 +19,7 @@ import {
   SimpleGrid,
   Textarea,
   FormHelperText,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -32,6 +34,7 @@ interface TripFormInterface {
   participants: number;
   startLocation: string;
   endLocation: string;
+  destinations: string[];
 }
 
 const Form1 = ({
@@ -68,7 +71,7 @@ const Form1 = ({
           />
         </FormControl>
 
-        <FormControl>
+        <FormControl mr="5%">
           <FormLabel htmlFor="trip-description" fontWeight={"normal"}>
             Description
           </FormLabel>
@@ -132,67 +135,140 @@ const Form2 = ({
   tripData: TripFormInterface;
   setTripData: React.Dispatch<React.SetStateAction<TripFormInterface>>;
 }) => {
+  const destinationRef = useRef<HTMLInputElement | null>(null);
+
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
         Trip Details
       </Heading>
-      <FormControl as={GridItem} colSpan={[6, 3]}>
-        <FormLabel
-          htmlFor="trip-budget"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-        >
-          Trip Budget
-        </FormLabel>
-        <Input
-          type="number"
-          name="trip-budget"
-          id="trip-budget"
-          autoComplete="street-address"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-          value={tripData.budget}
-          onChange={(e) =>
-            setTripData({ ...tripData, budget: parseInt(e.target.value) })
-          }
-        />
 
-        <FormLabel
-          htmlFor="trip-participants"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-        >
-          Trip Participants
-        </FormLabel>
-        <Input
-          type="number"
-          name="trip-budget"
-          id="trip-budget"
-          autoComplete="street-address"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-          value={tripData.budget}
-          onChange={(e) =>
-            setTripData({ ...tripData, participants: parseInt(e.target.value) })
-          }
-        />
+      <Flex>
+        <FormControl mr="5%">
+          <FormLabel
+            htmlFor="trip-budget"
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+          >
+            Trip Budget
+          </FormLabel>
+          <Input
+            type="number"
+            name="trip-budget"
+            id="trip-budget"
+            autoComplete="street-address"
+            focusBorderColor="brand.400"
+            shadow="sm"
+            size="sm"
+            w="full"
+            rounded="md"
+            value={tripData.budget}
+            onChange={(e) =>
+              setTripData({ ...tripData, budget: parseInt(e.target.value) })
+            }
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel
+            htmlFor="trip-participants"
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+          >
+            Trip Participants
+          </FormLabel>
+          <Input
+            type="number"
+            name="trip-participants"
+            id="trip-participants"
+            autoComplete="street-address"
+            focusBorderColor="brand.400"
+            shadow="sm"
+            size="sm"
+            w="full"
+            rounded="md"
+            value={tripData.participants}
+            onChange={(e) =>
+              setTripData({
+                ...tripData,
+                participants: parseInt(e.target.value),
+              })
+            }
+          />
+        </FormControl>
+      </Flex>
+      <Flex>
+        <FormControl mr="5%">
+          <FormLabel
+            htmlFor="trip-budget"
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+          >
+            Destination Tags
+          </FormLabel>
+          <Input
+            mr="5%"
+            ref={destinationRef}
+            type="text"
+            name="destination-tag-input"
+            id="destination-tag-input"
+            autoComplete="street-address"
+            focusBorderColor="brand.400"
+            shadow="sm"
+            size="sm"
+            w="half"
+            rounded="md"
+          />
 
-        {/* <Select
+          <Button
+            size="sm"
+            onClick={() => {
+              setTripData((curr) => {
+                const inputValue = destinationRef.current?.value ?? "";
+                const updatedTrip = { ...curr };
+                if (inputValue !== "" && destinationRef.current !== null) {
+                  updatedTrip.destinations.push(inputValue);
+                  destinationRef.current.value = "";
+                }
+                return updatedTrip;
+              });
+            }}
+            colorScheme="teal"
+            variant="solid"
+            w="7rem"
+            mr="5%"
+          >
+            Add
+          </Button>
+        </FormControl>
+      </Flex>
+      <Flex>
+        {tripData.destinations.map((loc) => {
+          return (
+            <Badge
+              px={2}
+              py={1}
+              bg={useColorModeValue("gray.50", "gray.800")}
+              fontWeight={"400"}
+            >
+              {loc}
+            </Badge>
+          );
+        })}
+      </Flex>
+
+      {/* <Select
           id="country"
           name="country"
           autoComplete="country"
@@ -207,7 +283,6 @@ const Form2 = ({
           <option>Canada</option>
           <option>Mexico</option>
         </Select> */}
-      </FormControl>
 
       {/* <FormControl as={GridItem} colSpan={6}>
         <FormLabel
@@ -460,6 +535,7 @@ export default function CreateTripForm() {
     participants: 0,
     startLocation: "",
     endLocation: "",
+    destinations: [],
   });
   const navigate = useNavigate();
 

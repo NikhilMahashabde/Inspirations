@@ -5,4 +5,9 @@ import express from "./express-plugin"; //Add this
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), express("src/server")], // Adjust this
+  // test: {
+  //   globals: true,
+  //   environment: "jsdom",
+  //   setupFiles: "./setupTests.ts",
+  // },
 });

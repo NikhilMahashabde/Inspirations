@@ -41,3 +41,19 @@ edit button - bring pop up for edit window.
 - update show editable items
 
 onClick on destination - open up more info.
+
+**AI funcitons**
+
+-node
+
+- suggest activity for node at destination
+  - update acitivites at node []
+-
+- suggest transport to the next destination
+  - add node transport + add transport options suggestions
+  -
+- -suggest transport to next node
+  - add node transport + add transport options suggestions
+-
+- suggest accomadation options at this node
+  - update description at node []

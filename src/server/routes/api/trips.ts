@@ -2,12 +2,13 @@ import express from "express";
 import {
   createNewTrip,
   getTripById,
-  getTripByUserEmail,
+  getTripsByUserEmail,
+  handleDeleteTrip,
 } from "../../controllers/tripsController";
 const router = express.Router();
 
-router.route("/").post(createNewTrip).get(getTripByUserEmail);
+router.route("/").post(createNewTrip).get(getTripsByUserEmail);
 
-router.route("/:id").get(getTripById);
+router.route("/:id").get(getTripById).delete(handleDeleteTrip);
 
 export default router;

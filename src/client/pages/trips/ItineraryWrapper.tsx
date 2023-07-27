@@ -22,6 +22,7 @@ import LegRow from "./LegRow";
 import { Badge, Icons } from "@kiwicom/orbit-components";
 import React from "react";
 import { AiFillEdit } from "react-icons/ai";
+import { Trip } from "@kiwicom/orbit-components/icons";
 
 const ItineraryWrapper = () => {
   const { tripData, isRowExpanded, setIsRowExpanded } = useContext(DataContext);
@@ -55,6 +56,7 @@ const ItineraryWrapper = () => {
       <Itinerary>
         <ItinerarySegment spaceAfter="medium">
           <ItinerarySegmentStop
+            icon={<Trip size="small" />}
             city={tripData.startLocation}
             station={""}
             date={getTimeString(new Date(tripData.startDate))}
@@ -66,6 +68,7 @@ const ItineraryWrapper = () => {
           ))}
 
           <ItinerarySegmentStop
+            icon={<Trip size="small" />}
             city={tripData.endLocation}
             station={""}
             date={getTimeString(new Date(tripData.endDate))}

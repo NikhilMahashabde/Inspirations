@@ -22,6 +22,7 @@ const defaultTripData: MyTripsInterface = {
   _id: "",
   name: "",
   authorisation: [],
+  images: [],
   purpose: "",
   budget: 0,
   startDate: "",
@@ -29,6 +30,8 @@ const defaultTripData: MyTripsInterface = {
   nodes: [],
   startLocation: "",
   endLocation: "",
+  destinations: [],
+  participants: 0,
 };
 
 const DataContext = createContext<DataContextProps>({
@@ -57,6 +60,7 @@ const DataContext = createContext<DataContextProps>({
   },
   tripData: {
     _id: "",
+    images: [],
     name: "",
     authorisation: [],
     purpose: "",
@@ -66,6 +70,8 @@ const DataContext = createContext<DataContextProps>({
     nodes: [],
     startLocation: "",
     endLocation: "",
+    destinations: [],
+    participants: 0,
   },
   setTripData: () => {
     return;

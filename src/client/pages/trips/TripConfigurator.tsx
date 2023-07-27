@@ -16,6 +16,7 @@ import {
   VisuallyHidden,
   List,
   ListItem,
+  Badge,
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
@@ -54,6 +55,13 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
     );
   }
 
+  const getDateString = (timeObj: Date) =>
+    timeObj.toLocaleDateString(undefined, {
+      year: "2-digit",
+      month: "2-digit",
+      day: "2-digit",
+    });
+
   if (tripDataMutation.isSuccess && tripData) {
     return (
       <Container maxW={"7xl"}>
@@ -66,9 +74,7 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
             <Image
               rounded={"md"}
               alt={"product image"}
-              src={
-                "https://images.unsplash.com/photo-1596516109370-29001ec8ec36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyODE1MDl8MHwxfGFsbHx8fHx8fHx8fDE2Mzg5MzY2MzE&ixlib=rb-1.2.1&q=80&w=1080"
-              }
+              src={tripData.images[0]}
               fit={"cover"}
               align={"center"}
               w={"100%"}
@@ -89,7 +95,8 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
                 fontWeight={300}
                 fontSize={"2xl"}
               >
-                {tripData.startDate}:{tripData.endDate}
+                {getDateString(new Date(tripData.startDate))} to{" "}
+                {getDateString(new Date(tripData.endDate))}
               </Text>
             </Box>
 
@@ -124,7 +131,19 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
                 </Text>
 
                 <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-                  {tripData.budget}
+                  {tripData.destinations.slice(0, 10).map((tag, index) => {
+                    return (
+                      <Badge
+                        key={index}
+                        px={2}
+                        py={1}
+                        bg={useColorModeValue("gray.50", "gray.800")}
+                        fontWeight={"400"}
+                      >
+                        {tag}
+                      </Badge>
+                    );
+                  })}
                 </SimpleGrid>
               </Box>
 
@@ -145,6 +164,17 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
                       Budget:
                     </Text>{" "}
                     {tripData.budget}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      Estimated cost:
+                    </Text>{" "}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      Participants:
+                    </Text>{" "}
+                    {tripData.participants}
                   </ListItem>
                 </List>
               </Box>
@@ -185,27 +215,5 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
 
   return <>Trip find error</>;
 };
-// {tripData?.nodes.map((trip) => {
-//   console.log(trip);
-//   return <span key={trip._id}>{trip.nodeType}</span>;
-// })}
-// </h1>
-
-{
-  /* add button to add a node - node type of led... node type of destination */
-}
-{
-  /* add button to add a node - node type of destination */
-}
-
-{
-  /* Render nodes conditionally based on type - css'd */
-}
-{
-  /* add button to delete the entire trip */
-}
-//     </>
-//   );
-// };
 
 export default TripConfigurator;

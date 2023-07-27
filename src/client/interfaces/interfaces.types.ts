@@ -10,7 +10,10 @@ export interface MyTripsInterface {
   budget: number;
   startDate: string;
   endDate: string;
+  images: string[];
   nodes: TripNode[] | [];
+  destinations: string[];
+  participants: number;
 }
 
 export interface DeleteResponse {
