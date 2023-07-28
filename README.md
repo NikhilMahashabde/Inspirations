@@ -34,13 +34,19 @@ onChange => update trip props.
 [actiities
 [budet]]
 
-**Plan of action**
+**Plan of action** --------------------------------
 
-edit button - bring pop up for edit window.
+**Landing page**
 
-- update show editable items
+-- show last trip you were working on and continue
 
-onClick on destination - open up more info.
+-- explore random other trips
+
+-- create my own trip guideline how to use
+
+**Trip Edit button**
+
+display all editable things
 
 **AI funcitons**
 

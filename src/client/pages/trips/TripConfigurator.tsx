@@ -30,6 +30,7 @@ import { DataContext } from "../../context/AppContext";
 import ItineraryWrapper from "./ItineraryWrapper";
 import AddLegButton from "../../components/buttons/AddLegButton";
 import AddActivityButton from "../../components/buttons/AddActivityButton";
+import { AddNodeModal } from "./AddTripModal/AddNodeModal";
 
 const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
   const { tripData, setTripData } = useContext(DataContext);
@@ -199,7 +200,7 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
         <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 8, md: 10 }}>
           <AddActivityButton id={tripData?._id} />
           <AddAccomodationButton id={tripData?._id} />
-          <AddLegButton id={tripData?._id} />
+          <AddNodeModal />
         </SimpleGrid>
 
         <SimpleGrid

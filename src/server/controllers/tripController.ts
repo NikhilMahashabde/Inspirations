@@ -6,7 +6,7 @@ const handleAddTripNode = async (req: Request, res: Response) => {
   const id = req.params.id;
   console.log(req.params, req.body);
 
-  if (!req.body.addNodeType)
+  if (!req.body.newTripData.nodeType)
     return res.status(400).json({ error: " missing or incorrect nodetype " });
 
   try {
@@ -21,24 +21,24 @@ const handleAddTripNode = async (req: Request, res: Response) => {
 
     //if trip found, create a blank node the Node type with basic data.
     const newNode: TripNode = {
-      nodeType: `${req.body.addNodeType}`,
-      duration: 0,
-      origin: "",
-      destination: "",
-      activities: "",
-      description: "",
-      startTime: new Date(),
-      endTime: new Date(),
-      notes: "",
-      budget: 0,
-      _id: undefined,
+      nodeType: `${req.body.newTripData.nodeType}`,
+      duration: req.body.newTripData.duration,
+      origin: `${req.body.newTripData.origin}`,
+      destination: `${req.body.newTripData.destination}`,
+      activities: `${req.body.newTripData.activities}`,
+      description: `${req.body.newTripData.description}`,
+      startTime: new Date(req.body.newTripData.startTime),
+      endTime: new Date(req.body.newTripData.endTime),
+      notes: req.body.newTripData.notes,
+      budget: req.body.newTripData.budget,
+      _id: req.body.newTripData._id,
     };
 
     foundTrip.nodes.push(newNode);
 
     await foundTrip.save();
 
-    return res.json({ trip: foundTrip });
+    return res.json({ updatedTrip: foundTrip });
 
     // return succesfull trip. update main trip component.
   } catch (error) {

@@ -11,14 +11,14 @@ import { useContext } from "react";
 import { DataContext } from "../../../context/AppContext";
 import { useMutation } from "react-query";
 import {
+  INewTripData,
   MyTripsInterface,
   NodeFormValues,
   UpdateTripResponse,
 } from "../../../interfaces/interfaces.types";
 import axios from "axios";
-import _ from "lodash";
 
-export function EditTripDataForm({ index }: { index: number }) {
+export function AddNodeDataForm() {
   const { tripData, setTripData } = useContext(DataContext);
   const toast = useToast();
 
@@ -30,18 +30,18 @@ export function EditTripDataForm({ index }: { index: number }) {
     return error;
   }
 
-  const UpdateTripMutation = useMutation(
-    (data: MyTripsInterface) =>
-      axios.put<UpdateTripResponse>(`/api/trip/${data._id}`, {
-        data,
+  const CreateTripMutation = useMutation(
+    (newTripData: INewTripData) =>
+      axios.post<UpdateTripResponse>(`/api/trip/${tripData._id}`, {
+        newTripData,
       }),
     {
       onSuccess: (res) => {
         setTripData(res.data.updatedTrip);
         console.log("success");
         toast({
-          title: "Trip Updated.",
-          description: "You can close the menu or continue updating",
+          title: "Trip Created.",
+          description: "You can continue planning",
           status: "success",
           duration: 3000,
           isClosable: true,
@@ -55,21 +55,27 @@ export function EditTripDataForm({ index }: { index: number }) {
 
   return (
     <Formik
-      initialValues={{ destination: tripData?.nodes[index]?.destination }}
+      initialValues={{
+        destination: "Enter Destination",
+        nodeType: "accomodation",
+        budget: 0,
+        description: "N/a",
+        activities: "TBA",
+        origin: "TBA",
+        notes: "N/a",
+      }}
       onSubmit={async (values, actions) => {
-        const updateTripData = _.cloneDeep(tripData);
-
-        updateTripData.nodes[index] = {
-          ...updateTripData.nodes[index],
+        await CreateTripMutation.mutateAsync({
           ...values,
-        };
-
-        await UpdateTripMutation.mutateAsync(updateTripData);
-
-        // set cheer here
+          _id: tripData._id,
+          startTime: new Date().toISOString(),
+          endTime: new Date().toISOString(),
+          duration: 0,
+          notes: "n.a",
+        });
       }}
     >
-      {(props: FormikProps<NodeFormValues>) => (
+      {(props) => (
         <Form>
           <Field name="destination" validate={validateDestination}>
             {({ field, form }) => {

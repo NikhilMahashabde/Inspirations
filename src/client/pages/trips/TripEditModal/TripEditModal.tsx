@@ -11,15 +11,16 @@ import {
   useColorModeValue,
   Button,
 } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { DataContext } from "../../../context/AppContext";
 import { EditTripDataForm } from "./EditTripDataForm";
+import EditTripModalWrapper from "./EditTripModalWrapper";
 
 export function TripEditModal({ index }: { index: number }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const { tripData } = useContext(DataContext);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -36,23 +37,12 @@ export function TripEditModal({ index }: { index: number }) {
           onOpen();
         }}
       />
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{tripData?.nodes[index].destination}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <EditTripDataForm index={index} />
-          </ModalBody>
-
-          <ModalFooter>
-            {/* <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button> */}
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <EditTripModalWrapper
+        index={index}
+        onOpen={onOpen}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </>
   );
 }

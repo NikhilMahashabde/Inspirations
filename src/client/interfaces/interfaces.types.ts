@@ -1,6 +1,7 @@
 import { TripNode } from "../../server/model/trips";
 
 export interface MyTripsInterface {
+  updateTripData: any;
   _id: string;
   name: string;
   authorisation: string[];
@@ -26,4 +27,24 @@ export interface UpdateTripResponse {
 
 export interface NodeFormValues {
   destination: string;
+  nodeType: string;
+  budget: number | null;
+  description: string | null;
+  activities: string | null;
+  origin: string | null;
+  notes: string | null;
+}
+
+export interface INewTripData {
+  _id: string;
+  nodeType: string;
+  duration: number | null;
+  origin: string | null;
+  destination: string | null;
+  activities: string | null;
+  description: string | null;
+  startTime: string | null;
+  endTime: string | null;
+  budget: number | null;
+  notes: string | null;
 }
