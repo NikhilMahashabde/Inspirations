@@ -34,8 +34,8 @@ export const TripList = () => {
         myTrips !== undefined &&
         myTrips.length !== 0 && (
           <Wrap spacing="4" justify="center">
-            {myTrips.map((trip) => (
-              <TripCard trip={trip} />
+            {myTrips.map((trip, index) => (
+              <TripCard key={index} trip={trip} />
             ))}
           </Wrap>
         )}

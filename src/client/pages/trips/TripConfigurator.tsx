@@ -1,34 +1,30 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import {
   Box,
-  chakra,
   Container,
   Stack,
   Text,
   Image,
   Flex,
   VStack,
-  Button,
   Heading,
   SimpleGrid,
   StackDivider,
   useColorModeValue,
-  VisuallyHidden,
   List,
   ListItem,
   Badge,
+  HStack,
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
-import { MdLocalShipping } from "react-icons/md";
 
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useMutation } from "react-query";
 
 import AddAccomodationButton from "../../components/buttons/AddAccomodationButton";
 import { DataContext } from "../../context/AppContext";
 import ItineraryWrapper from "./ItineraryWrapper";
-import AddLegButton from "../../components/buttons/AddLegButton";
+
 import AddActivityButton from "../../components/buttons/AddActivityButton";
 import { AddNodeModal } from "./AddTripModal/AddNodeModal";
 
@@ -55,6 +51,11 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
       </>
     );
   }
+
+  const colourModeGray = useColorModeValue("gray.500", "gray.400");
+  const colourModeGrayBG = useColorModeValue("gray.50", "gray.800");
+  const colourModeYellowText = useColorModeValue("yellow.500", "yellow.300");
+  const colourThemeGrey = useColorModeValue("gray.900", "gray.400");
 
   const getDateString = (timeObj: Date) =>
     timeObj.toLocaleDateString(undefined, {
@@ -91,11 +92,7 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
               >
                 {tripData.name}
               </Heading>
-              <Text
-                color={useColorModeValue("gray.900", "gray.400")}
-                fontWeight={300}
-                fontSize={"2xl"}
-              >
+              <Text color={colourThemeGrey} fontWeight={300} fontSize={"2xl"}>
                 {getDateString(new Date(tripData.startDate))} to{" "}
                 {getDateString(new Date(tripData.endDate))}
               </Text>
@@ -104,15 +101,11 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
             <Stack
               spacing={{ base: 4, sm: 6 }}
               direction={"column"}
-              divider={
-                <StackDivider
-                  borderColor={useColorModeValue("gray.200", "gray.600")}
-                />
-              }
+              divider={<StackDivider borderColor={colourThemeGrey} />}
             >
               <VStack spacing={{ base: 4, sm: 6 }}>
                 <Text
-                  color={useColorModeValue("gray.500", "gray.400")}
+                  color={colourModeGray}
                   fontSize={"2xl"}
                   fontWeight={"300"}
                 >
@@ -123,7 +116,7 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
               <Box>
                 <Text
                   fontSize={{ base: "16px", lg: "18px" }}
-                  color={useColorModeValue("yellow.500", "yellow.300")}
+                  color={colourModeYellowText}
                   fontWeight={"500"}
                   textTransform={"uppercase"}
                   mb={"4"}
@@ -138,7 +131,7 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
                         key={index}
                         px={2}
                         py={1}
-                        bg={useColorModeValue("gray.50", "gray.800")}
+                        bg={colourModeGrayBG}
                         fontWeight={"400"}
                       >
                         {tag}
@@ -151,7 +144,7 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
               <Box>
                 <Text
                   fontSize={{ base: "16px", lg: "18px" }}
-                  color={useColorModeValue("yellow.500", "yellow.300")}
+                  color={colourModeYellowText}
                   fontWeight={"500"}
                   textTransform={"uppercase"}
                   mb={"4"}
@@ -197,11 +190,13 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
           </Heading>
         </SimpleGrid>
 
-        <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 8, md: 10 }}>
-          <AddActivityButton id={tripData?._id} />
-          <AddAccomodationButton id={tripData?._id} />
-          <AddNodeModal />
-        </SimpleGrid>
+        <Box>
+          <HStack>
+            <AddActivityButton id={tripData?._id} />
+            <AddAccomodationButton id={tripData?._id} />
+            <AddNodeModal />
+          </HStack>
+        </Box>
 
         <SimpleGrid
           columns={{ base: 1, lg: 1 }}

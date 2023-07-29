@@ -33,13 +33,9 @@ import { Accommodation } from "@kiwicom/orbit-components/icons";
 import { TripNode } from "../../../server/model/trips";
 import { useContext, useEffect, useState } from "react";
 import { Icons } from "@kiwicom/orbit-components";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import { Sightseeing } from "@kiwicom/orbit-components/icons";
-import {
-  BsFileArrowDown,
-  BsFileArrowUp,
-  BsThreeDotsVertical,
-} from "react-icons/bs";
+import { BsFileArrowDown, BsFileArrowUp } from "react-icons/bs";
 import { DataContext } from "../../context/AppContext";
 import { useMutation } from "react-query";
 import axios from "axios";
@@ -53,7 +49,6 @@ import {
 import _ from "lodash";
 import { TripEditModal } from "./TripEditModal/TripEditModal";
 import { MdOutlineExpandLess, MdOutlineExpandMore } from "react-icons/md";
-import { BiChat, BiLike, BiShare } from "react-icons/bi";
 
 const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -127,10 +122,10 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
 
   const handleToggle = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
+
     setIsRowExpanded((prev) => {
       const newArr = [...prev];
       newArr[index] = !newArr[index];
-
       return newArr;
     });
   };
@@ -208,8 +203,7 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
   const BoxStyle = {
     border: isHovered
       ? "1px solid rgba(211, 211, 211, .9)"
-      : "1px solid rgba(211, 211, 211, .5)",
-
+      : "1px solid rgba(211, 211, 211, 0.5)",
     transition: "opacity 0.3s ease",
     borderRadius: "12px",
   };
@@ -227,222 +221,184 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
         icon={baseIcon()}
         duration="2h 30m"
         summary={
-          <HStack
+          <Box
             flex={1}
+            maxW={maxWidth}
             style={BoxStyle}
             onMouseEnter={handleHover}
             onMouseLeave={handleHoverLeave}
             onClick={handleToggle}
+            onDrag={(e) => e.stopPropagation()}
+            onMouseDown={(e) => e.stopPropagation()}
+            onMouseUp={(e) => e.stopPropagation()}
           >
-            <Box flex={1} maxW={maxWidth}>
-              <Collapse startingHeight={80} in={isRowExpanded[index]}>
-                <Card maxW="" style={{ padding: "-5px" }}>
-                  <CardHeader>
-                    <Flex>
-                      <Flex
-                        flex="1"
-                        gap="5px"
-                        alignItems="center"
-                        flexWrap="wrap"
-                      >
-                        <Box>
-                          <Heading size={{ base: "xs", md: "16px" }}>
-                            {node.destination || "Add a new Leg name!"}
-                          </Heading>
-                          <Text
-                            fontSize={{ base: "xs", md: "16px" }}
-                            noOfLines={1}
-                          >
-                            {node.description}
-                          </Text>
-                        </Box>
-                      </Flex>
-                      {isRowExpanded[index] ? (
-                        <MdOutlineExpandLess />
-                      ) : (
-                        <MdOutlineExpandMore />
-                      )}
+            <Collapse
+              startingHeight={80}
+              in={isRowExpanded[index]}
+              style={{ borderRadius: "12px" }}
+            >
+              <Card maxW="" style={{ padding: "-5px" }}>
+                <CardHeader>
+                  <Flex>
+                    <Flex
+                      flex="1"
+                      gap="5px"
+                      alignItems="center"
+                      flexWrap="wrap"
+                    >
+                      <Box>
+                        <Heading size={{ base: "xs", md: "16px" }}>
+                          {node.destination || "Add a new Leg name!"}
+                        </Heading>
+                        <Text
+                          fontSize={{ base: "xs", md: "16px" }}
+                          noOfLines={1}
+                        >
+                          {node.description}
+                        </Text>
+                      </Box>
                     </Flex>
-                  </CardHeader>
-                  <CardBody alignItems="left">
-                    <VStack align="flex-start">
-                      <HStack
-                        align="flex-start"
-                        justify="left"
-                        maxW={maxWidth}
-                        flexWrap="wrap"
-                      >
-                        <Box minW="100px">
-                          <Heading size={{ base: "xs", md: "16px" }}>
-                            Activities
-                          </Heading>
-                        </Box>
-                        <Box>
-                          <Text fontSize={{ base: "xs", md: "16px" }}>
-                            {node.activities || "Add activities"}
-                          </Text>
-                        </Box>
-                      </HStack>
-                      <HStack
-                        align="flex-start"
-                        justify="left"
-                        maxW={maxWidth}
-                        flexWrap="wrap"
-                      >
-                        <Box minW="100px">
-                          <Heading size={{ base: "xs", md: "16px" }}>
-                            Time:
-                          </Heading>
-                        </Box>
-                        <Box>
-                          <Text fontSize={{ base: "xs", md: "16px" }}>
-                            {new Date(node.startTime).toLocaleString(
-                              undefined,
-                              {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                              }
-                            )}{" "}
-                            -{" "}
-                            {new Date(node.endTime).toLocaleString(undefined, {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}
-                            {" , "}
-                            {dateString(node.startTime)}
-                            {""}
-                            {dateString(node.startTime) !==
-                              dateString(node.endTime) &&
-                              -dateString(node.endTime)}
-                          </Text>
-                        </Box>
-                      </HStack>
-                      <HStack
-                        align="flex-start"
-                        justify="left"
-                        maxW={maxWidth}
-                        flexWrap="wrap"
-                      >
-                        <Box minW="100px">
-                          <Heading size={{ base: "xs", md: "16px" }}>
-                            Budget:
-                          </Heading>
-                        </Box>
-                        <Box>
-                          <Text fontSize={{ base: "xs", md: "16px" }}>
-                            {node.budget}
-                          </Text>
-                        </Box>
-                      </HStack>
-                      <HStack
-                        align="flex-start"
-                        justify="left"
-                        maxW={maxWidth}
-                        flexWrap="wrap"
-                      >
-                        <Box minW="100px">
-                          <Heading size={{ base: "xs", md: "16px" }}>
-                            Notes:
-                          </Heading>
-                        </Box>
-                        <Box>
-                          <Text fontSize={{ base: "xs", md: "16px" }}>
-                            {node.notes}
-                          </Text>
-                        </Box>
-                      </HStack>
-                    </VStack>
-                    {/* <Tr>
-                            <Td style={{ width: "20px" }}>Activities:</Td>
-                            <Td>{node.activities}</Td>
-                          </Tr>
-                          <Tr>
-                            <Td style={{ width: "20px" }}>Notes:</Td>
-                            <Td>{node.notes}</Td>
-                          </Tr>
-                          <Tr>
-                            <Td style={{ width: "20px" }}>Time:</Td>
-                            <Td>
-                              {new Date(node.startTime).toLocaleString(
-                                undefined,
-                                {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                }
-                              )}{" "}
-                              -{" "}
-                              {new Date(node.endTime).toLocaleString(
-                                undefined,
-                                {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                }
-                              )}
-                              {" , "}
-                              {dateString(node.startTime)}
-                              {""}
-                              {dateString(node.startTime) !==
-                                dateString(node.endTime) &&
-                                -dateString(node.endTime)}
-                            </Td>
-                          </Tr>
-                        </Tbody>
-                        <Tfoot>
-                          <Tr>
-                            <Td>buttons here</Td>
-                          </Tr>
-                        </Tfoot>
-                      </Table>
-                    </TableContainer> */}
-                  </CardBody>
-
-                  <CardFooter flexWrap="wrap">
-                    <HStack flexWrap="wrap">
-                      <TripEditModal index={index} />
-                      {isRowExpanded[index] && (
-                        <IconButton
-                          bg={useColorModeValue("blue.400", "blue.800")}
-                          color={useColorModeValue("white", "gray.800")}
-                          _hover={{
-                            bg: "blue.600",
-                          }}
-                          aria-label="Move Row Down"
-                          icon={<BsFileArrowUp />}
-                          onClick={MoveRowUp}
-                        />
-                      )}
-
-                      {isRowExpanded[index] && (
-                        <IconButton
-                          bg={useColorModeValue("blue.400", "blue.800")}
-                          color={useColorModeValue("white", "gray.800")}
-                          _hover={{
-                            bg: "blue.600",
-                          }}
-                          aria-label="Move Row Down"
-                          icon={<BsFileArrowDown />}
-                          onClick={MoveRowDown}
-                        />
-                      )}
-
-                      {isRowExpanded[index] && (
-                        <IconButton
-                          bg={useColorModeValue("red.400", "red.800")}
-                          color={useColorModeValue("white", "gray.800")}
-                          _hover={{
-                            bg: "red.600",
-                          }}
-                          aria-label="Subscribe"
-                          icon={<AiFillDelete />}
-                          onClick={deleteRow}
-                        />
-                      )}
+                    {isRowExpanded[index] ? (
+                      <MdOutlineExpandLess />
+                    ) : (
+                      <MdOutlineExpandMore />
+                    )}
+                  </Flex>
+                </CardHeader>
+                <CardBody alignItems="left">
+                  <VStack align="flex-start">
+                    <HStack
+                      align="flex-start"
+                      justify="left"
+                      maxW={maxWidth}
+                      flexWrap="wrap"
+                    >
+                      <Box minW="100px">
+                        <Heading size={{ base: "xs", md: "16px" }}>
+                          Activities
+                        </Heading>
+                      </Box>
+                      <Box>
+                        <Text fontSize={{ base: "xs", md: "16px" }}>
+                          {node.activities || "Add activities"}
+                        </Text>
+                      </Box>
                     </HStack>
-                  </CardFooter>
-                </Card>
-              </Collapse>
-            </Box>
-          </HStack>
+                    <HStack
+                      align="flex-start"
+                      justify="left"
+                      maxW={maxWidth}
+                      flexWrap="wrap"
+                    >
+                      <Box minW="100px">
+                        <Heading size={{ base: "xs", md: "16px" }}>
+                          Time:
+                        </Heading>
+                      </Box>
+                      <Box>
+                        <Text fontSize={{ base: "xs", md: "16px" }}>
+                          {new Date(node.startTime).toLocaleString(undefined, {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}{" "}
+                          -{" "}
+                          {new Date(node.endTime).toLocaleString(undefined, {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                          {" , "}
+                          {dateString(node.startTime)}
+                          {""}
+                          {dateString(node.startTime) !==
+                            dateString(node.endTime) &&
+                            -dateString(node.endTime)}
+                        </Text>
+                      </Box>
+                    </HStack>
+                    <HStack
+                      align="flex-start"
+                      justify="left"
+                      maxW={maxWidth}
+                      flexWrap="wrap"
+                    >
+                      <Box minW="100px">
+                        <Heading size={{ base: "xs", md: "16px" }}>
+                          Budget:
+                        </Heading>
+                      </Box>
+                      <Box>
+                        <Text fontSize={{ base: "xs", md: "16px" }}>
+                          {node.budget}
+                        </Text>
+                      </Box>
+                    </HStack>
+                    <HStack
+                      align="flex-start"
+                      justify="left"
+                      maxW={maxWidth}
+                      flexWrap="wrap"
+                    >
+                      <Box minW="100px">
+                        <Heading size={{ base: "xs", md: "16px" }}>
+                          Notes:
+                        </Heading>
+                      </Box>
+                      <Box>
+                        <Text fontSize={{ base: "xs", md: "16px" }}>
+                          {node.notes}
+                        </Text>
+                      </Box>
+                    </HStack>
+                  </VStack>
+                </CardBody>
+
+                <CardFooter flexWrap="wrap">
+                  <HStack flexWrap="wrap">
+                    <TripEditModal index={index} />
+                    {isRowExpanded[index] && (
+                      <IconButton
+                        bg={useColorModeValue("blue.400", "blue.800")}
+                        color={useColorModeValue("white", "gray.800")}
+                        _hover={{
+                          bg: "blue.600",
+                        }}
+                        aria-label="Move Row Down"
+                        icon={<BsFileArrowUp />}
+                        onClick={MoveRowUp}
+                      />
+                    )}
+
+                    {isRowExpanded[index] && (
+                      <IconButton
+                        bg={useColorModeValue("blue.400", "blue.800")}
+                        color={useColorModeValue("white", "gray.800")}
+                        _hover={{
+                          bg: "blue.600",
+                        }}
+                        aria-label="Move Row Down"
+                        icon={<BsFileArrowDown />}
+                        onClick={MoveRowDown}
+                      />
+                    )}
+
+                    {isRowExpanded[index] && (
+                      <IconButton
+                        bg={useColorModeValue("red.400", "red.800")}
+                        color={useColorModeValue("white", "gray.800")}
+                        _hover={{
+                          bg: "red.600",
+                        }}
+                        aria-label="Subscribe"
+                        icon={<AiFillDelete />}
+                        onClick={deleteRow}
+                      />
+                    )}
+                  </HStack>
+                </CardFooter>
+              </Card>
+            </Collapse>
+          </Box>
+          // </HStack>
         }
       />
     </>
