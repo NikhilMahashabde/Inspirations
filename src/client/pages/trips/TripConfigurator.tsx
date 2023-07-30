@@ -192,8 +192,8 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
 
         <Box>
           <HStack>
-            <AddActivityButton id={tripData?._id} />
-            <AddAccomodationButton id={tripData?._id} />
+            {/* <AddActivityButton id={tripData?._id} />
+            <AddAccomodationButton id={tripData?._id} /> */}
             <AddNodeModal />
           </HStack>
         </Box>

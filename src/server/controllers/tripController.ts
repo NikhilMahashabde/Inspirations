@@ -4,15 +4,12 @@ import { MyTripsInterface } from "../../client/interfaces/interfaces.types";
 
 const handleAddTripNode = async (req: Request, res: Response) => {
   const id = req.params.id;
-  console.log(req.params, req.body);
 
   if (!req.body.newTripData.nodeType)
     return res.status(400).json({ error: " missing or incorrect nodetype " });
 
   try {
     const foundTrip = await Trips.findById(id);
-
-    console.log(foundTrip);
 
     if (!foundTrip) {
       console.log("no trip found");
@@ -90,10 +87,10 @@ const handleUpdateTripNode = async (req: Request, res: Response) => {
     });
 
   try {
-    await Trips.replaceOne({ _id: tripData._id }, tripData);
-    return res.json({ updatedTrip: req.body.data });
+    await Trips.findByIdAndUpdate(tripData._id, tripData);
+    return res.json({ updatedTrip: tripData });
   } catch (error) {
-    return console.error(error);
+    return console.log(error);
   }
 };
 

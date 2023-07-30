@@ -11,7 +11,7 @@ import {
   useColorModeValue,
   Button,
 } from "@chakra-ui/react";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { DataContext } from "../../../context/AppContext";
 import { EditTripDataForm } from "./EditTripDataForm";
 
@@ -35,7 +35,7 @@ export function EditTripModalWrapper({
         <ModalHeader>{tripData?.nodes[index]?.destination}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <EditTripDataForm index={index} />
+          <EditTripDataForm onClose={onClose} index={index} />
         </ModalBody>
 
         <ModalFooter>

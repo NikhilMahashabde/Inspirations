@@ -174,8 +174,8 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
   };
 
   const baseIcon = () => {
-    switch (node.nodeType) {
-      case "accomodation":
+    switch (node.nodeType.toLowerCase()) {
+      case "accommodation":
         return <Accommodation size="small" />;
       case "leg":
         return <Icons.Airplane size="small" />;
@@ -214,6 +214,10 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
       month: "2-digit",
       day: "2-digit",
     });
+
+  const ShowEndTime = () => {
+    return dateString(node.startTime) !== dateString(node.endTime);
+  };
 
   return (
     <>
@@ -309,9 +313,7 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
                           {" , "}
                           {dateString(node.startTime)}
                           {""}
-                          {dateString(node.startTime) !==
-                            dateString(node.endTime) &&
-                            -dateString(node.endTime)}
+                          {ShowEndTime() && <> to {dateString(node.endTime)}</>}
                         </Text>
                       </Box>
                     </HStack>
@@ -328,7 +330,7 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
                       </Box>
                       <Box>
                         <Text fontSize={{ base: "xs", md: "16px" }}>
-                          {node.budget}
+                          ${node.budget}
                         </Text>
                       </Box>
                     </HStack>

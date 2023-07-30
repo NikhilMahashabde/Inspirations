@@ -64,7 +64,7 @@ const ItineraryWrapper = () => {
           />
 
           {tripData.nodes.map((node: TripNode, index) => (
-            <LegRow node={node} index={index} />
+            <LegRow key={index} node={node} index={index} />
           ))}
 
           <ItinerarySegmentStop

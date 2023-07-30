@@ -46,7 +46,7 @@ export function AddNodeDataForm({ onClose }: { onClose: () => void }) {
     return error;
   }
 
-  function validateD(value: string) {
+  function validateTime(value: string) {
     let error;
     if (!value) {
       error = "Field is required";
@@ -88,22 +88,21 @@ export function AddNodeDataForm({ onClose }: { onClose: () => void }) {
   return (
     <Formik
       initialValues={{
-        destination: "Enter Destination",
-        nodeType: "",
+        destination: "",
+        nodeType: "Select a leg type",
         budget: 0,
-        description: "No Description Entered",
-        activities: "No Activities Entered",
-        origin: "TBA",
-        notes: "N/a",
+        description: "",
+        activities: "",
+        origin: "",
+        notes: "",
+        startTime: new Date().toISOString(),
+        endTime: new Date().toISOString(),
       }}
       onSubmit={async (values, actions) => {
         await CreateTripMutation.mutateAsync({
           ...values,
           _id: tripData._id,
-          startTime: new Date().toISOString(),
-          endTime: new Date().toISOString(),
           duration: 0,
-          notes: "n.a",
         });
       }}
     >
@@ -118,7 +117,7 @@ export function AddNodeDataForm({ onClose }: { onClose: () => void }) {
                   }
                 >
                   <FormLabel>Destination</FormLabel>
-                  <Input {...field} placeholder="test" />
+                  <Input {...field} placeholder="Add a destination" />
                   <FormErrorMessage>{form.errors.destination}</FormErrorMessage>
                 </FormControl>
               );
@@ -159,15 +158,37 @@ export function AddNodeDataForm({ onClose }: { onClose: () => void }) {
             }}
           </Field>
 
-          <Field name="activities">
+          <Field name="startTime" validate={validateTime}>
             {({ field, form }) => {
               return (
                 <FormControl
-                  isInvalid={form.errors.activities && form.touched.activities}
+                  isInvalid={form.errors.startTime && form.touched.startTime}
                 >
-                  <FormLabel>Description</FormLabel>
-                  <Input {...field} placeholder="Enter Description" />
-                  <FormErrorMessage>{form.errors.description}</FormErrorMessage>
+                  <FormLabel>Start Time</FormLabel>
+                  <Input
+                    type="datetime-local"
+                    {...field}
+                    placeholder="Select Date and Time"
+                  />
+                  <FormErrorMessage>{form.errors.startTime}</FormErrorMessage>
+                </FormControl>
+              );
+            }}
+          </Field>
+
+          <Field name="endTime" validate={validateTime}>
+            {({ field, form }) => {
+              return (
+                <FormControl
+                  isInvalid={form.errors.endTime && form.touched.endTime}
+                >
+                  <FormLabel>End Time</FormLabel>
+                  <Input
+                    type="datetime-local"
+                    {...field}
+                    placeholder="Select Date and Time"
+                  />
+                  <FormErrorMessage>{form.errors.endTime}</FormErrorMessage>
                 </FormControl>
               );
             }}
@@ -179,9 +200,37 @@ export function AddNodeDataForm({ onClose }: { onClose: () => void }) {
                 <FormControl
                   isInvalid={form.errors.activities && form.touched.activities}
                 >
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Activities</FormLabel>
+                  <Input {...field} placeholder="Enter Description" />
+                  <FormErrorMessage>{form.errors.description}</FormErrorMessage>
+                </FormControl>
+              );
+            }}
+          </Field>
+
+          <Field name="budget">
+            {({ field, form }) => {
+              return (
+                <FormControl
+                  isInvalid={form.errors.activities && form.touched.activities}
+                >
+                  <FormLabel>Budget</FormLabel>
                   <Input type="number" {...field} placeholder="Enter budget" />
                   <FormErrorMessage>{form.errors.description}</FormErrorMessage>
+                </FormControl>
+              );
+            }}
+          </Field>
+
+          <Field name="notes">
+            {({ field, form }) => {
+              return (
+                <FormControl
+                  isInvalid={form.errors.notes && form.touched.notes}
+                >
+                  <FormLabel>Notes</FormLabel>
+                  <Input type="text" {...field} placeholder="Optional Notes" />
+                  <FormErrorMessage>{form.errors.notes}</FormErrorMessage>
                 </FormControl>
               );
             }}

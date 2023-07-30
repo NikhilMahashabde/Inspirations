@@ -15,25 +15,6 @@
 - location
 - [optional buttons -
 
-// new card for login
-
----------- Trip component ---------
-Display trips on main page with basic trip info - button to edit or delete trip
-
-Main page - render 3 random trips with all of trip/edit info
-
-once inside the trip - show header with trip info
-add card
-type, + props.
-onChange => update trip props.
-
-<add legs card>
-[location]
-[date start]
-[date end]
-[actiities
-[budet]]
-
 **Plan of action** --------------------------------
 
 **Landing page**
@@ -43,10 +24,6 @@ onChange => update trip props.
 -- explore random other trips
 
 -- create my own trip guideline how to use
-
-**Trip Edit button**
-
-display all editable things
 
 **AI funcitons**
 

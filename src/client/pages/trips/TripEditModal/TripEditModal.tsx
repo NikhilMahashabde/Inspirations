@@ -11,15 +11,10 @@ import {
   useColorModeValue,
   Button,
 } from "@chakra-ui/react";
-import { useContext, useRef } from "react";
 import { AiFillEdit } from "react-icons/ai";
-import { DataContext } from "../../../context/AppContext";
-import { EditTripDataForm } from "./EditTripDataForm";
 import EditTripModalWrapper from "./EditTripModalWrapper";
 
 export function TripEditModal({ index }: { index: number }) {
-  const { tripData } = useContext(DataContext);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
