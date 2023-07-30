@@ -63,7 +63,7 @@ const handleAddTripNodeAI = async (req: Request, res: Response) => {
             nodeType: `${req.body.newNodeAIPromptData.nodeType}`,
             duration: 0,
             origin: `${req.body.newNodeAIPromptData.origin}` || "",
-            destination: `${req.body.newNodeAIPromptData.destination}: ${aiData.accommodation}`,
+            destination: `Accommodation at ${req.body.newNodeAIPromptData.destination}: ${aiData.accommodation}`,
             activities: `${req.body.newNodeAIPromptData.activities}` || "",
             description: `${aiData.description}` || "",
             startTime: new Date(aiData.startTime) || new Date(),
@@ -79,8 +79,55 @@ const handleAddTripNodeAI = async (req: Request, res: Response) => {
             nodeType: `${req.body.newNodeAIPromptData.nodeType}`,
             duration: 0,
             origin: `${req.body.newNodeAIPromptData.origin}` || "",
-            destination: `${req.body.newNodeAIPromptData.destination}: ${aiData.mode}`,
+            destination: `Travel to ${req.body.newNodeAIPromptData.destination}: ${aiData.mode}`,
             activities: `${req.body.newNodeAIPromptData.activities}` || "",
+            description: `${aiData.description}` || "",
+            startTime: new Date(aiData.startTime) || new Date(),
+            endTime: new Date(aiData.endTime) || new Date(),
+            notes: `Other options: ${aiData.notes}` || "",
+            budget: aiData.budget,
+            _id: req.body.newNodeAIPromptData._id,
+          };
+          break;
+
+        case "activity":
+          newNode = {
+            nodeType: `${req.body.newNodeAIPromptData.nodeType}`,
+            duration: 0,
+            origin: `${req.body.newNodeAIPromptData.origin}` || "",
+            destination: ` Activity at ${req.body.newNodeAIPromptData.destination}: ${aiData.activity}`,
+            activities: `${aiData.activity}` || "",
+            description: `${aiData.description}` || "",
+            startTime: new Date(aiData.startTime) || new Date(),
+            endTime: new Date(aiData.endTime) || new Date(),
+            notes: `Other options: ${aiData.notes}` || "",
+            budget: aiData.budget,
+            _id: req.body.newNodeAIPromptData._id,
+          };
+          break;
+
+        case "sightseeing":
+          newNode = {
+            nodeType: `${req.body.newNodeAIPromptData.nodeType}`,
+            duration: 0,
+            origin: `${req.body.newNodeAIPromptData.origin}` || "",
+            destination: `Sightseeing at ${req.body.newNodeAIPromptData.destination}: ${aiData.sightseeing}`,
+            activities: `${aiData.sightseeing}` || "",
+            description: `${aiData.description}` || "",
+            startTime: new Date(aiData.startTime) || new Date(),
+            endTime: new Date(aiData.endTime) || new Date(),
+            notes: `Other options: ${aiData.notes}` || "",
+            budget: aiData.budget,
+            _id: req.body.newNodeAIPromptData._id,
+          };
+          break;
+        case "meal":
+          newNode = {
+            nodeType: `${req.body.newNodeAIPromptData.nodeType}`,
+            duration: 0,
+            origin: `${req.body.newNodeAIPromptData.origin}` || "",
+            destination: `Meal at ${req.body.newNodeAIPromptData.destination}: ${aiData.meal}`,
+            activities: `${aiData.meal}` || "",
             description: `${aiData.description}` || "",
             startTime: new Date(aiData.startTime) || new Date(),
             endTime: new Date(aiData.endTime) || new Date(),
@@ -163,14 +210,41 @@ function generatePrompt(
       break;
 
     case "activity":
-      AIPrompt = `Suggest 3 activities to do in ${userPrompt.destination}`;
+      AIPrompt = `Visiting ${userPrompt.destination}. Provide suggestion for each key value below, return response in json string format
+      {
+        activity: name of activity,
+        description: short description of activity and address,
+        budget: estimated cost per person as a number without $ in string format,
+        startTime: estimtated start time of activity time ISO string,, 
+        endTime: estimtated end time of activity in ISO string,
+        notes: provide two more options for activities in the area nearby as a string
+      }`;
       break;
+
     case "sightseeing":
-      AIPrompt = `Recommend 3 sightseeing spots in ${userPrompt.destination}`;
+      AIPrompt = `Visiting ${userPrompt.destination}. Provide suggestion for each key value below, return response in json string format
+      {
+        sightseeing: name of sightseeing activity,
+        description: short description of activity and address,
+        budget: estimated cost per person as a number without $ in string format,
+        startTime: estimtated start time of activity time ISO string,, 
+        endTime: estimtated end time of activity in ISO string,
+        notes: provide two more options for sightseeing in the area nearby as a string
+      }`;
       break;
+
     case "meal":
-      AIPrompt = `Give 3 restaurant options in ${userPrompt.destination}`;
+      AIPrompt = `Visiting ${userPrompt.destination}. Provide suggestion for each key value below, return response in json string format
+      {
+        meal: name of a place to eat a meal,
+        description: short description of meal establishment and address,
+        budget: estimated cost per person as a number without $ in string format,
+        startTime: estimtated start time of activity time ISO string,, 
+        endTime: estimtated end time of activity in ISO string,
+        notes: provide two more options for eating meals in the area nearby as a string
+      }`;
       break;
+
     default:
       AIPrompt = `Unknown nodeType: ${nodeType}`;
       break;

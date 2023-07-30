@@ -106,9 +106,11 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
         options: "",
       }}
       onSubmit={async (values, actions) => {
+        if (values.nodeType === "Travel")
+          values.destination = tripData.nodes[values.nodeTo].destination;
+
         await AddNodeAIMutation.mutateAsync({
           ...values,
-          destination: tripData.nodes[values.nodeTo].destination,
           _id: tripData._id,
         });
       }}
@@ -174,11 +176,15 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
                         Select a origin location
                       </option>
                       <option value={-1}>{tripData.startLocation}</option>
-                      {tripData.nodes.map((node, index) => (
-                        <option key={index} value={index}>
-                          {node.destination}
-                        </option>
-                      ))}
+
+                      {tripData.nodes.map(
+                        (node, index) =>
+                          node.nodeType !== "Travel" && (
+                            <option key={index} value={index}>
+                              {node.destination}
+                            </option>
+                          )
+                      )}
                     </Select>
 
                     <FormErrorMessage>
@@ -190,6 +196,7 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
             </Field>
           )}
 
+          {/* travel option here */}
           {props.values.nodeType &&
             props.values.nodeType === "Travel" &&
             props.values.nodeFrom !== null && (
@@ -206,11 +213,15 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
                           Select a origin location
                         </option>
                         {props.values.nodeFrom !== null &&
-                          tripData.nodes.map((node, index) => (
-                            <option key={index} value={index}>
-                              {node.destination}
-                            </option>
-                          ))}
+                          tripData.nodes.map(
+                            (node, index) =>
+                              node.nodeType !== "Travel" &&
+                              index > props.values.nodeFrom && (
+                                <option key={index} value={index}>
+                                  {node.destination}
+                                </option>
+                              )
+                          )}
                         <option value={tripData.nodes.length}>
                           {tripData.endLocation}
                         </option>
@@ -224,6 +235,8 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
                 }}
               </Field>
             )}
+
+          {/* Sigheeing, acitivty, meal here  */}
 
           <Button
             mt={4}
