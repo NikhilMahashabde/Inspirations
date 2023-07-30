@@ -11,6 +11,7 @@ import tripsRouter from "./routes/api/trips.ts";
 import authRouter from "./routes/auth.ts";
 import cookieParser from "cookie-parser";
 import tripRouter from "./routes/api/trip.ts";
+import AIRouter from "./routes/api/ai.ts";
 const PORT = 8080;
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //routes private
 app.use("/api/trips", tripsRouter);
 app.use("/api/trip", tripRouter);
+app.use("/api/ai", AIRouter);
 
 //connect app
 

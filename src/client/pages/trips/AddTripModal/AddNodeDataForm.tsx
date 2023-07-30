@@ -89,7 +89,7 @@ export function AddNodeDataForm({ onClose }: { onClose: () => void }) {
     <Formik
       initialValues={{
         destination: "",
-        nodeType: "Select a leg type",
+        nodeType: "",
         budget: 0,
         description: "",
         activities: "",
@@ -146,6 +146,10 @@ export function AddNodeDataForm({ onClose }: { onClose: () => void }) {
                 >
                   <FormLabel>Leg Type</FormLabel>
                   <Select {...field}>
+                    <option value="" disabled hidden>
+                      {" "}
+                      Select a leg type
+                    </option>
                     {TripLegTypes.map((legType) => (
                       <option key={legType} value={legType}>
                         {legType}

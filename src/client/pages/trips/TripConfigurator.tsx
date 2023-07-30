@@ -27,6 +27,7 @@ import ItineraryWrapper from "./ItineraryWrapper";
 
 import AddActivityButton from "../../components/buttons/AddActivityButton";
 import { AddNodeModal } from "./AddTripModal/AddNodeModal";
+import { AddNodeAIButton } from "./AddNodeAIModal/AddNodeAIButton";
 
 const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
   const { tripData, setTripData } = useContext(DataContext);
@@ -192,9 +193,8 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
 
         <Box>
           <HStack>
-            {/* <AddActivityButton id={tripData?._id} />
-            <AddAccomodationButton id={tripData?._id} /> */}
             <AddNodeModal />
+            <AddNodeAIButton />
           </HStack>
         </Box>
 

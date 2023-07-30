@@ -48,3 +48,13 @@ export interface INewTripData {
   budget: number | null;
   notes: string | null;
 }
+
+export interface INewNodeAITripData {
+  nodeType: string;
+  nodeFrom: number | null;
+  nodeTo: number | null;
+  _id: string;
+  destination: string | null;
+  budget: number;
+  options: string;
+}
