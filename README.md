@@ -2,6 +2,12 @@
 
 **To do**
 
+how to use -
+add a trip with basic info
+
+add destinations you wish to visit
+add travel legs from destionations to destionations.
+
 - show example jounneys
 
 // start journey page
