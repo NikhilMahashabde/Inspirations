@@ -41,8 +41,6 @@ type ErrorResponse = {
 };
 
 export default function RegisterForm() {
-  const [registerError, setRegisterError] = useState<string>("");
-  const [registerSuccess, setRegisterSuccess] = useState<string>("");
   const { setIsAuthenticated, setUserName, navigate } = useContext(DataContext);
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
@@ -93,11 +91,11 @@ export default function RegisterForm() {
           duration: 3000,
           isClosable: true,
         });
-        setRegisterError("");
+        // setRegisterError("");
         navigate("/");
       },
       onError: (error: ErrorResponse) => {
-        setRegisterError(error.response.data.message || "");
+        // setRegisterError(error.response.data.message || "");
         toast({
           title: "Failed to create user",
           description: error.response.data.message,

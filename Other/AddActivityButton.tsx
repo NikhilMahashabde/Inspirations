@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/react";
 import axios from "axios";
 import { MdOutlineSportsTennis } from "react-icons/md";
 import { useMutation } from "react-query";
-import { DataContext } from "../../context/AppContext";
+import { DataContext } from "../src/client/context/AppContext";
 import { useContext } from "react";
 
 const AddActivityButton = ({ id }: { id: string | undefined }) => {

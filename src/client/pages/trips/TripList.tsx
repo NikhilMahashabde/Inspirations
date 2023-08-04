@@ -3,7 +3,7 @@ import { DataContext } from "../../context/AppContext";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import TripCard from "./TripCard";
-import { HStack, Wrap } from "@chakra-ui/react";
+import { Wrap } from "@chakra-ui/react";
 
 export const TripList = () => {
   const { myTrips, setMyTrips } = useContext(DataContext);

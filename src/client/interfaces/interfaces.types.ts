@@ -1,7 +1,7 @@
 import { TripNode } from "../../server/model/trips";
 
 export interface MyTripsInterface {
-  updateTripData: any;
+  // updateTripData: any;
   _id: string;
   name: string;
   authorisation: string[];

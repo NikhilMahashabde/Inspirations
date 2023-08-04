@@ -6,10 +6,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
-  IconButton,
-  useColorModeValue,
-  Button,
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { DataContext } from "../../../context/AppContext";
@@ -17,7 +13,7 @@ import { EditTripDataForm } from "./EditTripDataForm";
 
 export function EditTripModalWrapper({
   index,
-  onOpen,
+
   onClose,
   isOpen,
 }: {

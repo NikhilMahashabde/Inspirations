@@ -13,7 +13,6 @@ import {
   Heading,
   Flex,
   FormControl,
-  GridItem,
   FormLabel,
   Input,
   SimpleGrid,
@@ -51,8 +50,8 @@ const Form1 = ({
   //   tripData: TripFormInterface;
   //   setTripData: React.Dispatch<React.SetStateAction<TripFormInterface>>;
   // }) => {
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
+  // const [show, setShow] = React.useState(false);
+  // const handleClick = () => setShow(!show);
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">

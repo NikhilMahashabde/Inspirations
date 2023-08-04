@@ -1,31 +1,17 @@
 import Itinerary, {
   ItinerarySegment,
-  ItineraryStatus,
-  ItineraryBadgeList,
   ItinerarySegmentStop,
-  ItinerarySegmentDetail,
 } from "@kiwicom/orbit-components/lib/Itinerary";
 import { useContext, useEffect } from "react";
 import { DataContext } from "../../context/AppContext";
 import { TripNode } from "../../../server/model/trips";
-import {
-  Box,
-  Grid,
-  GridItem,
-  IconButton,
-  SimpleGrid,
-  Stack,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import AccomadationRow from "./AccomadationRow";
+
 import LegRow from "./LegRow";
-import { Badge, Icons } from "@kiwicom/orbit-components";
-import React from "react";
-import { AiFillEdit } from "react-icons/ai";
+
 import { Trip } from "@kiwicom/orbit-components/icons";
 
 const ItineraryWrapper = () => {
-  const { tripData, isRowExpanded, setIsRowExpanded } = useContext(DataContext);
+  const { tripData, setIsRowExpanded } = useContext(DataContext);
 
   const getTimeString = (timeObj: Date) =>
     timeObj.toLocaleTimeString(undefined, {
@@ -42,7 +28,7 @@ const ItineraryWrapper = () => {
     });
 
   useEffect(() => {
-    tripData.nodes.map((node, index) =>
+    tripData.nodes.map((_node, index) =>
       setIsRowExpanded((prev) => {
         const newArr = [...prev];
         newArr[index] = false;

@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import Trips, { TripDocument, TripNode } from "../model/trips";
-import { Configuration, OpenAIApi } from "openai";
-import { isAxiosError } from "axios";
 import { INewNodeAITripData } from "../../client/interfaces/interfaces.types";
 import { createChat } from "completions";
+// @ts-nocheck
 
 // const configuration = new Configuration({
 //   apiKey: process.env.OPENAI_API_KEY,
@@ -55,6 +54,7 @@ const handleAddTripNodeAI = async (req: Request, res: Response) => {
       const aiData = JSON.parse(resp.content);
       console.log(aiData);
 
+      // @ts-ignore
       let newNode: TripNode = {};
 
       switch (req.body.newNodeAIPromptData.nodeType.toLowerCase()) {

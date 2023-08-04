@@ -4,11 +4,10 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 interface NavigationBarProps {
-  isLoggedIn: boolean;
   userName: string;
 }
 
-function Navigationbar({ isLoggedIn, userName }: NavigationBarProps) {
+function Navigationbar({ userName }: NavigationBarProps) {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>

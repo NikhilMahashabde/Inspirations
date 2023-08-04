@@ -17,8 +17,8 @@ import {
   UpdateTripResponse,
 } from "../../interfaces/interfaces.types";
 import { DataContext } from "../../context/AppContext";
-import { Button } from "@chakra-ui/react";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+
+import { AiFillDelete } from "react-icons/ai";
 import { BsFileArrowDown, BsFileArrowUp } from "react-icons/bs";
 import _ from "lodash"; // Import Lodash
 import { TripEditModal } from "./TripEditModal/TripEditModal";

@@ -3,10 +3,8 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { useMutation } from "react-query";
 import { DataContext } from "../../context/AppContext";
 import { LoginButton } from "../../components/buttons/login-button";
-import { FcGoogle } from "react-icons/fc";
 
 import {
-  Center,
   Button,
   Checkbox,
   Flex,

@@ -21,13 +21,11 @@ import axios from "axios";
 import { useContext, useEffect } from "react";
 import { useMutation } from "react-query";
 
-import AddAccomodationButton from "../../components/buttons/AddAccomodationButton";
 import { DataContext } from "../../context/AppContext";
 import ItineraryWrapper from "./ItineraryWrapper";
 
-import AddActivityButton from "../../components/buttons/AddActivityButton";
 import { AddNodeModal } from "./AddTripModal/AddNodeModal";
-import { AddNodeAIButton } from "./AddNodeAIModal/AddNodeAIButton";
+import { AddNodeAIButton } from "../../../../Other/AddNodeAIButton";
 
 const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
   const { tripData, setTripData } = useContext(DataContext);

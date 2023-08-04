@@ -72,8 +72,8 @@ const handleJWT = async (req: Request, res: Response) => {
             passwordHash: "OAUTH",
           };
 
-          const success = await Users.create(newUser);
-          // console.log(success);
+          await Users.create(newUser);
+
           (req.session as CustomSession).email = newUser.email;
           (req.session as CustomSession).name = newUser.name;
           return res.json({

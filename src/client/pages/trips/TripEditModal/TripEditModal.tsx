@@ -1,16 +1,4 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  IconButton,
-  useColorModeValue,
-  Button,
-} from "@chakra-ui/react";
+import { useDisclosure, IconButton, useColorModeValue } from "@chakra-ui/react";
 import { AiFillEdit } from "react-icons/ai";
 import EditTripModalWrapper from "./EditTripModalWrapper";
 

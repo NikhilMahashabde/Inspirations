@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import axios from "axios";
 
 import { GiCommercialAirplane } from "react-icons/gi";

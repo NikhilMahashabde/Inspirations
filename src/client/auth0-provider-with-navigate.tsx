@@ -11,10 +11,10 @@ export const Auth0ProviderWithNavigate = ({
 }: PropsWithChildren<Auth0ProviderWithNavigateProps>): JSX.Element | null => {
   const navigate = useNavigate();
 
-  const domain = "dev-8v4vi8wg2ppia707.us.auth0.com";
-  const clientId = "NTTUE4jn33W5iW3W38kA941HDJOZcxiQ";
-  const redirectUri = "http://localhost:5173/callback";
-  const audience = "https://hello-world.example.com";
+  const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN;
+  const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID;
+  const redirectUri = import.meta.env.VITE_REACT_APP_AUTH0_CALLBACK_URL;
+  const audience = import.meta.env.VITE_REACT_APP_AUTH0_AUDIENCE;
 
   const onRedirectCallback = (appState?: AppState) => {
     navigate(appState?.returnTo || window.location.pathname);

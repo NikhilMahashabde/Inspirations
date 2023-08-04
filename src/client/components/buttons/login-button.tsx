@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 
 import { FcGoogle } from "react-icons/fc";
-import { Box, Button, Center, Stack, Text } from "@chakra-ui/react";
+import { Button, Center, Text } from "@chakra-ui/react";
 import { AiFillGithub } from "react-icons/ai";
 
 export const LoginButton: React.FC = () => {

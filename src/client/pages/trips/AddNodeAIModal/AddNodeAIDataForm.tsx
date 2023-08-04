@@ -5,16 +5,14 @@ import {
   FormLabel,
   Input,
   Select,
-  VStack,
   useToast,
 } from "@chakra-ui/react";
-import { Field, Form, Formik, FormikProps } from "formik";
+import { Field, Form, Formik } from "formik";
 import { useContext } from "react";
 import { DataContext } from "../../../context/AppContext";
 import { useMutation } from "react-query";
 import {
   INewNodeAITripData,
-  INewTripData,
   UpdateTripResponse,
 } from "../../../interfaces/interfaces.types";
 import axios from "axios";
@@ -105,7 +103,7 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
         budget: 0,
         options: "",
       }}
-      onSubmit={async (values, actions) => {
+      onSubmit={async (values) => {
         if (values.nodeType === "Travel")
           values.destination = tripData.nodes[values.nodeTo].destination;
 
@@ -118,6 +116,7 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
       {(props) => (
         <Form>
           <Field name="nodeType" validate={validateNodeType}>
+            {/* @ts-ignore */}
             {({ field, form }) => {
               return (
                 <FormControl
@@ -144,6 +143,7 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
 
           {props.values.nodeType && props.values.nodeType !== "Travel" && (
             <Field name="destination" validate={validateNodeType}>
+              {/* @ts-ignore */}
               {({ field, form }) => {
                 return (
                   <FormControl
@@ -164,6 +164,7 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
 
           {props.values.nodeType && props.values.nodeType === "Travel" && (
             <Field name="nodeFrom" validate={validateNodeType}>
+              {/* @ts-ignore */}
               {({ field, form }) => {
                 return (
                   <FormControl
@@ -201,6 +202,7 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
             props.values.nodeType === "Travel" &&
             props.values.nodeFrom !== null && (
               <Field name="nodeTo" validate={validateNodeTo}>
+                {/* @ts-ignore */}
                 {({ field, form }) => {
                   return (
                     <FormControl
@@ -216,6 +218,8 @@ export function AddNodeAIDataForm({ onClose }: { onClose: () => void }) {
                           tripData.nodes.map(
                             (node, index) =>
                               node.nodeType !== "Travel" &&
+                              // @ts-ignore
+
                               index > props.values.nodeFrom && (
                                 <option key={index} value={index}>
                                   {node.destination}

@@ -22,6 +22,12 @@
 
     "types": ["node"]
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "Other/AddActivityButton.tsx",
+    "Other/AddAccomodationButton.tsx",
+    "Other/AddNodeAIButton.tsx",
+    "Other/test"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

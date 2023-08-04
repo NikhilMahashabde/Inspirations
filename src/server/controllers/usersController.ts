@@ -40,8 +40,7 @@ const createNewUser = async (req: Request, res: Response) => {
   };
 
   try {
-    const success = await Users.create(newUser);
-    // console.log(success);
+    await Users.create(newUser);
     res.json({ message: "Success", name: newUser.name });
     (req.session as CustomSession).email = newUser.email;
     (req.session as CustomSession).name = newUser.name;

@@ -1,5 +1,5 @@
 import { useDisclosure, Button } from "@chakra-ui/react";
-import AddNodeAIModalWrapper from "./AddNodeAIModalWrapper";
+import AddNodeAIModalWrapper from "../src/client/pages/trips/AddNodeAIModal/AddNodeAIModalWrapper";
 import { BsHouseAddFill } from "react-icons/bs";
 
 export function AddNodeAIButton() {

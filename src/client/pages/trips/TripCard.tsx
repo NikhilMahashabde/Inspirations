@@ -6,7 +6,6 @@ import {
   Flex,
   Heading,
   Image,
-  Link,
   Stack,
   Text,
   useColorModeValue,
@@ -25,7 +24,7 @@ interface TripCardProps {
 }
 
 export default function TripCard({ trip }: TripCardProps) {
-  const { myTrips, setMyTrips } = useContext(DataContext);
+  const { setMyTrips } = useContext(DataContext);
 
   if (!trip?.images || trip.images.length == 0) {
     trip.images = [
