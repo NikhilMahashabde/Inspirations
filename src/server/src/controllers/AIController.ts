@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Trips, { TripDocument, TripNode } from "../model/trips";
-import { INewNodeAITripData } from "../../../client/interfaces/interfaces.types";
+import { INewNodeAITripData } from "../interfaces/interfaces.types";
 import { createChat } from "completions";
 // @ts-nocheck
 
