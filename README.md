@@ -1,7 +1,5 @@
 # Inspirations - Travel Itinerary Generator
 
-![Project Logo](link_to_your_logo.png)
-
 An itinerary generator using AI that helps you plan your travel journeys hassle-free. Inspirations takes the stress out of finding activities and travel options by providing suggestions for destinations, travel legs, and activities, allowing you to create your own personalized journey.
 
 ## Table of Contents
@@ -14,7 +12,7 @@ An itinerary generator using AI that helps you plan your travel journeys hassle-
 
 ## Installation
 
-The project is hosted online. You can access it by visiting the [Inspirations Website](https://www.inspirations-travel.com).
+The project is hosted online. You can access it by visiting the [Inspirations Website](https://www.inspirations-travel.com](https://inspirations.onrender.com/).
 
 ## Usage
 
