@@ -1,48 +1,51 @@
-# Inspirations
+# Inspirations - Travel Itinerary Generator
 
-**To do**
+An itinerary generator using AI that helps you plan your travel journeys hassle-free. Inspirations takes the stress out of finding activities and travel options by providing suggestions for destinations, travel legs, and activities, allowing you to create your own personalized journey.
 
-how to use -
-add a trip with basic info
+## Table of Contents
 
-add destinations you wish to visit
-add travel legs from destionations to destionations.
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contact](#contact)
+- [Roadmap](#roadmap)
 
-- show example jounneys
+## Installation
 
-// start journey page
+The project is hosted online. You can access it by visiting the [Inspirations Website](https://www.inspirations-travel.com](https://inspirations.onrender.com/).
 
-- optimise journey]
+## Usage
 
-// enter journey
+1. **Create an Account**: Sign up or log in using your Google or GitHub account. Your email and name are the only data stored, and they will not be shared.
 
-- card - start / end date time,
-- activities
-- location
-- [optional buttons -
+2. **Create a Journey**: Once logged in, use the menu to create a new journey. Enter the basic trip information, and you'll have an itinerary with a start and end point.
 
-**Plan of action** --------------------------------
+3. **Add Travel Nodes**: Add various travel nodes like restaurants, destinations, sightseeing spots, etc. As you enter a location or place, the AI will suggest options that can be directly added to the itinerary.
 
-**Landing page**
+4. **Add Travel Legs**: Connect travel nodes with travel legs. This generates travel options between the legs. The AI offers suggestions, and you can manually edit the data if needed.
 
--- show last trip you were working on and continue
+5. **Refine and Customize**: Edit, delete, or reorder nodes and legs to refine your journey.
 
--- explore random other trips
+## Features
 
--- create my own trip guideline how to use
+- Create and manage personalized travel itineraries.
+- Add, remove, and modify travel nodes and legs.
+- AI-powered suggestions for travel options and activities.
+- Flexible customization to suit your preferences.
 
-**AI funcitons**
+## Contact
 
--node
+For inquiries, feedback, or collaboration, you can reach out to the project owner at nikhil.mahashabde@gmail.com.
 
-- suggest activity for node at destination
-  - update acitivites at node []
--
-- suggest transport to the next destination
-  - add node transport + add transport options suggestions
-  -
-- -suggest transport to next node
-  - add node transport + add transport options suggestions
--
-- suggest accomadation options at this node
-  - update description at node []
+## Roadmap
+
+Inspirations is a work in progress, and future enhancements include:
+
+- User ability to modify trip details.
+- Regenerate trip images.
+- Public database of trips for non-authenticated users to browse.
+- Display random trips on the home page.
+- Convert trips to PDF for easy printing.
+- Read-only view of trips for other users.
+- Show last trip that the user was working on.
+
