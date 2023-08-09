@@ -25,6 +25,7 @@ import {
 import { useContext } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { DataContext } from "../context/AppContext";
+import { SiYourtraveldottv } from "react-icons/si";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
@@ -58,13 +59,13 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-          >
-            Logo
-          </Text>
+          <IconButton
+            as={ReactRouterLink}
+            to={"/"}
+            icon={<SiYourtraveldottv />}
+            aria-label="YourTravel Icon Link"
+            size="sm" // Adjust the size if needed
+          />
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
@@ -80,26 +81,29 @@ export default function WithSubnavigation() {
           {!isAuthenticated && (
             <>
               <Button
+                colorScheme="blue"
                 as={ReactRouterLink}
                 to={"/login"}
                 fontSize={"sm"}
                 fontWeight={400}
-                variant={"link"}
+                // variant={"link"}
               >
                 Sign In
               </Button>
+
               <Button
                 as={ReactRouterLink}
+                colorScheme="gray"
                 to={"/register"}
-                display={{ base: "none", md: "inline-flex" }}
+                // display={{ base: "none", md: "inline-flex" }}
                 fontSize={"sm"}
-                fontWeight={600}
-                color={"white"}
-                bg={"pink.400"}
-                variant={"link"}
-                _hover={{
-                  bg: "pink.300",
-                }}
+                fontWeight={400}
+                // color={"white"}
+                // bg={"pink.400"}
+                // variant={"link"}
+                // _hover={{
+                //   bg: "pink.300",
+                // }}
               >
                 Sign Up
               </Button>
@@ -109,15 +113,16 @@ export default function WithSubnavigation() {
             <Button
               as={ReactRouterLink}
               to={"/logout"}
-              display={{ base: "none", md: "inline-flex" }}
-              fontSize={"sm"}
-              fontWeight={600}
-              color={"white"}
-              bg={"pink.400"}
-              variant={"link"}
-              _hover={{
-                bg: "pink.300",
-              }}
+              colorScheme="blue"
+              // display={{ base: "none", md: "inline-flex" }}
+              // fontSize={"sm"}
+              fontWeight={400}
+              // color={"white"}
+              // bg={"pink.400"}
+              // variant={"link"}
+              // _hover={{
+              //   bg: "pink.300",
+              // }}
             >
               `Logout ({userName})`
             </Button>
@@ -136,48 +141,52 @@ const DesktopNav = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
-
+  const isAuthenticated = useContext(DataContext);
   return (
     <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                as={ReactRouterLink}
-                to={navItem.href ?? "#"}
-                fontSize={"sm"}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: "none",
-                  color: linkHoverColor,
-                }}
-              >
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
+      {NAV_ITEMS.map(
+        (navItem) =>
+          !isAuthenticated && (
+            <Box key={navItem.label}>
+              <Popover trigger={"hover"} placement={"bottom-start"}>
+                <PopoverTrigger>
+                  <Link
+                    p={2}
+                    as={ReactRouterLink}
+                    to={navItem.href ?? "#"}
+                    fontSize={"sm"}
+                    fontWeight={500}
+                    color={linkColor}
+                    _hover={{
+                      textDecoration: "none",
+                      color: linkHoverColor,
+                    }}
+                    isExternal={navItem.isExternal}
+                  >
+                    {navItem.label}
+                  </Link>
+                </PopoverTrigger>
 
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>
-      ))}
+                {navItem.children && (
+                  <PopoverContent
+                    border={0}
+                    boxShadow={"xl"}
+                    bg={popoverContentBgColor}
+                    p={4}
+                    rounded={"xl"}
+                    minW={"sm"}
+                  >
+                    <Stack>
+                      {navItem.children.map((child) => (
+                        <DesktopSubNav key={child.label} {...child} />
+                      ))}
+                    </Stack>
+                  </PopoverContent>
+                )}
+              </Popover>
+            </Box>
+          )
+      )}
     </Stack>
   );
 };
@@ -221,15 +230,17 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 };
 
 const MobileNav = () => {
+  const isAuthenticated = useContext(DataContext);
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
       p={4}
       display={{ md: "none" }}
     >
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
+      {NAV_ITEMS.map(
+        (navItem) =>
+          !isAuthenticated && <MobileNavItem key={navItem.label} {...navItem} />
+      )}
     </Stack>
   );
 };
@@ -291,11 +302,14 @@ interface NavItem {
   subLabel?: string;
   children?: Array<NavItem>;
   href?: string;
+  isExternal?: boolean;
+  isAuth?: boolean;
 }
 
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "My Trips",
+    isAuth: true,
     children: [
       {
         label: "My Trips",
@@ -309,16 +323,18 @@ const NAV_ITEMS: Array<NavItem> = [
       },
     ],
   },
-  {
-    label: "Search public trips",
-    href: "/trips/search",
-  },
+  // {
+  //   label: "Search public trips",
+  //   href: "/trips/search",
+  // },
   {
     label: "About the author",
-    href: "/about",
+    href: "https:nikhilmahashabde.netlify.app/", // Update this to your website's URL
+    isExternal: true, // Indicate an external link
   },
   {
     label: "Sponsor this project",
-    href: "/sponsor",
+    href: "https:nikhilmahashabde.netlify.app/", // Update this to your website's URL
+    isExternal: true,
   },
 ];

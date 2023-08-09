@@ -48,6 +48,8 @@ function LoginForm() {
     isAuthenticated,
   } = useContext(DataContext);
 
+  if (isAuthenticated) navigate("/");
+
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 

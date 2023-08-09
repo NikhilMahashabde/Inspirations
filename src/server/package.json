@@ -6,7 +6,9 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node build/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q build/index.js\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q src/index.ts\"",
+    "devbuild": "concurrently \"npx tsc --watch\" \"nodemon -q build/index.js\"",
+    "devnodemon": "nodemon --quiet --exec ts-node src/index.ts"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -34,6 +36,7 @@
     "concurrently": "^8.2.0",
     "eslint": "^8.38.0",
     "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
   "author": "",

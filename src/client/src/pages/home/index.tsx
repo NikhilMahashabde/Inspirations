@@ -6,7 +6,9 @@ import Footer from "../../components/Footer";
 import { DataContext } from "../../context/AppContext";
 
 const Home = () => {
-  const { isAuthenticated } = useContext(DataContext);
+  const { isAuthenticated, navigate } = useContext(DataContext);
+
+  if (isAuthenticated) navigate("/");
 
   return (
     <>

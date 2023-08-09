@@ -1,5 +1,5 @@
 import WithSubnavigation from "../../components/navbarUI";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import Footer from "../../components/Footer";
 import { DataContext } from "../../context/AppContext";
 import OauthLogin from "./OauthLogin";
@@ -7,13 +7,8 @@ import OauthLogin from "./OauthLogin";
 const OauthLoginPage = () => {
   const { isAuthenticated, navigate } = useContext(DataContext);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated, navigate]);
-
   if (isAuthenticated) {
+    navigate("/");
     return null;
   }
 

@@ -2,12 +2,15 @@ import Footer from "../../components/Footer";
 import WithSubnavigation from "../../components/navbarUI";
 
 import NoMatchingRoutes from "./nomatchingroutes";
+import { Heading } from "@chakra-ui/react";
 
 const CouldNotFind = () => {
   return (
     <div className="container">
       <div className="content">
-        <h1>Inspirations - 404 </h1>
+        <Heading size="4xl" color="gray.500">
+          Inspirations
+        </Heading>
         <WithSubnavigation />
         <NoMatchingRoutes />
       </div>

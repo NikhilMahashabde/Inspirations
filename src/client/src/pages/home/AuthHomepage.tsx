@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 export default function AuthHomepage() {
+  const navigate = useNavigate();
+  navigate("/trips");
+
   return (
     <>
       <h1>welcome to inspirations</h1>
