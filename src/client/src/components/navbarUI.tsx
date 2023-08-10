@@ -12,7 +12,6 @@ import {
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
 
@@ -124,7 +123,7 @@ export default function WithSubnavigation() {
               //   bg: "pink.300",
               // }}
             >
-              `Logout ({userName})`
+              Logout ({userName})
             </Button>
           )}
         </Stack>
@@ -146,7 +145,7 @@ const DesktopNav = () => {
     <Stack direction={"row"} spacing={4}>
       {NAV_ITEMS.map(
         (navItem) =>
-          !isAuthenticated && (
+          isAuthenticated && (
             <Box key={navItem.label}>
               <Popover trigger={"hover"} placement={"bottom-start"}>
                 <PopoverTrigger>
@@ -239,7 +238,7 @@ const MobileNav = () => {
     >
       {NAV_ITEMS.map(
         (navItem) =>
-          !isAuthenticated && <MobileNavItem key={navItem.label} {...navItem} />
+          isAuthenticated && <MobileNavItem key={navItem.label} {...navItem} />
       )}
     </Stack>
   );

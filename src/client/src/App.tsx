@@ -5,13 +5,7 @@ import { useMutation } from "react-query";
 import Router from "./pages/Router";
 import "./assets/css/styles.css";
 import { DataContext } from "./context/AppContext";
-
-interface LoginStateResponse {
-  data: {
-    isLoggedIn: boolean;
-    name: string;
-  };
-}
+import { LoginStateResponse } from "./interfaces/interfaces.types";
 
 function App() {
   const { setIsAuthenticated, setUserName } = useContext(DataContext);
@@ -20,6 +14,7 @@ function App() {
     () => axios.get("/api/sessions"),
     {
       onSuccess: (response) => {
+        console.log("App starting... ", response.data);
         setIsAuthenticated(response.data.isLoggedIn);
         setUserName(response.data.name);
       },
@@ -28,7 +23,7 @@ function App() {
 
   useEffect(() => {
     loginStateMutation.mutateAsync();
-  }, []);
+  }, [loginStateMutation]);
 
   if (loginStateMutation.isLoading) {
     return <div>Loading...</div>;

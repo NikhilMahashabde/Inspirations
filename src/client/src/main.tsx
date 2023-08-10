@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom"; // Import BrowserRouter
 import { QueryClient, QueryClientProvider } from "react-query";
 import { DataProvider } from "./context/AppContext.tsx";
 
-import { Auth0ProviderWithNavigate } from "./auth0-provider-with-navigate.tsx";
+import { Auth0ProviderWithNavigate } from "./services/auth0-provider-with-navigate.tsx";
 import OrbitProvider from "@kiwicom/orbit-components/lib/OrbitProvider";
 
 import { defaultTheme } from "@kiwicom/orbit-components";

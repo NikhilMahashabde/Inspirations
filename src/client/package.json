@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "movebuild": "xcopy /E /I dist\\* ..\\server\\src\\public",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.0",
@@ -66,6 +68,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "happy-dom": "^10.9.0",
     "jsdom": "^22.1.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",

@@ -4,11 +4,14 @@ An itinerary generator using AI that helps you plan your travel journeys hassle-
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Contact](#contact)
-- [Roadmap](#roadmap)
+- [Inspirations - Travel Itinerary Generator](#inspirations---travel-itinerary-generator)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Features](#features)
+  - [Learnings](#learnings)
+  - [Contact](#contact)
+  - [Roadmap](#roadmap)
 
 ## Installation
 
@@ -33,6 +36,18 @@ The project is hosted online. You can access it by visiting the [Inspirations We
 - AI-powered suggestions for travel options and activities.
 - Flexible customization to suit your preferences.
 
+## Learnings
+
+- Folder structure - as i worked on the app over time I was severely hampered by disorganised code and as a result gradually started moving into a more organised structure e.g. Splitting up contexts, router, sites/pages, services. I also learnt about feature driven folder surcture but Due to limited time and difficulty of reengineering i chose to continue with a pages appraoch.
+
+- This app served as a the first major Typescript project that I have undertaken however it could have been utilised to a greater extent by delcaring more rigid interfaces/types rather than reuse existing types with optional parameters. More planning around types should have been done prior to any code entry.
+- Splitting code more things into resueable components
+  - Using and Reusing API call services / Mutations rather than redfining the queries at component level.
+  - Context and Redux - The app was initially started before I had practical knowledge of Redux - in hindsight, due to the complex nature of states used across various features (some of which are currently not enabled), a redux store with actions/dispatch would have led to more orgainsed / clean code
+  - I should have broken down simple components into a second level to create reuseable parts which accept props/styling rather than reuse base components. E.g. Styled components
+
+Test driven approach would have greatly improve by confidence in testing for bugs, edge cases, functionality etc. but I did not posses the knowlege of testing when the app dvelopment was underway.
+
 ## Contact
 
 For inquiries, feedback, or collaboration, you can reach out to the project owner at nikhil.mahashabde@gmail.com.
@@ -48,4 +63,3 @@ Inspirations is a work in progress, and future enhancements include:
 - Convert trips to PDF for easy printing.
 - Read-only view of trips for other users.
 - Show last trip that the user was working on.
-

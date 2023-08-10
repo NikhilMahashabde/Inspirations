@@ -4,13 +4,16 @@ import CreateTripForm from "./CreateTripForm";
 import { useParams } from "react-router-dom";
 import TripConfigurator from "./TripConfigurator";
 import { TripList } from "./TripList";
+import { Heading } from "@chakra-ui/react";
 
 const Trips = () => {
   return (
     <>
       <div className="container">
         <div className="content">
-          <h1>Inspirations - Trips menu </h1>
+          <Heading size="4xl" color="gray.500">
+            Inspirations
+          </Heading>
           <WithSubnavigation />
           <TripList />
         </div>
@@ -25,7 +28,9 @@ const CreateTrips = () => {
     <>
       <div className="container">
         <div className="content">
-          <h1>Inspirations - Create Trips </h1>
+          <Heading size="4xl" color="gray.500">
+            Inspirations
+          </Heading>
           <WithSubnavigation />
           <CreateTripForm />
         </div>

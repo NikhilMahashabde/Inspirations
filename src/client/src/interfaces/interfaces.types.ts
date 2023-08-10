@@ -58,3 +58,10 @@ export interface INewNodeAITripData {
   budget: number;
   options: string;
 }
+
+export interface LoginStateResponse {
+  data: {
+    isLoggedIn: boolean;
+    name: string;
+  };
+}
