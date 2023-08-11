@@ -6,13 +6,52 @@ import Home from ".";
 
 describe("<Home />", () => {
   test("Home component renders correctly", () => {
-    const testValues = {
-      isLoggedIn: false,
-      userName: "Nikhil",
+    const defaultValues = {
+      isAuthenticated: false,
+      isRowExpanded: [],
+      setIsRowExpanded: () => {
+        return;
+      },
+      setIsAuthenticated: () => {
+        return;
+      },
+      setUserName: () => {
+        return;
+      },
+      userName: "",
+      navigate: () => {
+        return;
+      },
+      errorResponse: "",
+      setErrorResponse: () => {
+        return;
+      },
+      myTrips: undefined,
+      setMyTrips: () => {
+        return;
+      },
+      tripData: {
+        _id: "",
+        images: [],
+        name: "",
+        authorisation: [],
+        purpose: "",
+        budget: 0,
+        startDate: "",
+        endDate: "",
+        nodes: [],
+        startLocation: "",
+        endLocation: "",
+        destinations: [],
+        participants: 0,
+      },
+      setTripData: () => {
+        return;
+      },
     };
 
     const wrapper = render(
-      <DataContext.Provider value={testValues}>
+      <DataContext.Provider value={defaultValues}>
         <Home />
       </DataContext.Provider>
     );

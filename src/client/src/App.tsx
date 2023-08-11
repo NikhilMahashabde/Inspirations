@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     loginStateMutation.mutateAsync();
-  }, [loginStateMutation]);
+  }, []);
 
   if (loginStateMutation.isLoading) {
     return <div>Loading...</div>;

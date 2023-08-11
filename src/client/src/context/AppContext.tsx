@@ -34,7 +34,7 @@ const defaultTripData: MyTripsInterface = {
   participants: 0,
 };
 
-const DataContext = createContext<DataContextProps>({
+const defaultValues = {
   isAuthenticated: false,
   isRowExpanded: [],
   setIsRowExpanded: () => {
@@ -76,7 +76,9 @@ const DataContext = createContext<DataContextProps>({
   setTripData: () => {
     return;
   },
-});
+};
+
+const DataContext = createContext<DataContextProps>(defaultValues);
 
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

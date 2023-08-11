@@ -9,7 +9,7 @@ import { Heading } from "@chakra-ui/react";
 const Home = () => {
   const { isAuthenticated, navigate } = useContext(DataContext);
 
-  if (isAuthenticated) navigate("/");
+  if (isAuthenticated) navigate("/trips");
 
   return (
     <>

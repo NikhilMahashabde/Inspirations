@@ -41,12 +41,6 @@ app.use("/api/ai", AIRouter);
 
 app.use(express.static(path.join(__dirname, "/public")));
 
-app.use("/.well-known/pki-validation/", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "/public/BD0C6D2A6CF9B4B9F703793042070D98.txt")
-  );
-});
-
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });

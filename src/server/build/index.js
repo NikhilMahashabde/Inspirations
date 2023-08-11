@@ -41,9 +41,6 @@ exports.app.use("/api/trips", trips_1.default);
 exports.app.use("/api/trip", trip_1.default);
 exports.app.use("/api/ai", ai_1.default);
 exports.app.use(express_1.default.static(path_1.default.join(__dirname, "/public")));
-exports.app.use("/.well-known/pki-validation/", function (req, res) {
-    res.sendFile(path_1.default.join(__dirname, "/public/BD0C6D2A6CF9B4B9F703793042070D98.txt"));
-});
 exports.app.use(function (req, res) {
     res.sendFile(path_1.default.join(__dirname, "/public/index.html"));
 });
