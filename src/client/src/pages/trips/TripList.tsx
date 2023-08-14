@@ -8,7 +8,7 @@ import { Text } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
 export const TripList = () => {
-  const { myTrips, setMyTrips } = useContext(DataContext);
+  const { myTrips, setMyTrips, navigate } = useContext(DataContext);
 
   const myTripsMutation = useMutation(
     async () => await axios.get("/api/trips"),
@@ -25,6 +25,13 @@ export const TripList = () => {
   useEffect(() => {
     myTripsMutation.mutateAsync();
   }, []);
+
+  if (
+    myTripsMutation.isSuccess &&
+    myTrips !== undefined &&
+    myTrips.length === 0
+  )
+    navigate("/trips/create");
 
   return (
     <>
@@ -43,10 +50,12 @@ export const TripList = () => {
         myTrips.length === 0 && (
           <div>
             <Center>
-              <Heading size="m">No Trips found!</Heading>
-              <ReactRouterLink to={"/trips/create"}>
-                <Text>Click here to start New Trip!</Text>
-              </ReactRouterLink>
+              <VStack>
+                <Heading>No Trips found!</Heading>
+                <ReactRouterLink to={"/trips/create"}>
+                  <Text>Click here to start New Trip!</Text>
+                </ReactRouterLink>
+              </VStack>
             </Center>
           </div>
         )}
