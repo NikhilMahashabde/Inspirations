@@ -91,7 +91,7 @@ export function EditTripDataForm({
     {
       onSuccess: (res) => {
         setTripData(res.data.updatedTrip);
-        console.log("success");
+
         toast({
           title: "Trip Updated.",
           description: "You can close the menu or continue updating",
@@ -129,7 +129,6 @@ export function EditTripDataForm({
   //   }
   // );
 
-  console.log(tripData.nodes[index].startTime);
   return (
     <Formik
       initialValues={{

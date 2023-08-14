@@ -18,7 +18,6 @@ const AddLegButton = ({ id }: { id: string | undefined }) => {
 
     {
       onSuccess: (response) => {
-        console.log(response.data);
         setTripData(response.data.trip);
       },
 

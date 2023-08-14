@@ -39,7 +39,6 @@ const handleAddTripNodeAI = async (req: Request, res: Response) => {
     const foundTrip = await Trips.findById(id);
 
     if (!foundTrip) {
-      console.log("no trip found");
       return res.status(404).json({ error: "Trip not found" });
     }
 
@@ -52,7 +51,6 @@ const handleAddTripNodeAI = async (req: Request, res: Response) => {
       );
 
       const aiData = JSON.parse(resp.content);
-      console.log(aiData);
 
       // @ts-ignore
       let newNode: TripNode = {};
@@ -206,7 +204,7 @@ function generatePrompt(
         endTime: estimated arrival time in ISO string,
         notes: provide two more alternative modes of travel for this journey
       }`;
-      console.log(AIPrompt);
+
       break;
 
     case "activity":

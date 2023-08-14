@@ -13,7 +13,7 @@ export function AddNodeAIButton() {
         // color={useColorModeValue("white", "gray.800")}
         colorScheme="teal"
         _hover={{
-          bg: "red.600",
+          bg: "green.600",
         }}
         aria-label="AI node generate"
         leftIcon={<BsHouseAddFill />}

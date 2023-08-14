@@ -37,8 +37,7 @@ export default function TripCard({ trip }: TripCardProps) {
   const TripMutation = useMutation(
     () => axios.delete(`/api/trips/${trip._id}`),
     {
-      onSuccess: (response) => {
-        console.log(response);
+      onSuccess: () => {
         toast({
           title: "Trip Deleted.",
           description: "We've Deleted the trip for you",

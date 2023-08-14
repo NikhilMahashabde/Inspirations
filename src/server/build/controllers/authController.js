@@ -75,7 +75,6 @@ var handleJWT = function (req, res) { return __awaiter(void 0, void 0, void 0, f
             case 1:
                 _a.trys.push([1, 8, , 9]);
                 decodedToken = jsonwebtoken_1.default.decode(accessToken);
-                console.log("Decoded Token:", decodedToken);
                 userInfoEndpoint = "https://dev-8v4vi8wg2ppia707.us.auth0.com/userinfo";
                 return [4 /*yield*/, axios_1.default.get(userInfoEndpoint, {
                         headers: {
@@ -88,7 +87,6 @@ var handleJWT = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, users_1.default.findOne({ email: email })];
             case 3:
                 foundUser = _a.sent();
-                console.log("user response:", foundUser);
                 if (foundUser && foundUser.passwordHash !== "OAUTH")
                     return [2 /*return*/, res.status(400).json({
                             error: "Email is already regstered as a standard non-auth0 client",
@@ -142,7 +140,6 @@ var handleLogin = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 // Object.entries(req.body).forEach(([key, value]) => {
                 //   console.log(key, ":", value);
                 // });
-                console.log(req.headers);
                 if (!(req.body.email && req.body.password))
                     return [2 /*return*/, res.status(400).json({ message: "invalid email or password input" })];
                 return [4 /*yield*/, users_1.default.findOne({ email: req.body.email })];

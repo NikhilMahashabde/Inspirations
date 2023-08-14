@@ -23,6 +23,8 @@ import { BsFileArrowDown, BsFileArrowUp } from "react-icons/bs";
 import { DataContext } from "../../context/AppContext";
 import { useMutation } from "react-query";
 import axios from "axios";
+import { Meal } from "@kiwicom/orbit-components/icons";
+import { SportEquipment } from "@kiwicom/orbit-components/icons";
 
 import {
   DeleteResponse,
@@ -163,9 +165,16 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
         return <Accommodation size="small" />;
       case "leg":
         return <Icons.Airplane size="small" />;
+
       case "activity":
+        return <SportEquipment size="small" />;
+
+      case "meal":
+        return <Meal size="small" />;
+
+      case "Sightseeing":
         return <Sightseeing size="small" />;
-      // Add more cases for other node types and their corresponding icons
+
       default:
         return <Icons.Airplane size="small" />;
     }
@@ -199,15 +208,25 @@ const LegRow = ({ node, index }: { node: TripNode; index: number }) => {
       day: "2-digit",
     });
 
+  const timeString = (timeStamp: string | number | Date) =>
+    new Date(timeStamp).toLocaleString(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
   const ShowEndTime = () => {
     return dateString(node.startTime) !== dateString(node.endTime);
+  };
+
+  const durationCalc = () => {
+    return `${timeString(node.startTime)}`;
   };
 
   return (
     <>
       <ItinerarySegmentDetail
         icon={baseIcon()}
-        duration="2h 30m"
+        duration={durationCalc()}
         summary={
           <Box
             flex={1}

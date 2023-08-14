@@ -12,7 +12,6 @@ const handleAddTripNode = async (req: Request, res: Response) => {
     const foundTrip = await Trips.findById(id);
 
     if (!foundTrip) {
-      console.log("no trip found");
       return res.status(404).json({ error: "Trip not found" });
     }
 

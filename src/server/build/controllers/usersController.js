@@ -47,10 +47,6 @@ var createNewUser = function (req, res) { return __awaiter(void 0, void 0, void 
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                Object.entries(req.body).forEach(function (_a) {
-                    var key = _a[0], value = _a[1];
-                    console.log(key, ":", value);
-                });
                 if (!(req.body.name &&
                     req.body.email &&
                     req.body.password &&

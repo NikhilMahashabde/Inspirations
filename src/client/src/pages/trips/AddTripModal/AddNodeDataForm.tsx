@@ -69,7 +69,6 @@ export function AddNodeDataForm({ onClose }: { onClose: () => void }) {
     {
       onSuccess: (res) => {
         setTripData(res.data.updatedTrip);
-        console.log("success");
         toast({
           title: "Trip Created.",
           description: "You can continue planning",

@@ -78,7 +78,6 @@ var handleAddTripNodeAI = function (req, res) { return __awaiter(void 0, void 0,
             case 2:
                 foundTrip = _a.sent();
                 if (!foundTrip) {
-                    console.log("no trip found");
                     return [2 /*return*/, res.status(404).json({ error: "Trip not found" })];
                 }
                 userPrompt = req.body.newNodeAIPromptData;
@@ -90,7 +89,6 @@ var handleAddTripNodeAI = function (req, res) { return __awaiter(void 0, void 0,
             case 4:
                 resp = _a.sent();
                 aiData = JSON.parse(resp.content);
-                console.log(aiData);
                 newNode = {};
                 switch (req.body.newNodeAIPromptData.nodeType.toLowerCase()) {
                     case "accommodation":
@@ -219,7 +217,6 @@ function generatePrompt(userPrompt, foundTrip) {
             }
             AIPrompt =
                 AIPrompt = "Travelling from ".concat(origin, " to ").concat(destination, " . Provide suggestion for each key value below, return response in json string format\n      {\n        mode: method of travel e.g. drive, public transport etc.,\n        description: short description of journey,\n        budget: estimated cost as a number without $ in string format,\n        startTime: estimtated start time ISO string,\n        endTime: estimated arrival time in ISO string,\n        notes: provide two more alternative modes of travel for this journey\n      }");
-            console.log(AIPrompt);
             break;
         case "activity":
             AIPrompt = "Visiting ".concat(userPrompt.destination, ". Provide suggestion for each key value below, return response in json string format\n      {\n        activity: name of activity,\n        description: short description of activity and address,\n        budget: estimated cost per person as a number without $ in string format,\n        startTime: estimtated start time of activity time ISO string,, \n        endTime: estimtated end time of activity in ISO string,\n        notes: provide two more options for activities in the area nearby as a string\n      }");

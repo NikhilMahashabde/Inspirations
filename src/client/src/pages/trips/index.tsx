@@ -47,7 +47,9 @@ const TripModify = () => {
     <>
       <div className="container">
         <div className="content">
-          <h1>Inspirations - Edit my trip </h1>
+          <Heading size="4xl" color="gray.500">
+            Inspirations
+          </Heading>
           <WithSubnavigation />
           <TripConfigurator id={id} />
         </div>

@@ -542,7 +542,6 @@ export default function CreateTripForm() {
     () => axios.post("/api/trips", tripData),
     {
       onSuccess: (response) => {
-        console.log(response);
         toast({
           title: "Trip created.",
           description: "We've created the trip for you",

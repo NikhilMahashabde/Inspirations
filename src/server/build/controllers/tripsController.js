@@ -55,7 +55,6 @@ var createNewTrip = function (req, res) { return __awaiter(void 0, void 0, void 
                 else {
                     searchQuery = req.body.destinations.join(",");
                 }
-                console.log(searchQuery);
                 unsplashImageUrl = "https://api.unsplash.com/photos/random?query=".concat(searchQuery, "&client_id=Iy-9nBKpFYGdxpRDphCLXT_rdtdPdF1eGkPeTj7UEQA&orientation=landscape&count=1");
                 tripImage = [];
                 _b.label = 1;
@@ -65,7 +64,6 @@ var createNewTrip = function (req, res) { return __awaiter(void 0, void 0, void 
             case 2:
                 response = _b.sent();
                 tripImage.push(response.data[0].urls.regular);
-                console.log(tripImage);
                 return [3 /*break*/, 4];
             case 3:
                 err_1 = _b.sent();

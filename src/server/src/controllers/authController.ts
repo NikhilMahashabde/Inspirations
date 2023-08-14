@@ -40,7 +40,6 @@ const handleJWT = async (req: Request, res: Response) => {
 
     try {
       const decodedToken = jwt.decode(accessToken);
-      console.log("Decoded Token:", decodedToken);
 
       //const userInfoVerifyUrl= decodedToken.aud[1]
       const userInfoEndpoint =
@@ -57,7 +56,6 @@ const handleJWT = async (req: Request, res: Response) => {
       const email = userResponse.data.email;
 
       const foundUser = await Users.findOne({ email: email });
-      console.log("user response:", foundUser);
 
       if (foundUser && foundUser.passwordHash !== "OAUTH")
         return res.status(400).json({
@@ -107,8 +105,6 @@ const handleLogin = async (req: Request, res: Response) => {
   // Object.entries(req.body).forEach(([key, value]) => {
   //   console.log(key, ":", value);
   // });
-
-  console.log(req.headers);
 
   if (!(req.body.email && req.body.password))
     return res.status(400).json({ message: "invalid email or password input" });

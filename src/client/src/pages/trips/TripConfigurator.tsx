@@ -6,7 +6,6 @@ import {
   Text,
   Image,
   Flex,
-  VStack,
   Heading,
   SimpleGrid,
   StackDivider,
@@ -27,6 +26,10 @@ import ItineraryWrapper from "./ItineraryWrapper";
 import { AddNodeModal } from "./AddTripModal/AddNodeModal";
 import { AddNodeAIButton } from "../../components/AddNodeAIButton";
 
+import { Spinner } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
+import PrintButton from "../../components/buttons/PrintButton";
+
 const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
   const { tripData, setTripData } = useContext(DataContext);
 
@@ -46,7 +49,9 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
   if (tripDataMutation.isLoading) {
     return (
       <>
-        <h1> trip is loading.... please wait.</h1>
+        <Center>
+          <Spinner />
+        </Center>
       </>
     );
   }
@@ -89,7 +94,7 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
                 fontWeight={600}
                 fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
               >
-                {tripData.name}
+                {tripData.name.toUpperCase()}
               </Heading>
               <Text color={colourThemeGrey} fontWeight={300} fontSize={"2xl"}>
                 {getDateString(new Date(tripData.startDate))} to{" "}
@@ -102,16 +107,10 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
               direction={"column"}
               divider={<StackDivider borderColor={colourThemeGrey} />}
             >
-              <VStack spacing={{ base: 4, sm: 6 }}>
-                <Text
-                  color={colourModeGray}
-                  fontSize={"2xl"}
-                  fontWeight={"300"}
-                >
-                  {tripData.purpose}
-                </Text>
-                <Text fontSize={"lg"}></Text>
-              </VStack>
+              <Text color={colourModeGray} fontSize={"2xl"} fontWeight={"300"}>
+                {tripData.purpose}
+              </Text>
+
               <Box>
                 <Text
                   fontSize={{ base: "16px", lg: "18px" }}
@@ -160,14 +159,15 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Estimated cost:
+                      Estimated cost: {tripData.budget.toString()}
                     </Text>{" "}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Participants:
+                      {tripData.participants && (
+                        <>Participants:{tripData.participants.toString()}</>
+                      )}
                     </Text>{" "}
-                    {tripData.participants}
                   </ListItem>
                 </List>
               </Box>
@@ -193,6 +193,7 @@ const TripConfigurator = ({ id }: { id: string | undefined }): JSX.Element => {
           <HStack>
             <AddNodeModal />
             <AddNodeAIButton />
+            <PrintButton />
           </HStack>
         </Box>
 

@@ -56,7 +56,6 @@ var handleAddTripNode = function (req, res) { return __awaiter(void 0, void 0, v
             case 2:
                 foundTrip = _a.sent();
                 if (!foundTrip) {
-                    console.log("no trip found");
                     return [2 /*return*/, res.status(404).json({ error: "Trip not found" })];
                 }
                 newNode = {

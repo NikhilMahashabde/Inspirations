@@ -14,14 +14,12 @@ const createNewTrip = async (req: Request, res: Response) => {
   } else {
     searchQuery = req.body.destinations.join(",");
   }
-  console.log(searchQuery);
 
   const unsplashImageUrl = `https://api.unsplash.com/photos/random?query=${searchQuery}&client_id=Iy-9nBKpFYGdxpRDphCLXT_rdtdPdF1eGkPeTj7UEQA&orientation=landscape&count=1`;
   const tripImage = [];
   try {
     const response = await axios.get(unsplashImageUrl);
     tripImage.push(response.data[0].urls.regular);
-    console.log(tripImage);
   } catch (err) {
     console.log(err);
   }

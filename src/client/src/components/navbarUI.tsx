@@ -57,6 +57,7 @@ export default function WithSubnavigation() {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
+
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <IconButton
             as={ReactRouterLink}
@@ -67,7 +68,7 @@ export default function WithSubnavigation() {
           />
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav />
+            <DesktopNav isAuthenticated={isAuthenticated} />
           </Flex>
         </Flex>
 
@@ -108,6 +109,7 @@ export default function WithSubnavigation() {
               </Button>
             </>
           )}
+
           {isAuthenticated && (
             <Button
               as={ReactRouterLink}
@@ -130,62 +132,61 @@ export default function WithSubnavigation() {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
+        <MobileNav isAuthenticated={isAuthenticated} />
       </Collapse>
     </Box>
   );
 }
 
-const DesktopNav = () => {
+const DesktopNav = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
-  const isAuthenticated = useContext(DataContext);
+
+  if (!isAuthenticated) return null;
+
   return (
     <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map(
-        (navItem) =>
-          isAuthenticated && (
-            <Box key={navItem.label}>
-              <Popover trigger={"hover"} placement={"bottom-start"}>
-                <PopoverTrigger>
-                  <Link
-                    p={2}
-                    as={ReactRouterLink}
-                    to={navItem.href ?? "#"}
-                    fontSize={"sm"}
-                    fontWeight={500}
-                    color={linkColor}
-                    _hover={{
-                      textDecoration: "none",
-                      color: linkHoverColor,
-                    }}
-                    isExternal={navItem.isExternal}
-                  >
-                    {navItem.label}
-                  </Link>
-                </PopoverTrigger>
+      {NAV_ITEMS.map((navItem) => (
+        <Box key={navItem.label}>
+          <Popover trigger={"hover"} placement={"bottom-start"}>
+            <PopoverTrigger>
+              <Link
+                p={2}
+                as={ReactRouterLink}
+                to={navItem.href ?? "#"}
+                fontSize={"sm"}
+                fontWeight={500}
+                color={linkColor}
+                _hover={{
+                  textDecoration: "none",
+                  color: linkHoverColor,
+                }}
+                isExternal={navItem.isExternal}
+              >
+                {navItem.label}
+              </Link>
+            </PopoverTrigger>
 
-                {navItem.children && (
-                  <PopoverContent
-                    border={0}
-                    boxShadow={"xl"}
-                    bg={popoverContentBgColor}
-                    p={4}
-                    rounded={"xl"}
-                    minW={"sm"}
-                  >
-                    <Stack>
-                      {navItem.children.map((child) => (
-                        <DesktopSubNav key={child.label} {...child} />
-                      ))}
-                    </Stack>
-                  </PopoverContent>
-                )}
-              </Popover>
-            </Box>
-          )
-      )}
+            {navItem.children && (
+              <PopoverContent
+                border={0}
+                boxShadow={"xl"}
+                bg={popoverContentBgColor}
+                p={4}
+                rounded={"xl"}
+                minW={"sm"}
+              >
+                <Stack>
+                  {navItem.children.map((child) => (
+                    <DesktopSubNav key={child.label} {...child} />
+                  ))}
+                </Stack>
+              </PopoverContent>
+            )}
+          </Popover>
+        </Box>
+      ))}
     </Stack>
   );
 };
@@ -228,14 +229,12 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   );
 };
 
-const MobileNav = () => {
-  const isAuthenticated = useContext(DataContext);
+const MobileNav = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
+  const bgColour = useColorModeValue("white", "gray.800");
+  if (!isAuthenticated) return null;
+
   return (
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={4}
-      display={{ md: "none" }}
-    >
+    <Stack bg={bgColour} p={4} display={{ md: "none" }}>
       {NAV_ITEMS.map(
         (navItem) =>
           isAuthenticated && <MobileNavItem key={navItem.label} {...navItem} />
