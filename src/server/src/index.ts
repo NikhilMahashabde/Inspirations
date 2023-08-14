@@ -12,7 +12,7 @@ import authRouter from "./routes/auth";
 import cookieParser from "cookie-parser";
 import tripRouter from "./routes/api/trip";
 import AIRouter from "./routes/api/ai";
-const PORT = 443;
+const PORT = 8080;
 
 export const app = express();
 
