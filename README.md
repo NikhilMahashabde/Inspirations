@@ -2,14 +2,8 @@
 
 An itinerary generator using AI that helps you plan your travel journeys hassle-free. Inspirations takes the stress out of finding activities and travel options by providing suggestions for destinations, travel legs, and activities, allowing you to create your own personalized journey.
 
-<div style="display: flex; border: 2px solid black;">
-    <div style="width: 50%; padding: 10px; box-sizing: border-box;">
-        ![Image 1](https://user-images.githubusercontent.com/126232737/261521733-910bd6ec-8b6d-40cc-8599-e758cd0e2e7e.png)
-    </div>
-    <div style="width: 50%; padding: 10px; box-sizing: border-box;">
-        ![Image 2](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/bb552c89-3146-4af4-bec7-be611023f9a7.png)
-    </div>
-</div>
+<img src="https://user-images.githubusercontent.com/126232737/261521733-910bd6ec-8b6d-40cc-8599-e758cd0e2e7e.png" alt="Image 1" style="width: 50%;"><img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/bb552c89-3146-4af4-bec7-be611023f9a7.png" alt="Image 2" style="width: 50%;">
+
 
 ## Table of Contents
 
@@ -35,20 +29,19 @@ The project is hosted online. You can access it by visiting the [Inspirations We
 3. **Create a Journey**: Once logged in, use the menu to create a new journey. Enter the basic trip information, and you'll have an itinerary with a start and end point.
 <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/df4d3e2f-fc93-458a-acaa-58882f6e513b.jpg" alt="Image Description" style="width: 50%;">
 
-5. **Add Travel Nodes**: Add various travel nodes like restaurants, destinations, sightseeing spots, etc. As you enter a location or place, the AI will suggest options that can be directly added to the itinerary.
+5. **Add Travel Leg Nodes**: Add various travel nodes like restaurants, destinations, sightseeing spots, etc. You can manually enter a node by filling out the form details or use the AI suggestion by entering a location and letting the AI add a suggestion directly to the itinerary.
+![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/b5e2141c-e4a4-4b22-ad16-1f09d338678f)
+![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/7d5f80ae-ddfe-480a-9615-ebb2a8b1df4a)
 ![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/768879b3-16bb-46e4-84ab-76763cb47dd6)
 
-7. **Add Travel Legs**: Connect travel nodes with travel legs. This generates travel options between the legs. The AI offers suggestions, and you can manually edit the data if needed.
+7. **Optional - Add Travel Options between Destinations**: Connect travel leg nodes with travel options. You can only add travel options between two destiantions/nodes - Similair to above, adding a Leg can be done manually or using the AI tool.
 ![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/6f6588c5-c102-4c7c-a9bb-346a24aa65fb)
 
-
-8. **Refine and Customize**: Edit, delete, or reorder nodes and legs to refine your journey.
+8. **Refine and Customize**: Edit, delete, reorder nodes and legs to refine your journey.
 ![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/f551c3c9-3dcc-4358-8d93-c3ce8e022523)
-
 
 9. **Print your travel plan** : Print or save your PDF travel plan for convinience
 ![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/0b9d0ea9-dfc0-4e39-96c1-6e2b0bedf14a)
-
 
 ## Features
 
