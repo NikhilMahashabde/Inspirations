@@ -21,16 +21,18 @@ The project is hosted online. You can access it by visiting the [Inspirations We
 ## Usage
 
 1. **Create an Account**: Sign up or log in using your Google or GitHub account. Your email and name are the only data stored, and they will not be shared.
+   ![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/910bd6ec-8b6d-40cc-8599-e758cd0e2e7e)
 
-2. **Create a Journey**: Once logged in, use the menu to create a new journey. Enter the basic trip information, and you'll have an itinerary with a start and end point.
 
-3. **Add Travel Nodes**: Add various travel nodes like restaurants, destinations, sightseeing spots, etc. As you enter a location or place, the AI will suggest options that can be directly added to the itinerary.
+3. **Create a Journey**: Once logged in, use the menu to create a new journey. Enter the basic trip information, and you'll have an itinerary with a start and end point.
 
-4. **Add Travel Legs**: Connect travel nodes with travel legs. This generates travel options between the legs. The AI offers suggestions, and you can manually edit the data if needed.
+4. **Add Travel Nodes**: Add various travel nodes like restaurants, destinations, sightseeing spots, etc. As you enter a location or place, the AI will suggest options that can be directly added to the itinerary.
 
-5. **Refine and Customize**: Edit, delete, or reorder nodes and legs to refine your journey.
+5. **Add Travel Legs**: Connect travel nodes with travel legs. This generates travel options between the legs. The AI offers suggestions, and you can manually edit the data if needed.
 
-6. **Print your travel plan** : Print or save your PDF travel plan for convinience
+6. **Refine and Customize**: Edit, delete, or reorder nodes and legs to refine your journey.
+
+7. **Print your travel plan** : Print or save your PDF travel plan for convinience
 
 ## Features
 
