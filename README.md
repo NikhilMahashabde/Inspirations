@@ -51,14 +51,46 @@ The project is hosted online. You can access it by visiting the [Inspirations We
 - Flexible customization to suit your preferences.
 - PDF Printable travel plan
 
-## Key technologies used
+## Key Technologies Used
 
-- React with Typescript, ChakraUI, Orbit-Components, React-to-Print, React-Query
-- NodeJS with Typescript, Express, Sessions, JWTs
-- External APIs including OpenAI, Auth0 & Unsplash API
-- MongoDB with Mongoose ODM
-- Rest APIs
-- Unit testing with ViTest
+### Front-End
+
+- **React with Typescript:** Using TypeScript adds static typing which helps catch errors, allows for clear interface implementation and enables autocomplete.
+
+- **ChakraUI, Orbit-Components:** UI component libraries like ChakraUI and Orbit provide pre-styled and reusable components, speeding up the development process and maintaining consistent design.
+
+- **React-to-Print:** This library allows you to easily create a printable version of your React components, which was crucial for generating the itinerary documents.
+
+- **React-Query:** A data-fetching library for React that simplified managing asynchronous data and API calls. Useful for retrieving and managing data and rendering conditional views during load and failure.
+
+### Back-End
+
+- **NodeJS with Typescript:** Node.js is used for building the server-side of your application. TypeScript enhances code quality and maintainability by adding static types, similair to React. 
+
+- **Express:** Express.js is a web application framework for Node.js. It simplifies routing, middleware handling, and request/response management.
+
+- **Sessions, JWTs (JSON Web Tokens):** These are essential for user authentication and authorization. Sessions maintain user state, while JWTs provide a secure way handle the Auth0 Tokens and securely transmit user information between client and server
+
+### External APIs
+
+- **OpenAI:** OpenAI's API is used to generate trip related suggestion content.
+
+- **Auth0:** Auth0 provides a platform for implementing authentication and authorization in thee application, offering features like single sign-on (SSO) and social login. Drastically simplifies the sign up process for new users. 
+
+- **Unsplash API:** This API allows you to fetch high-quality images for displaying in your application, enhancing the visual appeal and user experience.
+
+### Database
+
+- **MongoDB with Mongoose ODM:** MongoDB is a NoSQL database that's suitable for storing structured and semi-structured data, like user information, itineraries, and preferences. Mongoose simplifies interactions with MongoDB by providing a schema-based model system and handling tasks like validation and data manipulation.
+
+### Communication
+
+- **Rest APIs:** Rest APIs are used to enable communication between different components of my front-end. React components make requests to the Node.js backend to fetch data, authenticate users, update app state and generate the itinerary information by interacting with the database.
+
+### Testing
+
+- **Unit testing with ViTest:** Unit testing is crucial for maintaining code quality and preventing regressions. It was mainly used for unit testing React Components. 
+
 
 ## Learnings and Personal Feedback
 
