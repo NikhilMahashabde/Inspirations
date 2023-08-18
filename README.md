@@ -26,24 +26,24 @@ The project is hosted online. You can access it by visiting the [Inspirations We
 ## Usage
 
 1. **Create an Account**: Sign up or log in using your Google or GitHub account. Your email and name are the only data stored, and they will not be shared.
-<img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/910bd6ec-8b6d-40cc-8599-e758cd0e2e7e.jpg" alt="Image Description" style="width: 50%;">
+   <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/910bd6ec-8b6d-40cc-8599-e758cd0e2e7e.jpg" alt="Image Description" width="50%">
 
 3. **Create a Journey**: Once logged in, use the menu to create a new journey. Enter the basic trip information, and you'll have an itinerary with a start and end point.
-<img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/df4d3e2f-fc93-458a-acaa-58882f6e513b.jpg" alt="Image Description" style="width: 50%;">
+   <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/df4d3e2f-fc93-458a-acaa-58882f6e513b.jpg" alt="Image Description" width="50%">
 
 5. **Add Travel Leg Nodes**: Add various travel nodes like restaurants, destinations, sightseeing spots, etc. You can manually enter a node by filling out the form details or use the AI suggestion by entering a location and letting the AI add a suggestion directly to the itinerary.
-![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/b5e2141c-e4a4-4b22-ad16-1f09d338678f)
-![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/7d5f80ae-ddfe-480a-9615-ebb2a8b1df4a)
-![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/768879b3-16bb-46e4-84ab-76763cb47dd6)
+   <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/b5e2141c-e4a4-4b22-ad16-1f09d338678f" alt="Image Description" width="50%">
+   <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/7d5f80ae-ddfe-480a-9615-ebb2a8b1df4a" alt="Image Description" width="50%">
+   <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/768879b3-16bb-46e4-84ab-76763cb47dd6" alt="Image Description" width="50%">
 
-7. **Optional - Add Travel Options between Destinations**: Connect travel leg nodes with travel options. You can only add travel options between two destiantions/nodes - Similair to above, adding a Leg can be done manually or using the AI tool.
-![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/6f6588c5-c102-4c7c-a9bb-346a24aa65fb)
+7. **Optional - Add Travel Options between Destinations**: Connect travel leg nodes with travel options. You can only add travel options between two destinations/nodes - Similar to above, adding a Leg can be done manually or using the AI tool.
+   <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/6f6588c5-c102-4c7c-a9bb-346a24aa65fb" alt="Image Description" width="50%">
 
 8. **Refine and Customize**: Edit, delete, reorder nodes and legs to refine your journey.
-![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/f551c3c9-3dcc-4358-8d93-c3ce8e022523)
+   <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/f551c3c9-3dcc-4358-8d93-c3ce8e022523" alt="Image Description" width="50%">
 
-9. **Print your travel plan** : Print or save your PDF travel plan for convinience
-![image](https://github.com/NikhilMahashabde/Inspirations/assets/126232737/0b9d0ea9-dfc0-4e39-96c1-6e2b0bedf14a)
+9. **Print your travel plan**: Print or save your PDF travel plan for convenience.
+   <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/0b9d0ea9-dfc0-4e39-96c1-6e2b0bedf14a" alt="Image Description" width="50%">
 
 ## Features
 
@@ -94,27 +94,32 @@ The project is hosted online. You can access it by visiting the [Inspirations We
 - **Unit testing with ViTest:** Unit testing is crucial for maintaining code quality and preventing regressions. It was mainly used for unit testing React Components. 
 
 
-## Learnings and Personal Feedback
+## Personal Reflection and Lessons Learned
 
-- This app served as a the first major Typescript project that I have undertaken however it could have been utilised to a greater extent by delcaring more rigid interfaces/types rather than reuse existing types with optional parameters. More planning around types should have been done prior to any code entry.
+Undertaking this project marked a significant milestone in my journey, representing my first major experience with Typescript. Looking back, I realize that the project's potential could have been unlocked further through the establishment of rigorous interfaces and types. Relying on existing types with optional parameters, in retrospect, fell short of achieving the clarity that could have been attained. A more proactive approach to type planning before plunging into code development would have been invaluable.
 
-- Focusing on development/code quality not quantity/features - As the app grew larger I realised the value of many techniques that I initially did not pay enough attention to e.g.
+As the application's complexity grew, a fundamental shift occurred in my perspective. Quality emerged as the paramount consideration over the mere accumulation of features. This realization illuminated a host of techniques that had initially escaped my attention:
 
-  - Rigorously testing for edge cases and thinking of conditions that would lead to broken components such as
-    - Setting limits on inputs
-    - Page view sizes
-    - Data input types / validation / Error checking
-  - Creating better error messages, handling and displaying errors appropriately
-  - Creating more Github 'issues', branches and better commit messages.
-  - Documenting changes for each feature, API, interfaces etc.
+- **Testing for Edge Cases:** I grasped the pivotal significance of rigorous testing, particularly for edge cases that could trigger component failures. This included defining input constraints, accommodating varying page view sizes, and implementing robust data input validation and error handling mechanisms.
 
-- Folder structure - as i worked on the app over time I was severely hampered by disorganised code and as a result gradually started moving into a more organised structure e.g. Splitting up contexts, router, sites/pages, services. I also learnt about feature driven folder surcture but Due to limited time and difficulty of reengineering i chose to continue with a pages appraoch.
-- - Splitting code more things into resueable components
-  - Using and Reusing API call services / Mutations rather than redfining the queries at component level.
-  - Context and Redux - The app was initially started before I had practical knowledge of Redux - in hindsight, due to the complex nature of states used across various features (some of which are currently not enabled), a redux store with actions/dispatch would have led to more orgainsed / clean code
-  - I should have broken down simple components into a second level to create reuseable parts which accept props/styling rather than reuse base components. E.g. Styled components
+- **Error Handling Excellence:** Creating refined error messages and adopting error-handling best practices emerged as essential components of successful development.
 
-Test driven approach would have greatly improve by confidence in testing for bugs, edge cases, functionality etc. but I did not posses the knowlege of testing when the app dvelopment was underway.
+- **Effective Version Control:** I came to appreciate the value of meticulous version control practices. This led to the creation of more GitHub issues, branches, and improved commit messages.
+
+- **Thorough Documentation:** Recognizing the importance of documenting changes for each feature, API, and interface became clear. This practice maintained clarity and cohesion within the project.
+
+- **Structured Folder Approach:** My project's folder structure underwent a transformation, mirroring my growth. Moving from disorganized beginnings to a more structured layout involved dividing contexts, routers, site pages, and services. While I explored the idea of a feature-driven folder structure, practical constraints led me to maintain a pages-centric approach due to time limitations and reengineering complexities.
+
+- **Modular Component Design:** I realized the potential of modular component design and advocated for the reuse of API call services and mutations over redundant queries at the component level. This highlighted the importance of efficient resource utilization.
+
+- **Context and Redux Insight:** The project's evolving complexity led me to comprehend the benefits of Redux, a state management tool. In retrospect, adopting a Redux store with actions and dispatch mechanisms could have significantly enhanced code organization.
+
+- **Enhanced Component Structure:** I recognized the elegance of breaking down simple components into secondary layers. This approach fostered reusability, granting the flexibility to accept props and styling, rather than relying solely on basic components.
+
+Regarding testing, I now understand the significant potential of a test-driven approach. It could have greatly bolstered my confidence in addressing bugs, edge cases, and overall functionality. Regrettably, my understanding of testing was not comprehensive during the app's development.
+
+In conclusion, this journey not only resulted in a functional application but also imparted invaluable lessons. These insights include meticulous planning, coherent code organization, comprehensive testing, and an unwavering commitment to development quality. As I carry these lessons forward, I am confident that my future projects will be executed with enhanced precision and success.
+
 
 ## Contact
 
