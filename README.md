@@ -123,16 +123,17 @@ In conclusion, this journey not only resulted in a functional application but al
 
 ## Contact
 
-For inquiries, feedback, or collaboration, you can reach out to the project owner at nikhil.mahashabde@gmail.com.
+For inquiries, feedback, or collaboration, feel free to reach out to the project owner at [nikhil.mahashabde@gmail.com](mailto:nikhil.mahashabde@gmail.com).
 
 ## Roadmap
 
-Inspirations is a work in progress, and future enhancements include:
+Inspirations is an ongoing project, with planned future enhancements including:
 
-- Add more unit testing and integration testing
-- User ability to modify trip details.
-- Regenerate trip images.
-- Public database of trips for non-authenticated users to browse.
-- Display random trips on the home page.
-- Read-only view of trips for other users.
-- Show last trip that the user was working on.
+- Adding more comprehensive unit testing and integration testing.
+- Allowing users to modify trip details.
+- Regenerating trip images.
+- Introducing a public database of trips for non-authenticated users to browse.
+- Displaying random trips on the home page.
+- Offering a read-only view of trips for other users.
+- Showcasing the last trip that the user was working on.
+
