@@ -16,6 +16,8 @@ An itinerary generator using AI that helps you plan your travel journeys hassle-
   - [Learnings and Personal Feedback](#learnings-and-personal-feedback)
   - [Contact](#contact)
   - [Roadmap](#roadmap)
+  - [User Stories (External Link)](https://github.com/NikhilMahashabde/Inspirations/blob/main/UserStories.md)
+  - [Wireframes (External Link)](https://github.com/NikhilMahashabde/Inspirations/blob/main/Wireframes.md)
 
 ## Installation
 
