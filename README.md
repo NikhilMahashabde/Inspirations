@@ -26,23 +26,29 @@ The project is hosted online. You can access it by visiting the [Inspirations We
 ## Usage
 
 1. **Create an Account**: Sign up or log in using your Google or GitHub account. Your email and name are the only data stored, and they will not be shared.
+   
    <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/910bd6ec-8b6d-40cc-8599-e758cd0e2e7e.jpg" alt="Image Description" width="50%">
 
 3. **Create a Journey**: Once logged in, use the menu to create a new journey. Enter the basic trip information, and you'll have an itinerary with a start and end point.
+   
    <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/df4d3e2f-fc93-458a-acaa-58882f6e513b.jpg" alt="Image Description" width="50%">
 
 5. **Add Travel Leg Nodes**: Add various travel nodes like restaurants, destinations, sightseeing spots, etc. You can manually enter a node by filling out the form details or use the AI suggestion by entering a location and letting the AI add a suggestion directly to the itinerary.
+   
    <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/b5e2141c-e4a4-4b22-ad16-1f09d338678f" alt="Image Description" width="50%">
    <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/7d5f80ae-ddfe-480a-9615-ebb2a8b1df4a" alt="Image Description" width="50%">
    <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/768879b3-16bb-46e4-84ab-76763cb47dd6" alt="Image Description" width="50%">
 
 7. **Optional - Add Travel Options between Destinations**: Connect travel leg nodes with travel options. You can only add travel options between two destinations/nodes - Similar to above, adding a Leg can be done manually or using the AI tool.
+   
    <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/6f6588c5-c102-4c7c-a9bb-346a24aa65fb" alt="Image Description" width="50%">
 
-8. **Refine and Customize**: Edit, delete, reorder nodes and legs to refine your journey.
+9. **Refine and Customize**: Edit, delete, reorder nodes and legs to refine your journey.
+    
    <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/f551c3c9-3dcc-4358-8d93-c3ce8e022523" alt="Image Description" width="50%">
 
-9. **Print your travel plan**: Print or save your PDF travel plan for convenience.
+11. **Print your travel plan**: Print or save your PDF travel plan for convenience.
+    
    <img src="https://github.com/NikhilMahashabde/Inspirations/assets/126232737/0b9d0ea9-dfc0-4e39-96c1-6e2b0bedf14a" alt="Image Description" width="50%">
 
 ## Features
