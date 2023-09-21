@@ -21,7 +21,7 @@ An itinerary generator using AI that helps you plan your travel journeys hassle-
 
 ## Installation
 
-The project is hosted online. You can access it by visiting the my personal domain [Inspirations Website](https://inspirations.nikhilmahashabde.com/trips). 
+The project is hosted online. You can access it by visiting the my personal domain [Inspirations Website](https://inspirations.nikhilmahashabde.com/). 
 
 If the AWS server is not online, please try [Inspirations Website](https://inspirations.onrender.com/). Allow 45-60 seconds for the server to start up, while waiting - you can read all about the app and tech stack below!
 
