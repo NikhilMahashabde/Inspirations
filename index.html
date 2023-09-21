@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Wordle</title>
+    <script src="project 1 nm.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous" defer></script>
+       
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="Project 1 nm.css" />   
+</head>
+<body>
+
+    <header class="border-bottom">
+        <!--  OLD CODE TO REmOVE LATER IFNEEDED NON BOOTSTRAP.
+
+        <h1 class="display-1">FOOTBALL WORDLE</h1>
+        <div id="settingsDiv">
+
+            
+            <button id="startGame" class="btn btn-dark" onclick="startGameInit()">
+                Start Game 
+            </button>
+            
+            <button  class="btn btn-dark" data-toggle="modal" data-target="#settingsModal" id="settingsButton">
+                Settings
+            </button>
+
+            <button  class="btn btn-dark" data-toggle="modal" data-target="#modalHints" id="hintsButton">
+                Hints
+            </button>
+
+
+        </div>
+        -->
+        
+        <!-- Settings Modal -->
+        <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modelSettings">Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               
+                <div id=difficulty>
+                    <label for="gameDifficulty">
+                        Difficulty
+                    </label>
+                    <br />
+                    <select id="selectDifficulty" name="gameDifficulty">
+                        <option value="easy">Farmer's League [Easy]</option>
+                        <option value="medium">Europa League [Medium]</option>
+                        <option value="hard">Champions League [Hard]</option>
+                    </select>
+                </div>
+                             
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+            </div>
+        </div>
+        </div>
+        <button id="buttonSettingsModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingsModal" style="display:none;"></button>
+
+        <!-- Hints modal -->
+        <div class="modal fade" id="modalHints" tabindex="-1" role="dialog" aria-labelledby="hintsModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="headerHints">Reveal a random clue</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  
+                    <div class="container">
+                        <div id="containerLine" class="row align-items-center no-gutters">
+                            <button display="inline" class="col btn btn-secondary" id="buttonHintRequest" onclick="revealHint()">
+                               Cost: 1 attempt
+                            </button>
+        
+                            <button class="col btn btn-secondary" id="buttonPayClue" onclick="revealHint()">
+                                Cost: monetisation 
+                            </button>
+
+                        </div>
+                        
+                    </div>
+
+                    <div id="clueContainer">
+                    </div> 
+
+                    <table class="table">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Name</th>
+                            <td id="tdClueName">??????</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Kit Number</th>
+                            <td id="tdClueKitNumber">??????</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Club</th>
+                            <td id="tdClueClub">??????</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Nationality</th>
+                            <td id="tdClueNationality">??????</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Age</th>
+                            <td id="tdClueAge">??????</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Position</th>
+                            <td id="tdCluePosition">??????</td>
+                          </tr>
+                          <div id="divCluePlayerPhoto">
+
+                          </div>
+
+                        </tbody>
+                      </table>
+                        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game instructions modal -->
+        <div class="modal fade" id="modalInstructions" tabindex="-1" role="dialog" aria-labelledby="modalInstructions" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="headingInstructions">How to play</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: left">
+                    <h6> How to Play</h6>
+                    <ul>
+                        <li>Guess each letter from a player's Name</li>
+                        <li>Each guess not does need to be a valid name</li>
+                        <li>The color of the tile will change to show your results after a guess - In the example below,</li>
+                            <ul>
+                                <li>Green tile is a correct letter guess</li>
+                                <li>Yellow tile is a correct letter in an incorrect position</li>
+                                <li>Grey tile is an incorrect letter</li>
+                            </ul>
+                        <video width="300" height="240" autoplay loop>
+                            <source src="https://vp.nyt.com/video/2022/02/09/98758_1_10wordle-art2_wg_1080p.mp4" type="video/mp4">
+                        </video>
+                    </ul>
+
+                   
+                    <h6>Scoring</h6>
+                    <ul>
+                        <li>Earn 1 point per unique correct letter</li>
+                        <li>Extra points are awarded if you win, based on difficulty</li>
+                        <li>If you win within 60 seconds, you are given 1 gem to redeem on hints </li>
+                    </ul>
+                    <p>Good luck!</p>
+             
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+                </div>
+            </div>
+        </div>
+        <button id="instructionsModalTrigger" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInstructions" style="display:none;"></button>
+
+        <!-- Win/loss Modal -->
+        <div class="modal fade" id="modalWL" tabindex="-1" role="dialog" aria-labelledby="modalWLLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="headingWL"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <table class="table">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Name</th>
+                            <td id="tdName">Mark</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Kit Number</th>
+                            <td id="tdKitNumber">Jacob</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Club</th>
+                            <td id="tdClub">Larry</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Nationality</th>
+                            <td id="tdNationality">Larry</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Age</th>
+                            <td id="tdAge">Larry</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Position</th>
+                            <td id="tdPosition">Larry</td>
+                          </tr>
+                          <div id="divPlayerPhoto">
+
+                          </div>
+
+                        </tbody>
+                      </table>
+
+                </div>
+                                 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+                </div>
+            </div>
+        </div>
+        <button id="btnModalWL" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalWL" style="display:none;"></button>
+        
+        <div class="container" id="headerTitle">
+
+            <!-- container for header grid -->
+            <div class="row">
+                <div class="col-1 divValign btn btn-dark align-self-center">
+
+                   
+                    <svg id = "svgSettingsIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16" class="icons">
+                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                    </svg>
+                  
+                </div>
+                <div class="col-1 divValign btn btn-dark align-self-center">
+                    <!-- help modal ?? link -->
+
+                    <svg id="svgInstructionsIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16" class="icons">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                    </svg>
+
+                </div>
+                <div class="col-1 divValign btn btn-dark align-self-center">
+                    <!-- help modal ?? link -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16" class="icons">
+                        <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                    </svg>
+                </div>
+
+
+                <!-- tittle div 10 wide.  -->
+                <div class="col-6">
+                    <h1 id="headingPageTitle" class="display-6">SOCCER WORDLE</h1>
+                </div>
+                <!-- personal c  -->
+                <div class="col-3 divValign">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col" style="text-align: right;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy" viewBox="0 0 16 16">
+                                    <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935zM3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z"/>
+                                </svg> 
+                            </div>
+
+                            <div class="col" style="text-align: left;">
+                                <p id="scoreText" class="textInline small" > 
+                                    340
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col" style="text-align: right;" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gem" viewBox="0 0 16 16">
+                                    <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z"/>
+                                </svg>
+                            </div>
+ 
+                            <div class="col" style="text-align: left;">
+                                <p class="textInline small"> 
+                                    5
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </header>
+    
+    <section id="gameContainer" class = "border-bottom">
+
+        <div class="container border-bottom" id="headNavButtons"> 
+
+            <div class="row g-0 divValign ">
+                                   
+                
+                    <button id="startGame" class="col btn btn-dark headerButtons gameButtonBorder" onclick="startGameInit()">
+                        <svg id = "svgPlayIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16" >
+                            <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/>
+                        </svg>
+                        <svg id="svgStopIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stop-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3z"/>
+                          </svg>
+                        <!--  -->
+                        <p class="textInline" id="buttonGameStateDisplay">Play</p>
+                    </button>
+
+            
+                <!-- start game button -->
+            
+                <!-- timer and show time function -->
+                <div class="col btn btn-dark gameButtonBorder ">
+                    <p id="timeMinutes" class="timerText">
+                    0
+                    </p>
+
+                    <p class="timerText">
+                    m
+                    </p>
+
+                    <p id="timeSeconds" class="timerText">
+                    0
+                    </p>
+                    
+                    <p class="timerText" >
+                    s
+                    </p>
+                </div>
+
+                <!-- hints button --> 
+                    <button  class="col btn btn-dark headerButtons gameButtonBorder" data-toggle="modal" data-target="#modalHints" id="hintsButton">
+                        Hints
+                    </button>
+
+                
+                
+                </div>
+            </div>
+        </div>
+                
+        <!-- output grid starts here -->
+        <div id="containerLetterOutput">
+        </div>
+        <!-- keyboard starts here 
+        <div id="containerKeyboardInput">
+            <div id="keyboardContainerTopRow">
+               top row keys go here
+            </div>
+            <div id="keyboardContainerMiddleRow">
+                 mid row keys go here 
+            </div>
+            <div id="keyboardContainerBottomRow">
+                 bottom row keys go here 
+            </div>
+        </div>
+        -->
+        <div id="containerKeyboardInput" class="container">
+            <div id="keyboardContainerTopRow" class="row align-items-stretch no-gutters">
+                <!-- mid row keys go here -->
+            </div>
+            <div id="keyboardContainerMiddleRow" class="row align-items-stretch no-gutters">
+                <!-- mid row keys go here -->
+            </div>
+            <div id="keyboardContainerBottomRow" class="row align-items-stretch no-gutters">
+                <!-- bottom row keys go here -->
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="timerText border-top">
+            <p>
+                Copyright (C) Soccer Wordle | Contact - <a href="mailto: nikhil.mahashabde@gmail.com">nikhil.mahashabde@gmail.com</a>
+            </p>
+        </div>
+
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+</html>

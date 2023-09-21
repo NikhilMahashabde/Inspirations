@@ -18,7 +18,7 @@ var auth_1 = __importDefault(require("./routes/auth"));
 var cookie_parser_1 = __importDefault(require("cookie-parser"));
 var trip_1 = __importDefault(require("./routes/api/trip"));
 var ai_1 = __importDefault(require("./routes/api/ai"));
-var PORT = 8080;
+var PORT = 10100;
 exports.app = (0, express_1.default)();
 //config
 //middlwares
