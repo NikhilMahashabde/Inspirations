@@ -81,6 +81,14 @@ If the AWS server is not online, please try [Inspirations Website](https://inspi
 
 - **Sessions, JWTs (JSON Web Tokens):** These are essential for user authentication and authorization. Sessions maintain user state, while JWTs provide a secure way handle the Auth0 Tokens and securely transmit user information between client and server
 
+### Deployment / Devops
+
+- **Server - AWS EC2 **: This site is deployed on my personal domain hosted on AWS using an Amazon linux EC2 instance.
+- **Domain** - A domain name was purchased and registered with AWS. Nameservers were setup to enable redirect
+- **NGINX** - NGINX is used a reverse proxy in order to route various subdomains and map them to various docker conatiners running seperate apps.
+- **SSL/TLS** - HTTPS was enabled using letsencrypt and Certbot - this was a mandatory step as the auth provider (auth0) only accepts https requests and redirect/callback
+- **Docker** - Docker is used to host the NodeJS-alpine server. 
+
 ### External APIs
 
 - **OpenAI:** OpenAI's API is used to generate trip related suggestion content.
